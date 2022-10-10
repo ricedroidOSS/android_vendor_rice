@@ -38,6 +38,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.rice.maintainer=$(RICE_MAINTAINER) \
     ro.rice.code=$(RICE_CODE) \
+    ro.riseui.code=$(RISE_CODE) \
     ro.rice.packagetype=$(RICE_PACKAGE_TYPE) \
     ro.rice.releasetype=$(RICE_BUILDTYPE) \
     ro.rice.version?=$(RICE_VERSION) \
@@ -114,9 +115,9 @@ PRODUCT_PACKAGES += \
     Updater
     
 ifeq ($(TARGET_USE_PIXEL_FINGERPRINT), true)
-BUILD_FINGERPRINT := "google/raven/raven:13/TP1A.221005.002/9012097:user/release-keys"
+BUILD_FINGERPRINT := "google/cheetah/cheetah:13/TD1A.220804.031/9071314:user/release-keys"
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="raven-user 13 TP1A.221005.002 9012097 release-keys"
+    PRIVATE_BUILD_DESC="cheetah-user 13 TD1A.220804.031 9071314 release-keys"
 
 endif
