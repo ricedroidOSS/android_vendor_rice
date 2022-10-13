@@ -5,9 +5,7 @@ $(call inherit-product-if-exists, vendor/lineage/config/rice.mk)
 $(call inherit-product-if-exists, vendor/lineage/audio/audio.mk)
 $(call inherit-product-if-exists, vendor/lineage/fonts/fonts.mk)
 
-ifeq ($(WITH_GMS),true)
 -include vendor/gms/products/gms.mk
-endif
 
 PRODUCT_BRAND ?= riceDroid
 
