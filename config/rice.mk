@@ -79,10 +79,6 @@ endif
 PRODUCT_PRODUCT_PROPERTIES += \
     arm64.memtag.process.system_server=off
 
-# Enable dex2oat64 to do dexopt
-PRODUCT_PRODUCT_PROPERTIES += \
-    dalvik.vm.dex2oat64.enabled=true
-
 TARGET_BUILD_GRAPHENEOS_CAMERA ?= false
 ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
 PRODUCT_PACKAGES += \
