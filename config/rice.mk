@@ -85,6 +85,12 @@ PRODUCT_PACKAGES += \
     GrapheneCamera
 endif
 
+TARGET_BUILD_APERTURE_CAMERA ?= true
+ifeq ($(strip $(TARGET_BUILD_APERTURE_CAMERA)),true)
+PRODUCT_PACKAGES += \
+    Aperture
+endif
+
 # Bootanimation
 ifeq ($(SUSHI_BOOTANIMATION),720)
 # Sushi Bootanimation 720 by saavedra3
