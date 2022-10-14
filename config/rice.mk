@@ -47,16 +47,20 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.rice.platform_release_codename=$(RICE_FLAVOR) \
     ro.ricelegal.url=https://www.manginasal.com/
 
+TARGET_ENABLE_OOS_GBOARD_PADDINGS ?=false
+ifeq ($(TARGET_ENABLE_OOS_GBOARD_PADDINGS), true)
 # Gboard
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.google.ime.kb_pad_port_b?=1
+    ro.com.google.ime.kb_pad_port_b=1
 
 # Gboard side padding (OOS)
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.google.ime.kb_pad_port_l?=7 \
-    ro.com.google.ime.kb_pad_port_r?=7 \
-    ro.com.google.ime.kb_pad_land_l?=14 \
-    ro.com.google.ime.kb_pad_land_r?=14
+    ro.com.google.ime.kb_pad_port_l=7 \
+    ro.com.google.ime.kb_pad_port_r=7 \
+    ro.com.google.ime.kb_pad_land_l=14 \
+    ro.com.google.ime.kb_pad_land_r=14
+
+endif
 
 # Disable touch video heatmap to reduce latency, motion jitter, and CPU usage
 # on supported devices with Deep Press input classifier HALs and models
