@@ -17,10 +17,10 @@ ifeq ($(WITH_GMS), true)
     else ifeq ($(TARGET_OPTOUT_GOOGLE_TELEPHONY), true)
        RICE_PACKAGE_TYPE ?= GMS
     else
-       RICE_PACKAGE_TYPE ?= PIXEL    
+       RICE_PACKAGE_TYPE ?= PIXEL
     endif
 else
-       RICE_PACKAGE_TYPE ?= AOSP 
+       RICE_PACKAGE_TYPE ?= AOSP
 endif
 
 LINEAGE_BUILD_DATE := $(shell date -u +%y%m%d%H)
