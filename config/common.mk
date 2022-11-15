@@ -197,6 +197,9 @@ endif
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
+# Dedupe VNDK libraries with identical core variants
+TARGET_VNDK_USE_CORE_VARIANT := true
+
 ifeq ($(TARGET_SUPPORTS_64_BIT_APPS), true)
 # Use 64-bit dex2oat for better dexopt time.
 PRODUCT_PROPERTY_OVERRIDES += \
