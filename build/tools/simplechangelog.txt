@@ -1,0 +1,92 @@
+RiceDroid simplified changelogs
+Rice Code: 8.6
+Rice Version: Macapuno or coconut sport is a naturally occurring coconut cultivar which has an abnormal development of the endosperm. The result of this abnormal development is a soft translucent jelly-like flesh that fills almost the entire central cavity of coconut seeds, with little to no coconut water. 
+
+Legend:
+[] = Credits, original authors
+
+  * DnsResolver
+  - misc fixes and improvements from upstream
+
+  * android
+  - upgraded the following android libraries to latest / compatible with tiramisu
+    - flatbuffers
+    - freetype
+    - harfbuzz-ng text shaping engine
+    - libpng 
+    - scudo
+    - xamarin sqlite
+  
+  * android_art
+  * android_bionic
+  - improved ART and bionic memory handling and runtime performance
+  - switched to arm optimized routines, c23 and avx2 functions
+
+  * android_sepolicy
+  - resolved selinux denials
+
+  * android_base
+  - Reset battery stats [Jorge Ruesga]
+  - Parallel space [LibXZR]  [spkal01]
+  - AdvancedReboot: Add a button for Soft reboot   
+  - Fixed blur radius for media notification   
+  - Scale mobile data type icon with font size  [Adithya R]
+  - Introducing Scarlet System Manager   
+    * introducing scarlet aggressive idle mode
+      - automatically turns off wifi/data/sensors/wakelocks/alarms on screen off (depends on users prefence)
+    * introducing scarlet system boost feature
+      - automatically applies skia vulkan if supported
+      - enables sustained performance mode 
+      - enables certain ported code linaro optimizations 
+  - Add support for strict standby policy  [LibXZR]
+  - Animation/transition rendering improvements  
+  - Add an option to block all sensors from a specific app  
+  - Power menu styles [nift4]
+  - fix granting of permissions for location and phone state  [hydrangea07]
+  - Sleep Mode/Scarlet Services: Fixed sensor blocking   
+  - Added firewall status bar icon when internet is disabled for a specific app  [t-m-w] [Michael Bestas] [Oliver Scott]
+  - Use the same fp animation for AOD mode   
+  - Remove combined signal icon changes   
+  - core: Disable doze by default   
+  - Vulkan improvements [Trevor David Black]
+
+  * android_external_arm-optimized-routines
+  - updated arm optimized routines
+
+  * android_media
+  - camera, media, audio and memory leaks fixes
+  
+  * android_personalizations
+  - Add device center category   
+  - Prompt user for soft reboots   
+  - Integrate system boost feature to scarlet services   
+  - Switch to SystemPropertySwitchPreference  [Pranav Vashi]
+  - Add strings for connectivity toggle  [Pranav Vashi]
+  - Power menu styles [ShevT]
+
+  * android_sushi_Launcher
+  - Temporarily remove automatic add icon to homescreen   
+  - Make double tap to sleep gesture optional  [Hikari-no-Tenshi]
+  - Add kill action to app shortcuts popup  [ezio84]
+  - Add uninstall button to system shortcuts  [Ali B] [jhonboy121] [Pranav Vashi]
+  - disable white gradient on home screen  [Pratyush]
+  - add support for custom themed icon pack [jhonboy121]
+  - Remove specific camera apps from hotseat favorites   
+  - Improve All apps divider view   
+  - Add toggle to show/hide app drawer search bar  [StarkDroid]
+  - Reworked hotseat and all apps search bar 
+    - integrated google design to "all apps" search bar if google apps is installed
+    - themed icon style now applies to "all apps" search bar
+    - 
+  - Disable all caps from Personal and Work tabs  [Michael Bestas]
+
+  * android_system_core
+  - performance improvements based from code linaro and upstream
+
+  * android_system_memory
+  - memory management multitasking and performance improvements
+
+  * android_themes
+  - Added naruto icons  [Aditya Choudhury]
+  - Added Genshin Impact Character icons  [Aditya Choudhury]
+
