@@ -131,9 +131,9 @@ PRODUCT_PACKAGES += \
     Updater
     
 ifeq ($(TARGET_USE_PIXEL_FINGERPRINT), true)
-BUILD_FINGERPRINT := "google/cheetah/cheetah:13/TD1A.221105.003/9229241:user/release-keys"
+BUILD_FINGERPRINT := "google/cheetah/cheetah:13/TQ1A.221205.012/9283063:user/release-keys"
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="cheetah-user 13 TD1A.221105.003 9229241 release-keys"
+    PRIVATE_BUILD_DESC="cheetah-user 13 TQ1A.221205.012 9283063 release-keys"
 
 endif
