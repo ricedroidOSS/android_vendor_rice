@@ -24,6 +24,11 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     setupwizard.feature.skip_button_use_mobile_data.carrier1839=true \
     setupwizard.theme=glif_v3_light
 
+# Default notification/alarm sounds
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.config.notification_sound=oneplus.ogg \
+    ro.config.alarm_alert=into_the_night.ogg
+
 # HWUI
 PRODUCT_PRODUCT_PROPERTIES += \
     debug.renderengine.backend?=skiaglthreaded \
