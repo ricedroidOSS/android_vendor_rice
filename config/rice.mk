@@ -100,12 +100,6 @@ endif
 PRODUCT_PRODUCT_PROPERTIES += \
     arm64.memtag.process.system_server=off
 
-TARGET_BUILD_GRAPHENEOS_CAMERA ?= false
-ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
-PRODUCT_PACKAGES += \
-    GrapheneCamera
-endif
-
 TARGET_BUILD_APERTURE_CAMERA ?= true
 ifeq ($(strip $(TARGET_BUILD_APERTURE_CAMERA)),true)
 PRODUCT_PACKAGES += \
@@ -128,11 +122,11 @@ endif
 
 # Extra packages
 PRODUCT_PACKAGES += \
+    Backgrounds \
     GameSpace \
     RepainterServicePriv \
     ParallelSpacePrebuilt \
     OmniJaws \
-    OPWidget \
     Updater
     
 ifeq ($(TARGET_USE_PIXEL_FINGERPRINT), true)
