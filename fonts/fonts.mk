@@ -17,14 +17,3 @@ LOCAL_PATH := vendor/lineage/fonts
 # Copy font files
 include vendor/lineage/fonts/font_files.mk
 -include vendor/lineage/fonts/extra/extra.mk
-
-# Overlays for UI font styles
-PRODUCT_PACKAGES += \
-    FontHKGroteskOverlay \
-    FontManropeOverlay \
-    FontNotoSansOverlay \
-    FontRecursiveCasualOverlay \
-    FontRecursiveLinearOverlay \
-    FontRobotoOverlay \
-    FontSourceSansOverlay \
-    FontSourceSerifOverlay \
