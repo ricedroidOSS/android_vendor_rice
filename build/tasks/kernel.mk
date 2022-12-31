@@ -256,7 +256,7 @@ ifneq ($(TARGET_KERNEL_CLANG_COMPILE),false)
     endif
     PATH_OVERRIDE += PATH=$(TARGET_KERNEL_CLANG_PATH)/bin:$$PATH
     ifeq ($(KERNEL_CC),)
-        KERNEL_CC := CC="$(CCACHE_BIN) clang"
+        KERNEL_CC := CC="$(CCACHE_BIN) clang --cuda-path=/dev/null"
     endif
     ifeq ($(TARGET_KERNEL_OPTIONAL_LD), true)
     	ifeq ($(KERNEL_LD),)
