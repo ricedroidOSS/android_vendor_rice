@@ -125,7 +125,7 @@ PRODUCT_PACKAGES += \
     Backgrounds \
     GameSpace \
     RepainterServicePriv \
-    ParallelSpacePrebuilt \
+    ParallelSpace \
     OmniJaws \
     Updater
     
