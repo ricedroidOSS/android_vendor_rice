@@ -29,6 +29,8 @@
 #
 #   TARGET_KERNEL_CLANG_COMPILE        = Compile kernel with clang, defaults to true
 #   TARGET_KERNEL_LLVM_BINUTILS        = Use LLVM binutils, defaults to true
+#   TARGET_KERNEL_NO_GCC               = Fully compile the kernel without GCC.
+#                                        Defaults to false
 #   TARGET_KERNEL_VERSION              = Reported kernel version in top level kernel
 #                                        makefile. Can be overriden in device trees
 #                                        in the event of prebuilt kernel.
@@ -69,6 +71,15 @@ KERNEL_VERSION := $(shell grep -s "^VERSION = " $(TARGET_KERNEL_SOURCE)/Makefile
 KERNEL_PATCHLEVEL := $(shell grep -s "^PATCHLEVEL = " $(TARGET_KERNEL_SOURCE)/Makefile | awk '{ print $$3 }')
 TARGET_KERNEL_VERSION ?= $(shell echo $(KERNEL_VERSION)"."$(KERNEL_PATCHLEVEL))
 
+# 5.10+ can fully compile without GCC by default
+ifneq (,$(filter 5.10, $(TARGET_KERNEL_VERSION)))
+    TARGET_KERNEL_NO_GCC ?= true
+endif
+
+ifeq ($(TARGET_KERNEL_NO_GCC), true)
+    KERNEL_NO_GCC := true
+endif
+
 ifneq ($(TARGET_CLANG_PREBUILTS_VERSION),)
     ifeq ($(TARGET_CLANG_PREBUILTS_VERSION),latest)
         # Set the latest version of clang
@@ -93,6 +104,7 @@ KERNEL_TOOLCHAIN_arm := $(KERNEL_TOOLCHAIN_arm64)
 KERNEL_TOOLCHAIN_PREFIX_arm := arm-linux-gnueabi-
 else
 
+ifneq ($(KERNEL_NO_GCC), true)
 GCC_PREBUILTS := $(BUILD_TOP)/prebuilts/gcc/$(HOST_PREBUILT_TAG)
 
 ifeq ($(TARGET_KERNEL_NEW_GCC_COMPILE),true)
@@ -207,6 +219,7 @@ ifeq ($(KERNEL_ARCH),arm64)
   TOOLS_PATH_OVERRIDE += PATH=$(BUILD_TOP)/prebuilts/tools-lineage/$(HOST_PREBUILT_TAG)/bin:$(KERNEL_TOOLCHAIN_arm):$$PATH
 else
   TOOLS_PATH_OVERRIDE += PATH=$(BUILD_TOP)/prebuilts/tools-lineage/$(HOST_PREBUILT_TAG)/bin:$$PATH
+endif
 endif
 
 # Set DTBO image locations so the build system knows to build them
