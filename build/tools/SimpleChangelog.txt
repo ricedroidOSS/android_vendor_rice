@@ -1,0 +1,70 @@
+====================
+     Simple Changelog
+====================
+
+- Credits:
+   Original Authors of the commits
+
+- Legend: 
+   [] = original author(s)/co-authors
+   
+
+   * riceDroid Additions
+   =====================
+   * Backported/Cherry-picked pre-UpsideDownCake improvements and fixes
+   * Dynamic Island Reticker Style [StarkDroid]
+   * Improved bluetooth UX experience 
+       - long click to trigger bluetooth dialog [ghostrider-reborn]
+       - resolve some BT Le audio issues (fixes taken from pre-U)
+   * Implemented Dual tone design to framework [xyzuan] 
+   * Imported Pixel Addons for AOSP [Jason Edson|aswin7469|Rei Ryuki|ghostrider-reborn|neobuddy89|Vayruz Rafli|anayw2001]
+     - Fixed settings intelligence bluetooth widget
+     - Improved battery estimates support [frap129|neobuddy89]
+     - Google Extreme Battery Saver and battey usage implementation support
+   * Imported Weather Service API from pre-QPR1 [StarkDroid|maxwenn|LordClockan]
+   * Introducing AOSP boost and memory optimization framework API
+   * Introducing Glass blur effect back - only for devices that uses skiagl as hwui renderer
+   * Introducing Reworked Scarlet System Manager for QPR1 [SKULSHADY|cjh1249131356]
+     - Introducing screen off features - most API taken from sleep mode
+        - change ringer on screen off
+        - clean device cache and ram on screen off
+        - disable wifi, bluetooth, data, gps on screen off
+     - Introducing Scarlet System Boost - optimizes AOSP boost framework resources for increase in performance
+   * Introducing Theme Engine
+      - Reworked Font style preference preview
+      - Introducing lockscreen clock UI customization
+         - Introducing live lockscreen clock font picker [eldainosor]
+         - Prevented lockscreen clock from overlapping when custom font is enabled
+         - User-configurable lockscreen clock color
+         - User-configurable Big lockscreen clock font size
+         - User-configurable lockscreen clock bottom spacing
+      - Improved System Shapes support - brightness slider and qs tiles now follows system shapes
+      - Settings UI customization from pre-QPR1
+         - About phone style from pre-QPR1
+         - Hide user card preference [spkal01]
+         - Searchbar style settings [spkal01]
+      - Volume Styles from pre-QPR1
+   * Misc changes to resolve integrity failures that prevents some apps from working on AOSP
+     - Fixed issues where some apps that detects users as rooted even on fresh install (unrooted)
+     - Resolve app combatiblities on AOSP - some apps like COC, Epic Seven and Pokemon Go doesn't launch on 
+       AOSP even on fresh install (reported by official maintainers and support group members)
+   * Reworked settings panel to replicate qpr1 panel for expanded settings etc. 
+   * Reworked Volume Panel functionalities and UI [Arian|Akash Srivastava|hpnightowl|StarkDroid]
+   * SushiLauncher - rebrand from crDroid Home [crdroid android project]
+     - Introducing Extended At a glance views
+     - Improved now playing layout for extended and default styles
+     - Fixed misc quickspace issues from pre-QPR1 [neobuddy89]
+     - Reworked Quick search bar and all apps search bar
+     - Added custom themed icons support [jhonboy121|travarilo] 
+     - Rework recent apps styles like Nothing OS v1.5 [LibXZR]
+   * Lockscreen and Media Notification media filter [jhonboy121|eldainosor]
+   * QS Panel Styles from pre-QPR1 [StarkDroid]
+   
+   * cherry-picked Additions
+   - Add support GMS switch [LibXZR]
+   - Battery info
+   - Improved ParallelSpace support [LibXZR|neobuddy89]
+   - Imported Wifi-standard icon supported [Col_or|Kujou Yuko|ReallySnow|ghostrider-reborn
+   - Introduce camera & flashlight lockscreen shortcuts [ghostrider-reborn]
+   - Sync anim durations from Nothing phone 1 [spka01]
+   - Status bar Network traffic stats [LibXZR|ReallySnow|ghostrider-reborn|SpiritCroc|Stallix]
