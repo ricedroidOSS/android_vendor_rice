@@ -10,16 +10,30 @@ RICE_CODE := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)
 CURRENT_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
 BUILD_DATE_TIME := $(shell date -u '+%Y%m%d%H%M')
 
-ifeq ($(RICE_OFFICIAL), true)
-   LIST = $(shell cat vendor/riceOTA/ricedroid.devices)
-    ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
-      IS_OFFICIAL=true
+MAINTAINER_LIST = $(shell cat vendor/riceOTA/ricedroid.maintainers)
+DEVICE_LIST = $(shell cat vendor/riceOTA/ricedroid.devices)
+
+ifeq ($(filter $(CURRENT_DEVICE), $(DEVICE_LIST)), $(CURRENT_DEVICE))
+   ifeq ($(filter $(RICE_MAINTAINER), $(MAINTAINER_LIST)), $(RICE_MAINTAINER))
       RICE_BUILDTYPE := OFFICIAL
-    endif
-    ifneq ($(IS_OFFICIAL), true)
-       RICE_BUILDTYPE := COMMUNITY
-       $(error Device is not official "$(CURRENT_DEVICE)")
-    endif
+  else 
+     # the builder is overriding official flag on purpose
+     ifeq ($(RICE_BUILDTYPE), OFFICIAL)
+       $(error **********************************************************)
+       $(error *     A violation has been detected, aborting build      *)
+       $(error **********************************************************)
+     else 
+       $(warning **********************************************************************)
+       $(warning *   There is already an official maintainer for $(CURRENT_DEVICE)    *)
+       $(warning *              Setting build type to UNOFFICIAL                      *)
+       $(warning *    Please contact current official maintainer before distributing  *)
+       $(warning *              the current build to the community.                   *)
+       $(warning **********************************************************************)
+       RICE_BUILDTYPE := UNOFFICIAL
+     endif
+  endif
+else
+  RICE_BUILDTYPE := COMMUNITY
 endif
 
 ifeq ($(WITH_GMS), true)
