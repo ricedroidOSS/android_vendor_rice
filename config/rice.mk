@@ -79,10 +79,6 @@ ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
 $(call inherit-product-if-exists, external/faceunlock/config.mk)
 endif
 
-# Parallel space
-PRODUCT_COPY_FILES += \
-    vendor/lineage/config/permissions/privapp_whitelist_ink.kscope.parallelspace.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp_whitelist_ink.kscope.parallelspace.xml
-
 # Blurs
 ifeq ($(TARGET_ENABLE_BLUR), true)
 PRODUCT_PRODUCT_PROPERTIES += \
