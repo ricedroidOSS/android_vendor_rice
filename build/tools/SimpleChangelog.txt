@@ -11,6 +11,7 @@
 
    * riceDroid Additions
    =====================
+   * Ambient Customizations [SuperDroidBond|TikkiTikki]
    * Backported/Cherry-picked pre-UpsideDownCake improvements and fixes
    * Dynamic Island Reticker Style [StarkDroid]
    * Improved bluetooth UX experience 
@@ -48,6 +49,7 @@
      - Fixed issues where some apps that detects users as rooted even on fresh install (unrooted)
      - Resolve app combatiblities on AOSP - some apps like COC, Epic Seven and Pokemon Go doesn't launch on 
        AOSP even on fresh install (reported by official maintainers and support group members)
+   * NothingOS screenshot sound effect
    * Reworked settings panel to replicate qpr1 panel for expanded settings etc. 
    * Reworked Volume Panel functionalities and UI [Arian|Akash Srivastava|hpnightowl|StarkDroid]
    * SushiLauncher - rebrand from crDroid Home [crdroid android project]
@@ -61,10 +63,12 @@
    * QS Panel Styles from pre-QPR1 [StarkDroid]
    
    * cherry-picked Additions
-   - Add support GMS switch [LibXZR]
-   - Battery info
-   - Improved ParallelSpace support [LibXZR|neobuddy89]
-   - Imported Wifi-standard icon supported [Col_or|Kujou Yuko|ReallySnow|ghostrider-reborn
-   - Introduce camera & flashlight lockscreen shortcuts [ghostrider-reborn]
-   - Sync anim durations from Nothing phone 1 [spka01]
-   - Status bar Network traffic stats [LibXZR|ReallySnow|ghostrider-reborn|SpiritCroc|Stallix]
+   ============================
+   * Add missing button actions [neobuddy89]
+   * Add support GMS switch [LibXZR]
+   * Double tap to trigger doze [SKULSHADY]
+   * Improved ParallelSpace support [LibXZR|neobuddy89]
+   * Imported Wifi-standard icon support [Col_or|Kujou Yuko|ReallySnow|ghostrider-reborn]
+   * Lockscreen Shortcuts support and settings [ghostrider-reborn|idoybh|maxwen]
+   * Sync anim durations from Nothing phone 1 [spka01]
+   * Status bar Network traffic stats [LibXZR|ReallySnow|ghostrider-reborn|SpiritCroc|Stallix]

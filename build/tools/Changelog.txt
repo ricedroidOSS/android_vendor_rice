@@ -1,34 +1,203 @@
 ====================
-     01-13-2023
+     01-15-2023
 ====================
 
    * android_art
-   -  Simplify SimplifyAlwaysThrows  [Santiago Aboy Solanes]
-   -  Skip InductionVarAnalysis for a pathological case  [Santiago Aboy Solanes]
-   -  Don't inline methods if the block previously throws  [Santiago Aboy Solanes]
-   -  Set devirtualized methods as always throws if appropriate  [Santiago Aboy Solanes]
+   -  Always use llvm-addr2line for DumpNativeStack  [David Srbecky]
+
+   * android_build_soong
+   -  soong: Whitelist llvm-addr2line  [minaripenguin]
+
+   * android_device_qcom_sepolicy_vndr
+   -  Hal_camera: add servicemanager for hal_camera  [wenwying]
+   -  Camera: Add permission to access XDSP  [Michael Yi]
+   -  legacy: allow cnd to get wifi_hal_props  [Chenyang Zhong]
+   -  legacy: Add write permission to proc file system  [Ankita Bajaj]
+   -  sepolicy: Add required sysfs nodes access for display  [Ravikanth Tuniki]
+   -  sepolicy_vndr: fix wakup labels for (msmnile|msmsteppe|atoll)  [Pulkit077]
+   -  sepolicy_vndr: restore iwlan hwservice  [Chenyang Zhong]
+   -  sepolicy: Allow access for hal_graphics_composer_default.  [Vinoth Jayaram]
+
+   * android_frameworks_base
+   -  base: Double tap to trigger doze [1/2]  [SKULSHADY]
+   -  SystemUI: write initial value of SHOW_QR_CODE_SCANNER_SETTING on first call  [maxwen]
+   -  Add handling of missing ServiceSpecificException  [joonhunshin]
+   -  base: Allow setting bottom keyguard shortcuts [1/2]  [Ido Ben-Hur]
+   -  Revert "Fix NullPointerException when the display has been disabled"  [minaripenguin]
+   -  Add Ambient Customizations [1/2]  [TikkiTikki]
+   -  Revert "SystemUI: Update black theme package overlay"  [minaripenguin]
+
+   * android
+   -  manifest: Track our wallpaper provider  [minaripenguin]
+   -  manifest: Track our fork of sepolicy_vndr-legacy-um  [minaripenguin]
+   -  manifest: Untrack few projects  [Pranav Vashi]
+
+   * android_lineage-sdk
+   -  lineage-sdk: Update few default key assignments  [Pranav Vashi]
+   -  lineage-sdk: Add backend for handling missing button actions  [Pranav Vashi]
+
+   * android_packages_apps_Backgrounds
+   -  backgrounds: Refactor for QPR1 release  [minaripenguin]
+
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Import double tap to trigger doze strings  [minaripenguin]
+   -  settings: Allow setting bottom keyguard shortcuts [2/2]  [Ido Ben-Hur]
+   -  settings: Add missing button actions  [Pranav Vashi]
+   -  settings: Add Ambient Customizations [2/2]  [TikkiTikki]
+
+   * android_packages_apps_Settings
+   -  Settings: Double tap to trigger doze [2/2]  [SKULSHADY]
+   -  DisplaySettings: font size in 5% steps from 80% to 130% (#132)  [awakened]
+   -  Settings: Avoid enforcing weird backgrounds  [El Dainosor]
+
+   * android_vendor_addons
+   -  BlackTheme: Adjust luminance for neutral shades 800 and above  [minaripenguin]
+
+   * android_vendor_rice
+   -  soong: Remove unused cflags for TARGET_ALTERNATIVE_FUTEX_WAITERS  [Pranav Vashi]
+   -  backuptool: Unmount v3 partitions during backup  [TheHitMan7]
+   -  Revert "config: Add priv-app permissions whitelist for parallel space"  [minaripenguin]
+   -  config: Update GMS telephony flag  [minaripenguin]
+   -  vendor: Drop prebuilt Backgrounds app  [minaripenguin]
+
+   * vendor_google_pixel
+   -  vendor: An an option for maintainers to build google telephony  [minaripenguin]
+
+====================
+     01-14-2023
+====================
+
+   * android_art
    -  imgdiag: add memory page index for dirty entries  [Dmitrii Ishcheikin]
    -  imgdiag: don't compare zygote to bootimage  [Dmitrii Ishcheikin]
-   -  ART: Query change in behaviour caused by 4f18b94  [Hari Limaye]
-   -  Use "rsp" and not "esp" for 64-bit CFA annotations.  [Brett Wilson]
-   -  Swap optimizations when inlining  [Santiago Aboy Solanes]
-   -  Check if we need a deopt after method entry / exit callbacks  [Mythri Alle]
+   -  Fix missing ClassCastException in VH unboxing conversion  [Orion Hodson]
+   -  When creating a new cookie for a java dex file, determine whether it is the same java dex file  [zhaoxuyang.6]
+   -  Remove comments for dlmalloc inclusions  [Stefano Cianciulli]
+   -  Include dlmalloc.{h, c} without relative path inclusion  [Stefano Cianciulli]
+   -  Count app dirty pages against zygote in imgdiag  [Dmitrii Ishcheikin]
+   -  Fix null dereference in SweepInterpreterCaches  [David Srbecky]
+   -  Fix DCHECK when freeing last obj from free-list large-object space  [Lokesh Gidra]
+   -  Adjust thresholds for methods that share method hotness counter.  [Nicolas Geoffray]
+   -  Fix imgdiag page counting  [Dmitrii Ishcheikin]
+   -  VIXL Dissassembler Integration Upgrade May. 2022  [Greg Cawthorne]
+   -  Merge adjacent free chunks and release them in FreeListSpace  [qiubowen]
+   -  Comment and adjust system server profiling.  [Nicolas Geoffray]
+   -  Avoid inopportune GC with explicit gc() call  [Hans Boehm]
+   -  art: Add Kryo585 support  [Raphiel Rollerscaperers]
+   -  art: Kryo785 supports dotprod  [minaripenguin37]
+   -  For cortex-a75/a55 validate features with hwcaps.  [Nicolas Geoffray]
+   -  Optimize GC judgment process from foreground to background  [qiubowen]
+   -  Only madvise for jank-perceptible processes  [Jared Duke]
+   -  Only madvise primary oat/vdex artifacts  [Jared Duke]
+   -  Explicitly madvise boot image oat files  [Jared Duke]
+   -  runtime/arch/x86_64: Use memcpy directly  [Ryo Hashimoto]
+   -  ART: Optimized implementation of System.arraycopy(char) intrinsic  [Artem Kotsiuba]
+   -  Remove is low memory mode for threshold adjustment and TransitionGC  [Edgar Arriaga]
+   -  Update concurrent start bytes when app switches from background to foreground.  [qiubowen]
+   -  Check if return value from `LZ4_decompress_safe()` is negative.  [Ulya Trafimovich]
+   -  the time of finalize watchdog need adjust to 1 min  [xutianqi]
+   -  ART: dex2oat and instruction_set_features: utilize modified runtime capabilities set  [XeonDead]
+   -  art: add check for __ARM_FEATURE_ATOMICS that indicates LSE atomics availability on target  [XeonDead]
+   -  Turn off LTO for libperfetto_hprof as a workaround  [Yi Kong]
+   -  ART: Change hash table load factors in images to 0.6.  [Vladimir Marko]
+
+   * android_bionic
+   -  Remove obsolete hacks for the fabs() family.  [Elliott Hughes]
+   -  legacy strtof inline: don't set errno for "inf"  [Ryan Prichard]
+   -  Move some cruft from the build system to the source.  [Elliott Hughes]
+   -  linker: Fix memory leak for reserved memory  [huangchaochao]
+   -  linker: Add support for dynamic SHIM libraries  [Christopher R. Palmer]
+   -  bionic: Support wildcards in cached hosts file  [Tom Marshall]
+   -  bionic: Sort and cache hosts file data for fast lookup  [Tom Marshall]
+   -  Sync strptime.c with upstream.  [Elliott Hughes]
+   -  Reland 'Add ability to build scudo-free 32-bit libc variant.'  [Quallenauge]
+
+   * android_build
+   -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
 
    * android_build_soong
    -  soong: Specify heap size for metalava for S+  [Michael W]
    -  soong: cc: Enable global O3  [Andrzej Perczak]
-   -  Dexpreopt: use "speed-profile" if a system server jar has a profile.  [Ulya Trafimovich]
-   -  Make deapexer accept missing files and skip dex2oat invocations.  [Martin Stjernholm]
-   -  Remove obsolete dexpreopt config option `UseArtImage`.  [Ulya Trafimovich]
-   -  Only dexpreopt system server jars for the primary arch.  [Jiakai Zhang]
-   -  soong: Whitelist llvm-addr2line  [minaripenguin]
-   -  Use missing.x509.pem instead of missing.pem for faked missing certificates  [Colin Cross]
-   -  Move AllowMissingDependencies handling into processMainCert  [Colin Cross]
-   -  copy JNI from AAR files to android_app APK  [Sam Delmerico]
-   -  Use aapt2  [Saeid Farivar Asanjan]
 
-   * android_device_lineage_sepolicy
-   -  common: Import sepolicy for flipendo/turboadapter  [Vayruz Rafli]
+   * android_frameworks_av
+   -  libcameraservice: add TARGET_CAMERA_NEEDS_CLIENT_INFO_LIB  [Hikari-no-Tenshi]
+
+   * android_frameworks_base
+   -  core: Fix classloader and instrumentation initialization  [minaripenguin]
+   -  SystemUI: Fix inactive volume slider icons when using custom volume styles  [minaripenguin]
+
+   * android_frameworks_native
+   -  IPCThreadState::hasExplicitIdentity()  [mattgilbride]
+   -  Fix Surface HDR meta reset  [yihsing.shen]
+   -  installd: explicitly specify capabilities  [Nikita Ioffe]
+   -  SurfaceFlinger: skip composition when presenting a single auto-refresh layer  [Tomislav Novak]
+   -  SurfaceFlinger: keep auto-refresh in sync between producer and consumer  [Tomislav Novak]
+   -  BufferQueueConsumer: acquire a buffer only if fence is signaled  [Tomislav Novak]
+   -  DO NOT MERGE Extend mPreviousPresentFences for high refresh rate  [Jen-Chih Chang]
+   -  Revert "sf: avoiding unnecessary frame skip to reduce janks."  [chengdaozhong]
+   -  SF: Bring back support for disabling backpressure propagation  [Adithya R]
+   -  Replace duplicate shaderOutputLayer with subgroupBroadcastDynamicId  [Trevor David Black]
+   -  renderengine: skia: switch to glass blur effect  [minaripenguin]
+   -  Turn off LTO for libvibratorservice_test as a workaround  [Yi Kong]
+   -  Turn off LTO for libviabratorservice as a workaround  [Yi Kong]
+   -  BLASTBufferQueue: Comment out lines causing log spam (#13)  [raystef66]
+   -  EGL: Conditionally revert commit a9550f3  [Danny Trunk]
+
+   * android
+   -  manifest: Update ricedroid OTA repo link  [minaripenguin]
+
+   * android_libcore
+   -  Don't lose interrupt in lockFile()  [Hans Boehm]
+
+   * android_packages_apps_Settings
+   -  settings: Fix power usage summary preference fragment path  [minaripenguin]
+
+   * android_packages_apps_Updater
+   -  Redirect links to new organization  [minaripenguin]
+
+   * android_packages_modules_Bluetooth
+   -  BtHelper: Apply rightLeft check to usingLeft/usingRight  [someone5678]
+   -  BtHelper: Initial support for showing battery separately  [someone5678]
+   -  BtHelper: Add AirPods product images for metadata icons  [someone5678]
+   -  BtHelper: Fix NullPointerException  [someone5678]
+   -  BtHelper: Migrate package name from Settings to BtHelper  [someone5678]
+   -  Settings: Add null check to onStartCommand of AirPods services  [XiNGRZ]
+   -  System: Bluetooth: Add support for showing battery level for AirPods series  [XiNGRZ]
+   -  Bluetooth: Initial BtHelper package  [someone5678]
+   -  [HACK] BluetoothHeadset: Un-hide ACCEV api for Apple devices  [someone5678]
+   -  Additionally check le_set_event_mask command resturn status with UNSUPPORTED_LMP_OR_LL_PARAMETER  [tzu-hsien.huang]
+   -  gd: hci: Ignore unexpected status events  [Peter Cai]
+   -  audio_hal_interface: Optionally use sysbta HAL  [Peter Cai]
+   -  [RE-PICK] controller: Optionally disable LE_READ_BUFFER_SIZE_V2 and  LE_SET_HOST_FEATURE  [SGCMarkus]
+
+   * android_system_core
+   -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
+   -  Fix the cgroup v2 thread path  [Bart Van Assche]
+   -  rootdir: init: Setup runtime blkio  [minaripenguin]
+   -  rootdir: init: Tune VM settings  [minaripenguin]
+   -  Set memlock rlimit to 64KB  [Carlos Galo]
+
+   * android_system_sepolicy
+   -  sepolicy: Allow untrusted app with api 30 access to qemu properties  [minaripenguin]
+   -  Allow documents UI to access storage  [Pranav Vashi]
+
+   * android_vendor_RiceDroidOTA
+   -  ricedroid devices: Add maintainer lists for build types  [minaripenguin]
+   -  Merge pull request #1 from ricedroidOSS-devices/niteshagrawal-patch-1  [Nitesh]
+   -  Update ricedroid.devices  [Nitesh]
+   -  ricedroid devices: Initial list of official devices  [minaripenguin]
+   -  Dummy test for updater app  [minaripenguin37]
+
+   * android_vendor_rice
+   -  config: Rework build type versioning  [minaripenguin]
+   -  overlay: Don't pin shader libraries  [minaripenguin]
+   -  vendor: soong: Add camera_needs_client_info_lib  [Hikari-no-Tenshi]
+   -  config: Update versioning  [Sipun Ku Mahanta]
+   -  config: Remove apex overrides  [minaripenguin]
+
+====================
+     01-13-2023
+====================
 
    * android_frameworks_base
    -  core: Allow telephony stack and its components to receive un-sanitized ServiceState entries  [minaripenguin]
@@ -39,6 +208,47 @@
    -  Cleanup 'Update battery info every second when device is charging'  [Pranav Vashi]
    -  Make overlay for 'Update battery info every second when device is charging'  [ShevT]
    -  Update battery info every second when device is charging  [SagarMakhar]
+
+   * android
+   -  README: Update maintainership form  [minaripenguin]
+   -  manifest: Track incremental_delivery  [minaripenguin]
+   -  manifest: Untrack our fork of scudo  [minaripenguin]
+   -  manifest: Track dlmalloc dependencies  [minaripenguin]
+   -  manifest: Bump kernel build tools to r55  [Michael Bestas]
+
+   * android_packages_apps_Launcher3
+   -  Launcher3: InfoBottomSheet: Fix NPE with AppTransitionManager  [DennySPb]
+
+   * android_packages_apps_RiceDroidSettings
+   -  settigns: Add support for GMS switch  [Pranav Vashi]
+
+   * android_packages_apps_Settings
+   -  Settings: Update PowerUsageFeature implementation for QPR1  [Anay Wadhera]
+
+   * android_vendor_rice
+   -  config: Bump to v10.1 official release  [minaripenguin]
+
+   * vendor_google_pixel
+   -  vendor: gms: Refactor for riceDroid  [minaripenguin]
+   -  common: Ship Modified Flipendo by reiryuki  [Rei Ryuki]
+
+====================
+     01-12-2023
+====================
+
+   * android_build_soong
+   -  Use missing.x509.pem instead of missing.pem for faked missing certificates  [Colin Cross]
+   -  Move AllowMissingDependencies handling into processMainCert  [Colin Cross]
+   -  copy JNI from AAR files to android_app APK  [Sam Delmerico]
+   -  Use aapt2  [Saeid Farivar Asanjan]
+
+   * android_device_lineage_sepolicy
+   -  common: Import sepolicy for flipendo/turboadapter  [Vayruz Rafli]
+
+   * android_frameworks_av
+   -  camera: Expose aux cameras in third party apps  [Pierre-Hugues Husson]
+
+   * android_frameworks_base
    -  fwb: Only enable some features on eng build  [1582130940]
    -  SystemUI: Re-designed caffeine tile icon  [Andrew Fluck]
    -  Calculate apk size multiple times  [wu di]
@@ -54,53 +264,6 @@
    -  Permissions: Grant Mediascanner access permissions to external storage  [Ali B]
    -  base: Grant suspend permission to Flipendo  [Adithya R]
    -  fwb: Disable some debug/log/trace  [1582130940]
-
-   * android
-   -  manifest: Track incremental_delivery  [minaripenguin]
-   -  manifest: Untrack our fork of scudo  [minaripenguin]
-   -  manifest: Track dlmalloc dependencies  [minaripenguin]
-   -  manifest: Bump kernel build tools to r55  [Michael Bestas]
-
-   * android_packages_apps_Launcher3
-   -  Launcher3: InfoBottomSheet: Fix NPE with AppTransitionManager  [DennySPb]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settigns: Add support for GMS switch  [Pranav Vashi]
-
-   * android_packages_apps_Settings
-   -  Settings: Update PowerUsageFeature implementation for QPR1  [Anay Wadhera]
-
-   * android_packages_apps_Updater
-   -  Redirect links to new organization  [minaripenguin]
-
-   * android_vendor_rice
-   -  config: Bump to 10.1 official release  [minaripenguin]
-
-   * vendor_google_pixel
-   -  vendor: gms: Refactor for riceDroid  [minaripenguin]
-   -  common: Ship Modified Flipendo by reiryuki  [Rei Ryuki]
-   -  common: gms: Treat Flipendo as privileged app  [minaripenguin]
-   -  common: permissions: Import missing Flipendo priv-app permission whitelist  [minaripenguin]
-
-====================
-     01-12-2023
-====================
-
-   * android_art
-   -  Method entry / exit listeners don't need to force interpreter  [Mythri Alle]
-   -  Move code around in shutdown sequence.  [Nicolas Geoffray]
-   -  Add a write barrier elimination pass  [Santiago Aboy Solanes]
-   -  Remove Runtime dependency from Mutex  [David Srbecky]
-   -  Fix incorrect case in FindDivWithInputsInBasicBlock  [Santiago Aboy Solanes]
-   -  Fix incorrect TryToReuseDiv use  [Santiago Aboy Solanes]
-   -  Revert "ARM64: Enable implicit suspend checks after CCCR."  [Nicolas Geoffray]
-   -  Cleanup handling of frame pop debug feature  [Mythri Alle]
-   -  Refactor code aroud method resolution.  [Nicolas Geoffray]
-
-   * android_frameworks_av
-   -  camera: Expose aux cameras in third party apps  [Pierre-Hugues Husson]
-
-   * android_frameworks_base
    -  MediaCodec: check for exceptions when creating crypto info  [George Burgess IV]
    -  Do not preload ThreadLocalRandom class.  [Almaz Mingaleev]
    -  StrictMode: Enable by default only in ENG builds  [Adithya R]
@@ -109,12 +272,6 @@
    -  SystemUI: Add Pixel battery addons [1/2]  [aswin7469]
    -  core: Integrate dual tone base layout to framework  [xyzuan]
    -  base: Introduce Scarlet system manager  [minaripenguin]
-   -  Revert "SystemUI: write initial value of SHOW_QR_CODE_SCANNER_SETTING on first call"  [minaripenguin]
-   -  SystemUI: match brightness slider track height with the progress drawable  [jhonboy121]
-   -  SystemUI: Link UI elements radii to `dialogCornerRadius` attribute  [minaripenguin]
-   -  Revert "config: Enable QR scanner shortcut in lock screen"  [minaripenguin]
-   -  SettingsLib: CollapsingToolbarBaseActivity: Increase scrim transition…  [elluzion]
-   -  base: SettiingsLib: Change collapse mode to scale  [Blaster4385]
 
    * android_lineage-sdk
    -  ship as riceDroid  [minaripenguin]
@@ -155,32 +312,24 @@
    * android_packages_apps_Settings
    -  Settings: Add Pixel battery addons [1/2]  [Jason Edson]
 
+   * vendor_google_pixel
+   -  common: gms: Treat Flipendo as privileged app  [minaripenguin]
+   -  common: permissions: Import missing Flipendo priv-app permission whitelist  [minaripenguin]
+
 ====================
      01-11-2023
 ====================
 
-   * android_bionic
-   -  Avoid recording backtrace if alloc-size is outside range of interest  [Shibin George]
-   -  mntent_test: don't assume /proc isn't the first mount.  [Elliott Hughes]
-   -  Remove obsolete hacks for the fabs() family.  [Elliott Hughes]
-
    * android_frameworks_base
+   -  Revert "SystemUI: write initial value of SHOW_QR_CODE_SCANNER_SETTING on first call"  [minaripenguin]
+   -  SystemUI: match brightness slider track height with the progress drawable  [jhonboy121]
+   -  SystemUI: Link UI elements radii to `dialogCornerRadius` attribute  [minaripenguin]
+   -  Revert "config: Enable QR scanner shortcut in lock screen"  [minaripenguin]
+   -  SettingsLib: CollapsingToolbarBaseActivity: Increase scrim transition…  [elluzion]
+   -  base: SettiingsLib: Change collapse mode to scale  [Blaster4385]
    -  IllustrationPreference: Hide illustration when we fail to play anim  [LuK1337]
    -  SettingsLib: Make IllustrationPreference bg protection transparent  [minaripenguin]
    -  SystemUI: Hardcode lock icon color to white  [minaripenguin]
-   -  SystemUI: Introduce camera & flashlight keyguard affordance  [Adithya R]
-   -  base: dont call roundStorageSize on Storage API for getting sizes  [maxwen]
-   -  graphics: Override system fonts with user-selected overlays  [Danny Lin]
-   -  styles: Use user fonts for Material UI themes  [Danny Lin]
-   -  Fix black screen issue due to wallpaper decoding exceptions  [Weijie Wang]
-   -  Shrink by 0.5 for YUV TextViews  [John Reck]
-   -  hwui: renderthread/CanvasContext: Reduce the timeout for dequeueing buffers  [electimon]
-   -  KeyguardIndication: Set wakelock on doze only when required  [Pranav Vashi]
-   -  base: Refactor Wi-Fi standard icons  [Adithya R]
-   -  base: Import Wi-Fi standard icon [1/2]  [ReallySnow]
-
-   * android_frameworks_native
-   -  installd: explicitly specify capabilities  [Nikita Ioffe]
 
    * android_lineage-sdk
    -  sdk: add HFR privapp camera related resource to config.xml  [SGCMarkus]
@@ -192,22 +341,9 @@
 
    * android_packages_apps_RiceDroidSettings
    -  settings: theme engine: Use live clock instead of fixed text  [minaripenguin]
-   -  settings: Introduce Scarlet system manager  [minaripenguin]
-   -  settings: Bring in the kitchen dashboard  [minaripenguin]
 
    * android_packages_apps_Settings
    -  settings: Hardcode preference icons to color accent  [minaripenguin]
-
-   * android_system_core
-   -  Fix the cgroup v2 thread path  [Bart Van Assche]
-   -  rootdir: init: Setup runtime blkio  [minaripenguin]
-   -  rootdir: init: Tune VM settings  [minaripenguin]
-
-   * android_system_libbase
-   -  unique_fd: Disable socket code on Trusty  [Andrei Homescu]
-   -  Take std::string_views instead of const std::string & for android::base::Trim  [T.J. Mercier]
-   -  Add WriteFullyAtOffset utility method  [Kelvin Zhang]
-   -  Add Basename and Dirname backward compatibility  [Hongguang Chen]
 
    * android_vendor_rice
    -  kernel: Allow devices to opt-in for full LLVM build  [Michael Bestas]
@@ -216,267 +352,9 @@
    -  overlay: Set default status bar height to 28dp  [Michael Bestas]
    -  kernel: Only add GCC to PATH when using GNU binutils  [Michael Bestas]
 
-   * vendor_google_pixel
-   -  overlay: Add a prebuilt pixel config overlay for AOSP  [minaripenguin]
-   -  common: gms: Ship Flipendo  [minaripenguin]
-   -  products: gms: Fix core GMS variant conditions  [minaripenguin]
-
 ====================
      01-10-2023
 ====================
-
-   * android_art
-   -  Check for deoptimized method only when there are method entry callbacks  [Mythri Alle]
-   -  Fix bugprone-argument-comment clang-tidy issues  [Stefano Cianciulli]
-   -  Improve memory locality for generated code ranges list.  [Vladimir Marko]
-   -  Bug fix in runtime-generated app image.  [Nicolas Geoffray]
-   -  Fix missing ClassCastException in VH unboxing conversion  [Orion Hodson]
-   -  When loading dex files from APKs, eagerly do checksums checks.  [Nicolas Geoffray]
-   -  [MTE] disable MTE in RecurseDownStack::Touch  [Florian Mayer]
-   -  ART: Fix header guards in `verification_results.h`.  [Vladimir Marko]
-   -  Set the declaring class of obsolete ArtMethods during redefinition  [Mythri Alle]
-   -  When creating a new cookie for a java dex file, determine whether it is the same java dex file  [zhaoxuyang.6]
-   -  Make classes visibly initialized in bigger batches.  [Vladimir Marko]
-   -  ANR: Print threads in deterministic order.  [David Srbecky]
-   -  Don't run thread callbacks for runtime threads and shutdown thread  [Mythri Alle]
-   -  Skip DisableCollection JDWP tests for userfaultfd GC  [Lokesh Gidra]
-   -  Use virtual dispatch for `ThreadGroup.add(Thread)`.  [Vladimir Marko]
-   -  Indicate userfaultfd in application threads' start function  [Lokesh Gidra]
-   -  Make callee-saved registers behave according to kReserveMarkingRegister  [Lokesh Gidra]
-   -  Suppress bugprone-suspicious-include clang-tidy issue  [Stefano Cianciulli]
-   -  Remove comments for dlmalloc inclusions  [Stefano Cianciulli]
-   -  Include dlmalloc.{h, c} without relative path inclusion  [Stefano Cianciulli]
-   -  Make compiler/utils/ symbols hidden.  [Vladimir Marko]
-   -  Make compiler/debug/ symbols hidden.  [Vladimir Marko]
-   -  Refactor Thumb2 entrypoint adjustment handling.  [Vladimir Marko]
-   -  Make remaining compiler/ symbols hidden.  [Vladimir Marko]
-   -  Make compiler/jni/ symbols hidden.  [Vladimir Marko]
-   -  Assert no read barriers for method maps in JIT.  [Vladimir Marko]
-   -  Avoid read barrier in `ArtMethod::HasSingleImplementation()`.  [Vladimir Marko]
-   -  Split local reference table out of `IndirectReferenceTable`.  [Vladimir Marko]
-   -  x86/x86-64: Rewrite `art_quick_aput_obj`.  [Vladimir Marko]
-   -  arm64: Fix build for TABLELOOKUP GC.  [Vladimir Marko]
-   -  arm64: Rewrite `art_quick_aput_obj`.  [Vladimir Marko]
-   -  Add arch variants for Intel Atom CPUs  [Ryo Hashimoto]
-   -  Pass read barrier option to `ArtMethod::GetObsoleteDexCache()`.  [Vladimir Marko]
-   -  Do not link libziparchive both statically and dynamically in libartbase and libprofile.  [Martin Stjernholm]
-   -  ART: Move `CompiledMethod{,-Storage}` to dex2oat/.  [Vladimir Marko]
-   -  Remove `CompiledCode::CodePointer()`.  [Vladimir Marko]
-   -  Rename `GetInstructionSet{,Code}Alignment`.  [Vladimir Marko]
-   -  Rename a few constants and clarify their meaning in comments.  [Ulya Trafimovich]
-   -  Move ReflectionTest.StaticMainMethod to compiler/.  [Vladimir Marko]
-   -  Move `VerificationResults` to dex2oat/.  [Vladimir Marko]
-   -  Use named constant for max FP string length.  [Vladimir Marko]
-   -  Fix method tracing in non-debuggable runtimes  [Mythri Alle]
-   -  Don't instrument stack with instrumentation exit PCs  [Mythri Alle]
-   -  Tolerate potentially dead methods in `Instrumentation`.  [Vladimir Marko]
-   -  Update method tracing to use per-thread buffer  [Mythri Alle]
-   -  Update tracing config on git-master-art-host to use streaming  [Mythri Alle]
-   -  Remove bogus CHECK and replace some CHECKs to DCHECKs.  [Nicolas Geoffray]
-   -  Update comments for kUnsupportedClassLoaderContextEncoding.  [Jiakai Zhang]
-   -  Fix bounds check when reading MapList of a dex file.  [Nicolas Geoffray]
-   -  Do not allow read barriers with null Thread::Current().  [Vladimir Marko]
-   -  NativeStackDumper: use GetOatQuickMethodHeader.  [Nicolas Geoffray]
-   -  ANR: Improve parameter removal  [David Srbecky]
-   -  ANR: Remove function parameters from output.  [David Srbecky]
-   -  ANR: Reduce native-PC width to 8 characters.  [David Srbecky]
-   -  Move one ObjPtr use to Handle.  [Nicolas Geoffray]
-   -  DO NOT MERGE: Make veridex resolve API conflicts in favor of most accessible  [Paul Duffin]
-   -  Reland "ARM64: Enable implicit suspend checks after CCCR."  [Vladimír Marko]
-   -  Revert^2 "ART: Removes SuspendCheck for plain loops with a low trip count."  [Stelios Ioannou]
-   -  Avoid bad read barrier when relocating boot image.  [Vladimir Marko]
-   -  StringBuilder append pattern for float/double.  [Vladimir Marko]
-   -  Don't use instrumentation stubs for supporting entry / exit hooks  [Mythri Alle]
-   -  fixup! Maintain pre-zygote fork linear-alloc pages as shared-clean  [Lokesh Gidra]
-   -  Add InternOrNewUTF native function  [Hans Boehm]
-   -  Remove bad code from ComputeRelativeTimeSpec  [Hans Boehm]
-   -  Remove misleading kPageSize dependency  [Hans Boehm]
-   -  Reland "Adjust how we assign vtable indexes during class loading."  [Nicolas Geoffray]
-   -  Don't initialize at AOT time classes that need access checks.  [Nicolas Geoffray]
-   -  Reland^2 "ART: Rewrite compiled code check in FaultHandler."  [Vladimír Marko]
-   -  Avoid using SafeCopy on userfaultfd compacted spaces  [Lokesh Gidra]
-   -  Fix clinit debug check in instrumentation.  [Vladimir Marko]
-   -  Allow generating marking-register check for all GCs  [Lokesh Gidra]
-   -  Reland^2 "Use the thread local cache in interpreter / unresolved entrypoints"  [Nicolas Geoffray]
-   -  Reserve marking register for all GCs  [Lokesh Gidra]
-   -  Rename `kJniTransitionOrInvalid` to `kJniTransition`.  [Vladimir Marko]
-   -  Clean up `IndirectReferenceTable` visiting.  [Vladimir Marko]
-   -  Clean up `IndirectReferenceTable` construction.  [Vladimir Marko]
-   -  Add convenience helper `ArtMethod::NewObject()`.  [Vladimir Marko]
-   -  Add a few tests for `ArtMethod::Invoke*()` helpers.  [Vladimir Marko]
-   -  Fix OOME handing in `CreateAnnotationMember()`.  [Vladimir Marko]
-   -  Allow OatFileAssistant::Create to take std::nullopt for the context.  [Jiakai Zhang]
-   -  Continue image space initialization if the primary boot image is valid.  [Jiakai Zhang]
-   -  Don't compile boot image if the process is not Zygote.  [Jiakai Zhang]
-   -  Change ExecUtils to support callbacks.  [Jiakai Zhang]
-   -  Add a function in ExecUtils to return wall time and CPU time.  [Jiakai Zhang]
-   -  odrefresh: Ignore some system properties.  [Jiakai Zhang]
-   -  Add more comments about the return codes of profman.  [Jiakai Zhang]
-   -  Ignore the error when deleting the root directory during cleanup.  [Jiakai Zhang]
-   -  Use `.value()` instead of `*`.  [Jiakai Zhang]
-   -  Fix OatFileAssistant to return kNoDexOptNeeded when dex file is missing.  [Jiakai Zhang]
-   -  Make ArtDexFileLoader accept an zip file with no dex code.  [Jiakai Zhang]
-   -  Clear profile when switching between boot image profile and app profile  [Jiakai Zhang]
-   -  Grant artd CHOWN capability.  [Jiakai Zhang]
-   -  Move `host_supported: false` down from the cc_defaults module.  [Martin Stjernholm]
-   -  Add artd unit tests.  [Jiakai Zhang]
-   -  Grant artd root capabilities that it needs to perform its tasks.  [Jiakai Zhang]
-   -  Make artd a lazy service.  [Jiakai Zhang]
-   -  Update the file structure of ART Services.  [Jiakai Zhang]
-   -  Update the .bp file and annotations of ART services.  [Jiakai Zhang]
-   -  Update the .bp file and the skeleton of ArtServiceTests.  [Jiakai Zhang]
-   -  Only enable the libcap dependency on Linux host.  [Jiakai Zhang]
-   -  Move ScopedCap to libartbase.  [Jiakai Zhang]
-   -  Fix ExecUtils.WaitChildWithTimeoutFallback by adding a fallback.  [Jiakai Zhang]
-   -  Revert^2 "Update ExecUtils to support artd use cases."  [Jiakai Zhang]
-   -  odrefresh: Add an option to set the boot image compiler filter.  [Jiakai Zhang]
-   -  odrefresh: use "speed-profile" if a system server jar has a profile.  [Jiakai Zhang]
-   -  Move `ScopedUnroot` and `ScopedInaccessible` to common_art_test.  [Jiakai Zhang]
-   -  Update ClassLoaderContext to support artd use cases.  [Jiakai Zhang]
-   -  Don't apply backoff time if the last compilation succeeded.  [Jiakai Zhang]
-   -  Implement JNI methods for `getCurrentOptimizationStatus`.  [Jiakai Zhang]
-   -  Fix a typo in oat_file_assistant_context.h.  [Jiakai Zhang]
-   -  Add a method to OatFileAssistantContext to fetch all information.  [Jiakai Zhang]
-   -  Release startup dex cache arrays in the GC critical section.  [Nicolas Geoffray]
-   -  Reland "Use nterp cache for fields in switch interpreter."  [Nicolas Geoffray]
-   -  Make array class with erroneous component also erroneous under AOT.  [Nicolas Geoffray]
-   -  Avoid dangling pointers in DexCache in jvmti redefinition.  [Nicolas Geoffray]
-   -  Reland "Add strings from dex caches in runtime app image."  [Nicolas Geoffray]
-   -  Reland "Generate app image at runtime."  [Nicolas Geoffray]
-   -  Reland "Add clinit checks at entry for some boot image methods."  [Nicolas Geoffray]
-   -  Remove class root duplicates from well known classes.  [Vladimir Marko]
-   -  Change remaining well known methods to `ArtMethod*`.  [Vladimir Marko]
-   -  ART: Initialize intrinsics earlier.  [Vladimir Marko]
-   -  Change well known method `String.charAt()` to `ArtMethod*`.  [Vladimir Marko]
-   -  Filter BCP in `VMClassLoader.getBootClassPathEntries`.  [Vladimir Marko]
-   -  Change well known class loader methods to `ArtMethod*`.  [Vladimir Marko]
-   -  Add helpers for classes from well known fields/methods.  [Vladimir Marko]
-   -  Use virtual dispatch for `MethodHandle.asType()`.  [Vladimir Marko]
-   -  Change well known thread methods to `ArtMethod*`.  [Vladimir Marko]
-   -  Clean up decoding well-known classes.  [Vladimir Marko]
-   -  Fix `ClassLinker::AppendToBootClassPath` usages.  [Jiakai Zhang]
-   -  Move "android-cloexec-dup" into art_clang_tidy_errors  [Stefano Cianciulli]
-   -  Move "modernize-use-using" to art_clang_tidy_disabled  [Stefano Cianciulli]
-   -  Fix bugprone-unused-return-value clang-tidy issues  [Stefano Cianciulli]
-   -  Fix modernize-use-nullptr clang-tidy issues  [Stefano Cianciulli]
-   -  Update profman to support artd use cases.  [Jiakai Zhang]
-   -  Fix misc-unused-using-decl clang-tidy issues  [Stefano Cianciulli]
-   -  Fix performance-noexcept-move-constructor clang-tidy issues  [Stefano Cianciulli]
-   -  Fix performance-faster-string-find clang-tidy issues  [Stefano Cianciulli]
-   -  Fix performance-for-range-copy clang-tidy issues  [Stefano Cianciulli]
-   -  Fix modernize-use-using clang-tidy issues  [Stefano Cianciulli]
-   -  Fix performance-unnecessary-value-param clang-tidy issues  [Stefano Cianciulli]
-   -  Fix bugprone-macro-parentheses clang-tidy issues  [Stefano Cianciulli]
-   -  Add a helper class OfaContext for OatFileAssistant.  [Jiakai Zhang]
-   -  Fix bugprone-argument-comment clang-tidy issues  [Stefano Cianciulli]
-   -  Fix the legacy version of `GetDexOptNeeded`.  [Jiakai Zhang]
-   -  Add a new version of `GetDexOptNeeded`.  [Jiakai Zhang]
-   -  Transfer ClassLoaderContext to the caller of OatFileAssistant::Create.  [Jiakai Zhang]
-   -  Replace the static version of GetOptimizationStatus with a factory.  [Jiakai Zhang]
-   -  Add a version of `GetOptimizationStatus` that accepts inputs in strings  [Jiakai Zhang]
-   -  Reflect runtime's behavior on boot images in artd.  [Jiakai Zhang]
-   -  Refactor OatFileAssistant to allow it to function without a runtime.  [Jiakai Zhang]
-   -  Change some well-known methods to `ArtMethod*`.  [Vladimir Marko]
-   -  Minor nterp improvements.  [Vladimir Marko]
-   -  Fix ExceptionTest to properly untag when setting up a fake stack  [Mythri Alle]
-   -  Faster class retrieval in nterp.  [Vladimir Marko]
-   -  Optimistically update field and method cache on type update.  [Nicolas Geoffray]
-   -  Avoid a slow switch in `NterpGetMethod()`.  [Vladimir Marko]
-   -  Count app dirty pages against zygote in imgdiag  [Dmitrii Ishcheikin]
-   -  JNI: Fix local reference leak for exceptional path.  [Vladimir Marko]
-   -  Reland "Allocate dex cache arrays at startup."  [Nicolas Geoffray]
-   -  Avoid updating class loaders outside system weaks  [Lokesh Gidra]
-   -  ART: Add static helpers for ArtMethod's access flags.  [Vladimir Marko]
-   -  Add pure array versions of some dex cache fields.  [Nicolas Geoffray]
-   -  Refactor and cleanup DexCache.  [Nicolas Geoffray]
-   -  ART: Faster debug build image checks.  [Vladimir Marko]
-   -  Reland "Clean up `StackOverflowError` construction."  [Nicolas Geoffray]
-   -  Fix wrong operator (`||` -> `&&`).  [Vladimir Marko]
-   -  Change well known annotation methods to `ArtMethod*`.  [Vladimir Marko]
-   -  Change well-known `DdmServer` methods to `ArtMethod*`.  [Vladimir Marko]
-   -  Change well known boxing methods to `ArtMethod*`.  [Vladimir Marko]
-   -  Change remaining well known fields to `ArtField*`.  [Vladimir Marko]
-   -  Change well known `Thread` fields to `ArtField*`.  [Vladimir Marko]
-   -  libartbase: Fix a failing check on `dchecked_vector`  [minaripenguin]
-   -  Fix the wrong log verbose switch name for Art's lock atrace  [Zhao Qin]
-   -  Specialize `DefaultEmptyFn` for `std::string`.  [Vladimir Marko]
-   -  Use kPageSize instead of PAGE_SIZE  [Colin Cross]
-   -  Fix #undef directive for the REASON_FROM_NAME macro  [Stefano Cianciulli]
-   -  Fix padding computation in ArenaAllocator::AllocAlign16()  [Lokesh Gidra]
-   -  Reland "Clear mark-bitmap after compaction"  [Lokesh Gidra]
-   -  Fix class-after-object map creation logic  [Lokesh Gidra]
-   -  Take super-classes into consideration for from-space freeing  [Lokesh Gidra]
-   -  CC GC: Clean up class loaders in reclaim phase.  [Vladimir Marko]
-   -  Update all native roots in linear-alloc arenas created pre-zygote fork  [Lokesh Gidra]
-   -  Handle very old kernel (<4.11) userfaultfd scenario  [Lokesh Gidra]
-   -  Retain classes allocated after their objects until the objects are compacted  [Lokesh Gidra]
-   -  Mprotect from-space after uffd GC compaction  [Lokesh Gidra]
-   -  Fix the concurrent compaction logic in userfaultfd GC  [Lokesh Gidra]
-   -  Disable userfautlfd GC if minor-fault feature isn't available  [Lokesh Gidra]
-   -  Don't create shadow-map if kObjPtrPoisoning is true  [Lokesh Gidra]
-   -  Align uffd compacted spaces for faster mremap during pause  [Lokesh Gidra]
-   -  Reland "Handle userfaultfd API ioctl on older kernel hosts"  [Lokesh Gidra]
-   -  Reland "Update non-moving space references in reverse"  [Lokesh Gidra]
-   -  Maintain pre-zygote fork linear-alloc pages as shared-clean  [Lokesh Gidra]
-   -  Don't sanitize TrackingHeader::GetSize()  [Lokesh Gidra]
-   -  Reduce RSS peak during compaction (observed on CC) with userfaultfd-GC  [Lokesh Gidra]
-   -  Make native GC-root updation concurrent with userfaultfd  [Lokesh Gidra]
-   -  Update native GC roots page-by-page  [Lokesh Gidra]
-   -  Change well known I/O fields to `ArtField*`.  [Vladimir Marko]
-   -  Reland "Change well known `ClassLoader` fields to `ArtField*`."  [Vladimír Marko]
-   -  Use cmdline gc-type and phenotype to decide which GC to run  [Lokesh Gidra]
-   -  Reject boot images if there is a read barrier state mismatch.  [Jiakai Zhang]
-   -  Log GC type in logcat  [Lokesh Gidra]
-   -  Don't assume the class has never been looked at in FastVerify.  [Nicolas Geoffray]
-   -  Fix one crash on deoptimization.  [Nicolas Geoffray]
-   -  Fix for Thread::QuickDeliverException.  [Nicolas Geoffray]
-   -  Don't disable JIT GC when enabling method tracing  [Mythri Alle]
-   -  Remove dead code `Heap::RunFinalization()`.  [Vladimir Marko]
-   -  Confirm MREMAP_DONTUNMAP (mremap) on all targets  [Lokesh Gidra]
-   -  ART: Do not use boot image for space gtests.  [Vladimir Marko]
-   -  ART: Speed up some gtests.  [Vladimir Marko]
-   -  Resolve symlinks when checking class loader context.  [Jiakai Zhang]
-   -  Mark methods of unverified classes as uncompilable.  [Nicolas Geoffray]
-   -  Use side vector while sweeping jvmti-weak-table  [Lokesh Gidra]
-   -  Avoid accessing live-words bitmap past its size  [Lokesh Gidra]
-   -  Remove redundant definitions of constexpr data.  [Vladimir Marko]
-   -  Fix trivial typo  [Hans Boehm]
-   -  Fix unused variable warning in runtime/gc/heap.cc.  [Krzysztof Kosiński]
-   -  Assume MREMAP_DONTUNMAP always available only on Android  [Lokesh Gidra]
-   -  Sweep interpreter caches using checkpoint during GC  [Lokesh Gidra]
-   -  Record bytes-freed in stop-the-world compaction mode of uffd GC  [Lokesh Gidra]
-   -  Enable using nterp interpreter with userfaultfd GC  [Lokesh Gidra]
-   -  Add missing newline terminator on LogHeapCorruption  [Theodore Dubois]
-   -  Reduce sleep duration between marking and compaction  [Lokesh Gidra]
-   -  Skip some JDWP tests for userfaultfd GC  [Lokesh Gidra]
-   -  Disable GC in Get*Critical() for SS and CMS  [Lokesh Gidra]
-   -  Allow all GCs when not using read barrier  [Lokesh Gidra]
-   -  Fallback to stop-the-wold compaction on hosts with kernel < 5.7  [Lokesh Gidra]
-   -  Skip acquiring block-lock in BumpPointerSpace::AllocThreadUnsafe  [Lokesh Gidra]
-   -  Don't use MREMAP_DONTUNMAP on host when kernel < 5.13  [Lokesh Gidra]
-   -  Fix gtest failures due to userfaultfd GC  [Lokesh Gidra]
-   -  Convert kUseReadBarrier to static const from constexpr  [Lokesh Gidra]
-   -  Tolerate existing zero-pages in moving space  [Lokesh Gidra]
-   -  Update objects-freed after marking phase  [Lokesh Gidra]
-   -  Make moving space compaction concurrent using userfaultfd  [Lokesh Gidra]
-   -  Update native gc-roots separately in compaction pause  [Lokesh Gidra]
-   -  Add debugging info  [Lokesh Gidra]
-   -  Handle black allocations in concurrent mark-compact  [Lokesh Gidra]
-   -  Stop-the-world compaction phase  [Lokesh Gidra]
-   -  Add data-structures required for concurrent compaction  [Lokesh Gidra]
-   -  Marking phase of Concurrent Mark Compact GC  [Lokesh Gidra]
-   -  Don't run thread related callbacks for internal threads  [Mythri Alle]
-   -  Use ShouldDeoptimizeFlag to check if method exit hooks are needed  [Mythri Alle]
-   -  Call method entry hooks only when we have method entry listeners  [Mythri Alle]
-   -  Don't use nterp when instrumentation is active  [Mythri Alle]
-   -  Make sure we delete the dex_pc_list vector  [Santiago Aboy Solanes]
-   -  Don't fetch shorty when there are no listeners and  deopt isn't required  [Mythri Alle]
-   -  Only check for should_deoptimize_flag if there was a redefinition  [Mythri Alle]
-   -  Update method exit hooks from JITed code to not use Stack visitor  [Mythri Alle]
-
-   * android_bionic
-   -  legacy strtof inline: don't set errno for "inf"  [Ryan Prichard]
-   -  Move some cruft from the build system to the source.  [Elliott Hughes]
 
    * android_frameworks_av
    -  MTP: Do not exit MtpServer on receiving EPIPE  [Wesley Cheng]
@@ -493,6 +371,16 @@
    -  Fix crash when callback thread late launched after stream close.  [Kuowei Li]
 
    * android_frameworks_base
+   -  SystemUI: Introduce camera & flashlight keyguard affordance  [Adithya R]
+   -  base: dont call roundStorageSize on Storage API for getting sizes  [maxwen]
+   -  graphics: Override system fonts with user-selected overlays  [Danny Lin]
+   -  styles: Use user fonts for Material UI themes  [Danny Lin]
+   -  Fix black screen issue due to wallpaper decoding exceptions  [Weijie Wang]
+   -  Shrink by 0.5 for YUV TextViews  [John Reck]
+   -  hwui: renderthread/CanvasContext: Reduce the timeout for dequeueing buffers  [electimon]
+   -  KeyguardIndication: Set wakelock on doze only when required  [Pranav Vashi]
+   -  base: Refactor Wi-Fi standard icons  [Adithya R]
+   -  base: Import Wi-Fi standard icon [1/2]  [ReallySnow]
    -  Align passing member references to do nativeInit  [Shen Lin]
    -  Nfc: Replace use of android.view.Window->isDestroyed()  [Henri Chataing]
    -  Nfc: Change TechListParcel to use public Parcel->readStringArray()  [Henri Chataing]
@@ -511,26 +399,27 @@
    -  Launcher3: Do not limit the number of search results  [Adithya R]
 
    * android_packages_apps_RiceDroidSettings
+   -  settings: Introduce Scarlet system manager  [minaripenguin]
+   -  settings: Bring in the kitchen dashboard  [minaripenguin]
    -  settings: Import Wi-Fi standard icon  [Pranav Vashi]
    -  settings: Improve CustomSeekBarPreference drawables  [pri0818]
 
    * android_system_libbase
+   -  unique_fd: Disable socket code on Trusty  [Andrei Homescu]
+   -  Take std::string_views instead of const std::string & for android::base::Trim  [T.J. Mercier]
+   -  Add WriteFullyAtOffset utility method  [Kelvin Zhang]
+   -  Add Basename and Dirname backward compatibility  [Hongguang Chen]
    -  Increase ReadFdToString buffer size  [Frederick Mayle]
-
-   * android_system_sepolicy
-   -  sepolicy: Allow untrusted apps with api 30 to access bootimage props  [minaripenguin]
 
    * incremental_delivery
    -  Fix file descriptor leak on IncFS v1  [Hobin Woo]
 
    * vendor_google_pixel
+   -  overlay: Add a prebuilt pixel config overlay for AOSP  [minaripenguin]
+   -  common: gms: Ship Flipendo  [minaripenguin]
+   -  products: gms: Fix core GMS variant conditions  [minaripenguin]
    -  gms: overlay: PixelSetupWizardStringsOverlay: Refactor for riceDroid  [ralph950412]
    -  common: gms: Build required packages  [minaripenguin]
-   -  common: gms: Cleanup  [minaripenguin]
-   -  vendor: gms: Reconfigure for rd  [minaripenguin]
-   -  gms: Build NGA conditionally * Import from raven-user 13 TP1A.221005.002 9012097 release-keys  [jhenrique09]
-   -  Update DevicePersonalizationPrebuilt to 2022  [NurKeinNeid]
-   -  Add Launcher3 to config_defaultListenerAccessPackages in all configs  [NurKeinNeid]
 
 ====================
      01-09-2023
@@ -540,25 +429,11 @@
    -  Remove error messages from LoadLocalizedBitmap  [Michael Bestas]
    -  recovery: fix applying updates  [Alexander Martinz]
 
-   * android_build
-   -  envsetup.sh: Increase java heap size for low ram machines  [minaripenguin]
-
    * android_frameworks_base
    -  Revert "SystemUI: Use headline font for important UI elements"  [minaripenguin]
    -  Sync anim durations with Nothing Phone 1  [spkal01]
    -  SurfaceTexture: add setConsumerCanWait()  [Tomislav Novak]
    -  camera: Add backwards-compatible CaptureResultExtras constructor  [Adithya R]
-   -  SystemUI: write initial value of SHOW_QR_CODE_SCANNER_SETTING on first call  [maxwen]
-   -  Intent: Fix launch of permision revoke activity from playstore  [jhenrique09]
-
-   * android_frameworks_native
-   -  SurfaceFlinger: skip composition when presenting a single auto-refresh layer  [Tomislav Novak]
-   -  SurfaceFlinger: keep auto-refresh in sync between producer and consumer  [Tomislav Novak]
-   -  BufferQueueConsumer: acquire a buffer only if fence is signaled  [Tomislav Novak]
-   -  DO NOT MERGE Extend mPreviousPresentFences for high refresh rate  [Jen-Chih Chang]
-   -  Revert "sf: avoiding unnecessary frame skip to reduce janks."  [chengdaozhong]
-   -  SF: Bring back support for disabling backpressure propagation  [Adithya R]
-   -  Replace duplicate shaderOutputLayer with subgroupBroadcastDynamicId  [Trevor David Black]
 
    * android_frameworks_opt_telephony
    -  telephony: Use case insensitive check for plmn-spn  [Adithya R]
@@ -575,12 +450,6 @@
 
    * android_packages_apps_DeskClock
    -  DeskClock: Add FLAG_IMMUTABLE flag to PendingIntent  [Michael Bestas]
-
-   * android_packages_apps_Launcher3
-   -  Merge branch 'dutch-translations/thirteen' into thirteen  [minaripenguin]
-
-   * android_packages_apps_RiceDroidSettings
-   -  README: Recommend translator app  [minaripenguin]
 
    * android_packages_modules_common
    -  Make adbroot_aidl_interface-ndk available for adbd  [LuK1337]
@@ -604,11 +473,12 @@
    -  Netd: Add support for quotaReachedAlert event  [Pavan Kumar M]
    -  Return ECONNREFUSED when socket creation blocked  [Tommy Webb]
 
-   * android_system_sepolicy
-   -  Allow system_server to read /data/misc/profman.  [Jiakai Zhang]
-   -  Allow artd to scan directories for cleaning up obsolete managed files.  [Jiakai Zhang]
-   -  sepolicy: Allow untrusted app with api 30 access to qemu properties  [minaripenguin]
-   -  sepolicy: Allow artd to access bootimage properties  [minaripenguin]
+   * vendor_google_pixel
+   -  common: gms: Cleanup  [minaripenguin]
+   -  vendor: gms: Reconfigure for rd  [minaripenguin]
+   -  gms: Build NGA conditionally * Import from raven-user 13 TP1A.221005.002 9012097 release-keys  [jhenrique09]
+   -  Update DevicePersonalizationPrebuilt to 2022  [NurKeinNeid]
+   -  Add Launcher3 to config_defaultListenerAccessPackages in all configs  [NurKeinNeid]
 
 ====================
      01-08-2023
@@ -624,28 +494,19 @@
    -  Fix .clang-tidy error  [Chih-Hung Hsieh]
    -  Change libvixld symbol visibility.  [Vladimir Marko]
 
-   * android_libcore
-   -  Unhide @FastNative and @CriticalNative.  [Vladimir Marko]
-   -  Reduce local frame size for `ojluni` `JNI_OnLoad()`.  [Vladimir Marko]
+   * android_frameworks_base
+   -  SystemUI: write initial value of SHOW_QR_CODE_SCANNER_SETTING on first call  [maxwen]
+   -  Intent: Fix launch of permision revoke activity from playstore  [jhenrique09]
 
    * android_packages_apps_Launcher3
+   -  Merge branch 'dutch-translations/thirteen' into thirteen  [minaripenguin]
    -  Launcher3: Update Dutch translation  [B4579]
 
    * android_packages_apps_RiceDroidSettings
+   -  README: Recommend translator app  [minaripenguin]
    -  settings: Update Dutch translation  [B4579]
 
    * android_system_sepolicy
-   -  Allow documents UI to access storage  [Pranav Vashi]
-   -  Allow artd to access files for restorecon.  [Jiakai Zhang]
-   -  Allow artd to read symlinks for secondary dex files.  [Jiakai Zhang]
-   -  Allow artd to access primary dex'es in external and vendor partitions.  [Jiakai Zhang]
-   -  Update SELinux policy to allow artd to perform secondary dex compilation  [Jiakai Zhang]
-   -  Grant artd read permissions on current profile directories.  [Jiakai Zhang]
-   -  Grant artd write permissions on profile directories.  [Jiakai Zhang]
-   -  Allow reading process info from /proc.  [Jiakai Zhang]
-   -  Update SELinux policy for app compilation CUJ.  [Jiakai Zhang]
-   -  Allow artd to get root capabilities and write to dalvikcache_data_file.  [Jiakai Zhang]
-   -  Allow artd to check optimization status.  [Jiakai Zhang]
    -  sepolicy: Don't audit linker denials  [minaripenguin]
    -  Allow system_server to enable fs-verity.  [Alex Buynytskyy]
    -  Allow system_server to obtain verity root hash for install files.  [Alex Buynytskyy]
@@ -680,11 +541,15 @@
      01-07-2023
 ====================
 
+====================
+     01-06-2023
+====================
+
    * android_packages_apps_Launcher3
    -  Launcher3: Add Russian translation  [rxuglr]
 
 ====================
-     01-06-2023
+     01-05-2023
 ====================
 
    * android
@@ -694,22 +559,8 @@
    -  settings: Update Russian translation  [rxuglr]
 
 ====================
-     01-05-2023
-====================
-
-   * android
-   -  manifest: Track FaceUnlockService from crdroid  [Pranav Vashi]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Update readme file  [minaripenguin]
-   -  settings: Redirect links and easter eggs  [minaripenguin]
-
-====================
      01-04-2023
 ====================
-
-   * android_build
-   -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
 
    * android_build_soong
    -  Enable aidl#generate_traces by default for some Java SDK kinds  [Zim]
@@ -766,26 +617,8 @@
    -  Handle unparsable public keys  [Eran Messeri]
    -  InsetsStateController: Replace ArrayMap with HashMap for performance  [Danny Lin]
    -  base: Make hwui renderer property persistent  [LibXZR]
-   -  SystemUI: Make keyguard elements follow clock font  [minaripenguin]
-   -  SystemUI: Configurable text size for Large LS clock  [minaripenguin]
-   -  SystemUI: Configurable top margin for ls clock  [minaripenguin]
-   -  SystemUI: Fix a race condition on reticker's visibility  [minaripenguin]
-   -  core: Optimize system resources  [minaripenguin]
-   -  SystemUI: Use headline font for important UI elements  [minaripenguin]
 
    * android_frameworks_native
-   -  renderengine: skia: switch to glass blur effect  [minaripenguin]
-   -  Fix Surface HDR meta reset  [yihsing.shen]
-   -  Deleted clang property in Android.bp files  [Alix]
-   -  Turn off LTO for libvibratorservice_test as a workaround  [Yi Kong]
-   -  StatsAIDL: eliminated extra reverseDomainName string copy creation  [Vova Sharaienko]
-   -  Turn off LTO for libviabratorservice as a workaround  [Yi Kong]
-   -  Do not log an error about ro.sf.lcd_density on emulators  [Roman Kiryanov]
-   -  Fix dumpDebugInfo blocked and phone hanging  [yihsing.shen]
-   -  Add missing assert.h include  [Ryan Prichard]
-   -  BLASTBufferQueue: Comment out lines causing log spam (#13)  [raystef66]
-   -  EGL: Conditionally revert commit a9550f3  [Danny Trunk]
-   -  IPCThreadState::hasExplicitIdentity()  [mattgilbride]
    -  Trampoline atrace definitions through libbinder to libcutils  [Zim]
    -  libbinder: BBinder descriptor  [Steven Moreland]
    -  Add lookupOrCreateWeak to ObjectManager  [Devin Moore]
@@ -832,10 +665,9 @@
    -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
 
    * android
+   -  manifest: Track FaceUnlockService from crdroid  [Pranav Vashi]
    -  manifest: Track dependencies from crdroid android    *  [Pranav Vashi]
    -  manifest: android-13.0.0_r18 -> r24  [minaripenguin]
-   -  manifest: Track zstd from master  [minaripenguin]
-   -  manifest: Track android_system_libziparchive  [minaripenguin]
 
    * android_hardware_interfaces
    -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
@@ -847,11 +679,59 @@
    -  Revert "Launcher3: Do not limit the number of search results"  [minaripenguin]
 
    * android_packages_apps_RiceDroidSettings
-   -  settings: Clock text size and top margin settings  [minaripenguin]
+   -  settings: Update readme file  [minaripenguin]
+   -  settings: Redirect links and easter eggs  [minaripenguin]
 
    * android_packages_apps_Settings
    -  settings: Update easter egg  [minaripenguin]
    -  Merge tag 'android-13.0.0_r24' into rebase  [minaripenguin]
+
+   * android_packages_modules_Bluetooth
+   -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
+
+   * android_packages_modules_Wifi
+   -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
+
+   * android_packages_services_Telecomm
+   -  Merge tag 'android-13.0.0_r20' into staging/lineage-20.0_merge-android-13.0.0_r20  [Michael Bestas]
+
+   * android_vendor_rice
+   -  config: Include crdroid faceunlock  [Pranav Vashi]
+   -  config: Build ParallelSpace  [Pranav Vashi]
+   -  ricedroid: v10.0 release  [minaripenguin]
+   -  config: Bump fingerprint for Jan ASB  [minaripenguin]
+
+====================
+     01-03-2023
+====================
+
+   * android_frameworks_base
+   -  SystemUI: Make keyguard elements follow clock font  [minaripenguin]
+   -  SystemUI: Configurable text size for Large LS clock  [minaripenguin]
+   -  SystemUI: Configurable top margin for ls clock  [minaripenguin]
+   -  SystemUI: Fix a race condition on reticker's visibility  [minaripenguin]
+   -  core: Optimize system resources  [minaripenguin]
+   -  SystemUI: Use headline font for important UI elements  [minaripenguin]
+   -  SystemUI: User configurable lockscreen clock color [1/2]  [maxwen]
+   -  SystemUI: Decrease keyguard bottom area text size  [minaripenguin]
+   -  SystemUI: Move bluetooth dialog creation to LongClick method  [minaripenguin]
+   -  SystemUI: Slightly offset lockscreen clock to the center  [minaripenguin]
+
+   * android
+   -  manifest: Track zstd from master  [minaripenguin]
+   -  manifest: Track android_system_libziparchive  [minaripenguin]
+
+   * android_packages_apps_Launcher3
+   -  SushiLauncher: Use headline font for important UI elements  [minaripenguin]
+
+   * android_packages_apps_Messaging
+   -  Fix errorprone warnings that should be errors  [Cole Faust]
+
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Clock text size and top margin settings  [minaripenguin]
+   -  settings: Configurable lockscreen clock color [2/2]  [minaripenguin]
+
+   * android_packages_apps_Settings
    -  Settings: Rework settings panel design  [minaripenguin]
    -  Settings: Improve and fix about phone banner layout  [minaripenguin]
    -  Settings: Gestures: Make IME space optional [2/2]  [minaripenguin]
@@ -863,101 +743,20 @@
    -  Settings: Add Support for Dashboard theme styles  [minaripenguin]
    -  Settings: Add window ignore secure feature [2/2]  [LibXZR]
 
-   * android_packages_modules_Wifi
-   -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
-
-   * android_packages_services_Telecomm
-   -  Merge tag 'android-13.0.0_r20' into staging/lineage-20.0_merge-android-13.0.0_r20  [Michael Bestas]
-
-   * android_system_core
-   -  Merge tag 'android-13.0.0_r24' into thirteen  [minaripenguin]
+   * android_packages_modules_Bluetooth
+   -  eatt: Fix eatt device duplicate  [Jakub Tyszkowski]
+   -  bta_gattc: Fix handling disconnect  [Łukasz Rymanowski]
+   -  leaudio: Fix ASE clear on ACL disconnection  [Łukasz Rymanowski]
 
    * android_vendor_addons
    -  fonts: Use Google-sans as body fonts for Ndot headline font  [minaripenguin]
 
    * android_vendor_rice
-   -  config: Include crdroid faceunlock  [Pranav Vashi]
-   -  config: Build ParallelSpace  [Pranav Vashi]
-   -  ricedroid: v10.0 release  [minaripenguin]
-   -  config: Bump fingerprint for Jan ASB  [minaripenguin]
    -  changelogs: 01/03/23  [minaripenguin]
-
-====================
-     01-03-2023
-====================
-
-   * android_frameworks_base
-   -  SystemUI: User configurable lockscreen clock color [1/2]  [maxwen]
-   -  SystemUI: Decrease keyguard bottom area text size  [minaripenguin]
-   -  SystemUI: Move bluetooth dialog creation to LongClick method  [minaripenguin]
-   -  SystemUI: Slightly offset lockscreen clock to the center  [minaripenguin]
-   -  ScarletManager: Remove synchandler runtime modifications  [minaripenguin]
-   -  Using 'DeviceStateManager.INVALID_DEVICE_STATE' in getDeviceStateInfoLocked() when the initial Devicestates are not committed.  [jiayongqiang]
-   -  [zip] Make implementations of zip interfaces final  [Yurii Zubrytskyi]
-   -  Reland "Don't enable jdwp by default on userdebug builds""  [Mythri Alle]
-   -  config: Allow gms to access persistent data partition  [Demon000]
-   -  KernelCpuUidTimeReader: Decrease log level on non-eng builds  [Han Wang]
-   -  base: Delete media tests  [Evan Anderson]
-   -  base: Remove unnecessary videos  [Janson Kang]
-   -  Makes the loading "spinner" animation smoother  [Sar Castillo]
-   -  Keep recent tasks for more time in memory  [ezio84]
-   -  Add missing STORAGE_INTERNAL permission for BackupRestoreConfirmation  [c_jyuan]
-   -  Enable KEY_WFC_SPN_FORMAT_IDX_INT universally  [timocapa]
-   -  SystemUI: fix MediaProjection cast crash  [Pawit Pornkitprasan]
-   -  SystemUI: Fix SystemUI Crash  [mqi]
-   -  Shorten wait time for shutdown time optimization  [zljing]
-   -  SystemServer: only enable fd leak tracker on eng  [Simao Gomes Viana]
-   -  Add synchronization for invokeForAllObservers call  [Devi Sandeep Endluri V V]
-   -  Fixes crash/race condition when destroyActivity  [katao]
-   -  wm: Passing a new ArraySet instance to avoid crash  [Qiushi.Han]
-   -  Crash occured due to null pointer exception.  [Niraj kumar Mishra]
-   -  MountService: ensure VolumeRecord with UUID exists before modifying  [Scott Mertz]
-   -  frameworks: Fix null pointer Issue  [mqi]
-   -  os: Process: Fix wrong code in isThreadInProcess  [leo zhang]
-   -  view: add null check for dispatch touch view  [jianzhou]
-   -  ActivityThread: Prevent surface hang up when screen on and screen off  [Guo Li]
-   -  add fsync when copy native libs  [liulvping]
-   -  NativeMessageQueue: ensure nativeDestroy success  [Jintao Zhu]
-   -  libandroid_defaults: use whole program vtables lto optimization  [John Galt]
-   -  libandroid_defaults: use ThinLTO  [John Galt]
-   -  core/jni/libandroid_runtime: Use ThinLTO  [John Galt]
-   -  core: jni: use -O3  [Simao Gomes Viana]
-   -  Improve scrolling cache  [Pawit Pornkitprasan]
-   -  Watchdog: run emergency sync before killing system  [Simão Gomes Viana]
-   -  SQLite: Do integrity_check only once  [yi.jang]
-   -  SQLiteDatabase: Catch corrupt exception during transaction  [muzbit.kim]
-   -  AOD: Sleep when proximity is covered for 3 secs  [PMS22]
-   -  base: Set ic_avatar_user and ic_avatar_guest_user to follow system accent  [elpaablo]
-   -  display: Force a reset if brightness adjustment is changed directly  [LibXZR]
-   -  Allow devices to configure the blanking delay on displays  [Alex Cruz]
-   -  Delay blanking of displays to improve performance  [Hampus Wessman]
-   -  Remove wtf if no display nits mapping exists  [Alistair Delva]
-   -  Fix NPE when store brightness and displayDevice is null  [Shen Lin]
-   -  Fix NullPointerException when the display has been disabled  [niuwenchao]
-
-   * android_packages_apps_Launcher3
-   -  SushiLauncher: Use headline font for important UI elements  [minaripenguin]
-
-   * android_packages_apps_Messaging
-   -  Fix errorprone warnings that should be errors  [Cole Faust]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Configurable lockscreen clock color [2/2]  [minaripenguin]
-
-   * android_system_libbase
-   -  [base] Change Dirname/Basename params to string_view  [Yurii Zubrytskyi]
-   -  Make android::base::Dirname() thread-safe.  [Elliott Hughes]
-   -  Reland "Write string_view to fd".  [Chris Weir]
-   -  Add function_ref benchmark and optimize for pointers  [Yurii Zubrytskyi]
 
 ====================
      01-02-2023
 ====================
-
-   * android_build
-   -  Fix the build system to pass "-Xgc:CMC" to dex2oat correctly.  [Jiakai Zhang]
-   -  Determine whether to enable userfaultfd GC at build time.  [Jiakai Zhang]
-   -  Remove DEXPREOPT_USE_ART_IMAGE; it is no longer needed.  [Ulya Trafimovich]
 
    * android_frameworks_av
    -  Resume HW after forced pause during flush  [Gareth Fenn]
@@ -1015,283 +814,61 @@
    -  Don't drop HTTPLiveSource metadata  [mtk11204]
 
    * android_frameworks_base
+   -  ScarletManager: Remove synchandler runtime modifications  [minaripenguin]
+   -  Using 'DeviceStateManager.INVALID_DEVICE_STATE' in getDeviceStateInfoLocked() when the initial Devicestates are not committed.  [jiayongqiang]
+   -  [zip] Make implementations of zip interfaces final  [Yurii Zubrytskyi]
+   -  Reland "Don't enable jdwp by default on userdebug builds""  [Mythri Alle]
+   -  config: Allow gms to access persistent data partition  [Demon000]
+   -  KernelCpuUidTimeReader: Decrease log level on non-eng builds  [Han Wang]
+   -  base: Delete media tests  [Evan Anderson]
+   -  base: Remove unnecessary videos  [Janson Kang]
+   -  Makes the loading "spinner" animation smoother  [Sar Castillo]
+   -  Keep recent tasks for more time in memory  [ezio84]
+   -  Add missing STORAGE_INTERNAL permission for BackupRestoreConfirmation  [c_jyuan]
+   -  Enable KEY_WFC_SPN_FORMAT_IDX_INT universally  [timocapa]
+   -  SystemUI: fix MediaProjection cast crash  [Pawit Pornkitprasan]
+   -  SystemUI: Fix SystemUI Crash  [mqi]
+   -  Shorten wait time for shutdown time optimization  [zljing]
+   -  SystemServer: only enable fd leak tracker on eng  [Simao Gomes Viana]
+   -  Add synchronization for invokeForAllObservers call  [Devi Sandeep Endluri V V]
+   -  Fixes crash/race condition when destroyActivity  [katao]
+   -  wm: Passing a new ArraySet instance to avoid crash  [Qiushi.Han]
+   -  Crash occured due to null pointer exception.  [Niraj kumar Mishra]
+   -  MountService: ensure VolumeRecord with UUID exists before modifying  [Scott Mertz]
+   -  frameworks: Fix null pointer Issue  [mqi]
+   -  os: Process: Fix wrong code in isThreadInProcess  [leo zhang]
+   -  view: add null check for dispatch touch view  [jianzhou]
+   -  ActivityThread: Prevent surface hang up when screen on and screen off  [Guo Li]
+   -  add fsync when copy native libs  [liulvping]
+   -  NativeMessageQueue: ensure nativeDestroy success  [Jintao Zhu]
+   -  libandroid_defaults: use whole program vtables lto optimization  [John Galt]
+   -  libandroid_defaults: use ThinLTO  [John Galt]
+   -  core/jni/libandroid_runtime: Use ThinLTO  [John Galt]
+   -  core: jni: use -O3  [Simao Gomes Viana]
+   -  Improve scrolling cache  [Pawit Pornkitprasan]
+   -  Watchdog: run emergency sync before killing system  [Simão Gomes Viana]
+   -  SQLite: Do integrity_check only once  [yi.jang]
+   -  SQLiteDatabase: Catch corrupt exception during transaction  [muzbit.kim]
+   -  AOD: Sleep when proximity is covered for 3 secs  [PMS22]
+   -  base: Set ic_avatar_user and ic_avatar_guest_user to follow system accent  [elpaablo]
+   -  display: Force a reset if brightness adjustment is changed directly  [LibXZR]
+   -  Allow devices to configure the blanking delay on displays  [Alex Cruz]
+   -  Delay blanking of displays to improve performance  [Hampus Wessman]
+   -  Remove wtf if no display nits mapping exists  [Alistair Delva]
+   -  Fix NPE when store brightness and displayDevice is null  [Shen Lin]
+   -  Fix NullPointerException when the display has been disabled  [niuwenchao]
    -  AudioManager: Remove no-longer-relevant error message  [Darwin Huang]
    -  MediaDrm: error detail apis  [Robert Shih]
-   -  fw/b: Squash import NetworkTraffic  [Jon Haus]
-   -  AppErrors: Respect appsNotReportingCrashes for ANRs  [Danny Lin]
-   -  SystemUI: Apply dark theming to split shade  [minaripenguin]
-   -  SystemUI: Fix per-app volume icon paddings  [minaripenguin]
-   -  Youtube application shows black screen  [pioush.kumar-IN009423]
-   -  Skype is not opening in full screen  [pioush.kumar-IN009423]
-   -  Reland 'System crash during dismissing split in multi-user scenario'  [pioush.kumar-IN009423]
-   -  Revert "System crash during dismissing split in multi-user scenario"  [minaripenguin]
-   -  core: Enable Window development features by default  [minaripenguin]
-   -  base: Make IME space optional [1/2]  [minaripenguin]
-   -  Avoid AutoRestrictedBucketFeatureFlagChanged timing issues  [duanyangqi]
-   -  Fix the problem of slow exit of boot animation  [niuwenchao]
-   -  Fix operator name view reappearing even when user has disabled it  [Luca Weiss]
-   -  Dynamic broadcast receivers that are not exported need to be filtered in checkBroadcastFromSystem  [gang.huang]
-   -  JobScheduler: Stop leaking user information  [minaripenguin]
-   -  SystemUI: Make Lens work without independent package installed  [cjh1249131356]
-   -  SystemUI: Integrate Google Lens into Screenshot UI  [AshutoshSundresh]
-   -  SystemUI: Display a toast when a screenshot is deleted  [Alex Cruz]
-   -  core: Configure SQLite to operate in MEMORY mode  [Jesse Chan]
-   -  libs: Offload WM shell to another thread  [Danny Lin]
-   -  SystemUI: Refactor QS Data Usage  [minaripenguin]
-   -  SystemUI: Avoid ClassCastException for auto brightness icon  [minaripenguin]
-   -  PixelPropsUtils: spoof nothing smartcenter to pixel  [aswin7469]
-   -  Prevent apps from crashing if internet permission is revoked.  [minaripenguin]
-   -  config: Enable QR scanner shortcut in lock screen  [Adithya R]
-   -  stop Microsoft apps from crashing without INTERNET permission  [Dmitry Muhomor]
-   -  Revert "Fix potential crash when exit splash screen"  [minaripenguin]
-   -  SystemUI: Implement Bluetooth dialog  [Adithya R]
-   -  SystemUI: Require unlocking to use sensitive QS tiles  [Danny Lin]
-   -  Revert "QS: Add and use Bluetooth Panel instead of full Settings"  [minaripenguin]
-   -  PixelPropsUtils: Spoof as Pixel 7 Pro for ASI and persistent process  [minaripenguin]
-   -  Revert "SettingsLib: Don't show system overlays on apps list"  [minaripenguin]
-   -  SystemUI: Bring-in nothing breathing fingerprint and UDPS animations  [minaripenguin]
-   -  SystemUI: Configurable lockscreen album art blur radius [1/2]  [strwbrry143]
-   -  Improve renderscript allocation and usage  [minaripenguin]
-   -  SystemUI: Media notification artwork blur filter [1/2]  [minaripenguin]
-   -  SystemUI: Dynamically adjust clock font spacing  [minaripenguin]
-   -  KeyguardIndication: Fix glitchy charging info on AOD  [Pranav Vashi]
-   -  NotificationPlayer: use AUDIOFOCUS_GAIN_TRANSIENT instead of AUDIOFOCUS_GAIN in looping mode  [wumin3]
-   -  Dark Theme "TURN ON UNTIL SUNRISE" is not retained after reboot  [Sameer Zalke]
-   -  base: make per-app work with multi audio focus  [El Dainosor]
-   -  base: Silence broadcast warnings logspam  [minaripenguin]
-   -  base: Stop the spamming of background start not allowed  [SakuraiLH]
-   -  Disallow annoying OPlus camera notification  [vjspranav]
-   -  IllegalStateException: Have not received sensor event when getDeviceStateInfoLocked is being called  [huyuxin]
-   -  always auto-grant permissions that have "normal" protectionLevel  [Dmitry Muhomor]
-   -  aapt: Fix compiler warning (clobbered by longjmp)  [Christopher R. Palmer]
-   -  base: rescue party: check isDisabled on all public API  [maxwen]
-   -  SystemUI: add more notification snooze times  [Chris]
-   -  base: Fix for hybrid a2dp mode  [gmanam]
-   -  audio: Don't play sound effects if stream is muted  [Steve Kondik]
-   -  New Crowdin updates (#925)  [Lup Gabriel]
-   -  SystemUI: Remove existing icon group if its overriding  [Adithya R]
-   -  SystemUI: Re-evaluate system theme when applying weather changes  [minaripenguin]
-   -  Revert "SystemUI: Re-inflate keyguard statusbar on theme change"  [minaripenguin]
-   -  utils: Import Settings restart prompt api  [spkal01]
-   -  BootReceiver: Return early if trace_pipe doesn't exists  [minaripenguin]
-   -  AudioService: Use proper stream context for Le Audio stream volume  [Jakub Tyszkowski]
-   -  [LE Audio] Add BT LE headset check for voice call to update the icon  [changbetty]
-   -  BleAudioVolume: Fix calculation for the activated device  [Jakub Tyszkowski]
-   -  BtHelper: Check for SCO connection before broadcast  [Satish Kumar Kodishala]
-   -  Broadcast UI: Fix NPE after enabling/disabling broadcast multiple times  [xiaowang]
-   -  Don't update OverScroller fling state if improper time passed  [Jun Wang]
-   -  fwb: Link more elements to `config_dialogCornerRadius `  [minaripenguin]
-   -  core: Downscale Task snapshots to 65%  [minaripenguin]
-   -  core: res: config: speed up animations  [Simao Gomes Viana]
-   -  android: speed things up!  [Alex]
-   -  suppress SystemUI ANRs  [Danny Lin]
-   -  SystemUI: Clean up leftover with alignment  [Pranav Vashi]
-   -  SystemUI: old style mobile indicator layout fixes  [maxwen]
-   -  [Bugfix]create different pendingintent via appwidgetId  [Wen Zhang]
-   -  Use getPackagesForOps instead of iterating packages by checkOperation  [yinwei.sun1]
-   -  base: Blacklist OPlusExtras for Parallel space  [AnierinB]
-   -  base: Whitelist DocumentsUIGoogle for Parallel space  [Joey Huab]
-   -  core: User configurable clock font [1/2]  [minaripenguin]
-   -  base: Add support for window ignore secure  [LibXZR]
-   -  SystemUI: Custom volume styles [1/2]  [minaripenguin]
-   -  SystemUI: Implement Aqua design to volume panel  [minaripenguin37]
 
    * android
    -  manifest: Track a recent revision of libcap  [minaripenguin]
 
-   * android_libcore
-   -  Support for ART InternOrNewUTF native function  [Hans Boehm]
-   -  Discourage NativeAllocationRegistries without size  [Hans Boehm]
-   -  Don't lose interrupt in lockFile()  [Hans Boehm]
-   -  Remove preResolvesStrings and cached length fields.  [Nicolas Geoffray]
-   -  Add pure array versions of some dex cache fields.  [Nicolas Geoffray]
-   -  Add `isFullyCompiled`.  [Jiakai Zhang]
-   -  Add `getCurrentOptimizationStatus` and related APIs.  [Jiakai Zhang]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Import network traffic  [Jon Haus]
-
-   * android_system_core
-   -  Rename "Dex2OatBootBackground" to "Dex2OatBackground".  [Jiakai Zhang]
-   -  Add task profile "Dex2OatBackground".  [Jiakai Zhang]
+   * android_system_libbase
+   -  [base] Change Dirname/Basename params to string_view  [Yurii Zubrytskyi]
+   -  Make android::base::Dirname() thread-safe.  [Elliott Hughes]
+   -  Reland "Write string_view to fd".  [Chris Weir]
+   -  Add function_ref benchmark and optimize for pointers  [Yurii Zubrytskyi]
 
    * android_vendor_rice
    -  changelogs: 01/02/23  [minaripenguin]
-
-====================
-     01-01-2023
-====================
-
-   * android_art
-   -  Runtime implementation of try catch inlining  [Santiago Aboy Solanes]
-   -  Skip method unwind callbacks if exception was thrown by method exit  [Mythri Alle]
-   -  Add more verbose log message when stack map isn't found.  [David Srbecky]
-   -  Revert^2 "Better detect PrimitiveArrayCritical issues"  [Hans Boehm]
-   -  Check for pop frames independent of method entry listeners  [Mythri Alle]
-   -  Don't call entry callbacks when moving to JITed from interpreter  [Mythri Alle]
-   -  Add a null check for suppressed exception.  [Nicolas Geoffray]
-   -  Improve stack walk debug dumps.  [Artem Serov]
-   -  Move JIT lock below kTaggingLockLevel.  [Nicolas Geoffray]
-   -  Reland^2 "Update instrumentation support for non-java debuggable runtimes"  [Mythri Alle]
-   -  Run method entry callbacks for all methods on the stack  [Mythri Alle]
-   -  Return early after initializing non-invokable methods  [Mythri Alle]
-   -  Reland "Add isInitializing check in nterp header."  [Nicolas Geoffray]
-   -  Revert "Add isInitializing check in nterp header."  [Nicolas Geoffray]
-   -  Add isInitializing check in nterp header.  [Nicolas Geoffray]
-   -  Correctly handle non-invokable methods in InitializeMethodsCode  [Mythri Alle]
-   -  Don't request a deopt if caller isn't async deoptimizeable  [Mythri Alle]
-   -  Reland "Introduce a flag to check if JITed code has instrumentation support"  [Mythri Alle]
-   -  Update formatting of VIXL assembler tests  [David Srbecky]
-   -  Reland^2 "Don't use instrumentation stubs for native methods in debuggable"  [Mythri Alle]
-   -  Reland^3 "Don't use AOT code for native methods for java debuggable runtime"  [Mythri Alle]
-   -  Reland "Update how deoptimization from runtime methods is supported"  [Mythri Alle]
-   -  Introduce a nterp with clinit check entrypoint.  [Nicolas Geoffray]
-   -  Revert "Revert^2 "Don't wait with mutator lock"""  [minaripenguin]
-   -  Use libunwindstack instead of libbacktrace.  [Christopher Ferris]
-   -  Always use llvm-addr2line for DumpNativeStack  [David Srbecky]
-   -  Report DexPcMoved events only when required  [Mythri Alle]
-   -  Cleanup around method inspection callbacks  [Mythri Alle]
-   -  Don't enqueue new compilations when redefinition is in progress  [Mythri Alle]
-   -  Don't disable JIT GC when instrumentation is enabled  [Mythri Alle]
-   -  Reland "Put queued compilations in sets."  [Nicolas Geoffray]
-   -  Use mutator lock for deoptimized_methods_  [Mythri Alle]
-   -  Fix a linter issue in instrumentation.cc  [Mythri Alle]
-   -  Update implementation of method unwind callbacks  [Mythri Alle]
-   -  Remove unused this in method unwind callback  [Mythri Alle]
-   -  Use instrumentation stub if required when undeoptimizing a method  [Mythri Alle]
-   -  Reland "Add additional checks for ArtMethod::GetOatQuickMethodHeader"  [Mythri Alle]
-   -  Add irreducible loop check in CanInlineBody  [Santiago Aboy Solanes]
-   -  Move adding extra goto blocks to InlineInto  [Santiago Aboy Solanes]
-   -  Allow to inline invokes that sometimes throw into try blocks  [Santiago Aboy Solanes]
-   -  Revert old kMaximumNumberOfCumulatedDexRegisters heuristics  [Santiago Aboy Solanes]
-   -  Update loop information correctly in MaybeAddExtraGotoBlocks  [Santiago Aboy Solanes]
-   -  Allow inlining invokes that contain try catches into catch blocks  [Santiago Aboy Solanes]
-   -  Update domination chain and RPO manually in MaybeAddExtraGotoBlocks  [Santiago Aboy Solanes]
-   -  Update MaybeAddExtraGotoBlocks to bail for irreducible loops  [Santiago Aboy Solanes]
-   -  Move the try_start dump property to 'flags'  [Santiago Aboy Solanes]
-   -  Update loop information correctly when removing tries  [Santiago Aboy Solanes]
-   -  Update domination tree when removing tries, if the catch doesn't exit  [Santiago Aboy Solanes]
-   -  Mark TryBelongingInformation constructor as explicit  [Santiago Aboy Solanes]
-   -  Remove tries which don't contain throwing instructions  [Santiago Aboy Solanes]
-   -  Compiler implementation of try catch inlining  [Santiago Aboy Solanes]
-   -  Clean up Modified UTF-8 encoding.  [Vladimir Marko]
-   -  Fix null dereference in SweepInterpreterCaches  [David Srbecky]
-   -  Refactor CollectionVector::SortByMapOrder  [Stefano Cianciulli]
-   -  Add more checks in the presence of file corruption.  [Nicolas Geoffray]
-   -  Cleanups around shadow frame creation.  [Nicolas Geoffray]
-   -  Reland "Ensure we initialize before pushing the method invoked."  [Nicolas Geoffray]
-   -  Don't cache a field if storing to it can throw.  [Nicolas Geoffray]
-   -  Remove deprecated code on obsolete method.  [Nicolas Geoffray]
-   -  Clean up `DexCacheData` records earlier.  [Vladimir Marko]
-   -  Fix DCHECK when freeing last obj from free-list large-object space  [Lokesh Gidra]
-   -  Adjust thresholds for methods that share method hotness counter.  [Nicolas Geoffray]
-   -  profman: Accept array receivers in inline caches.  [Vladimir Marko]
-   -  GraphChecker: Call VisitInstruction in VisitConstant  [Santiago Aboy Solanes]
-   -  Graph checker fixups  [Santiago Aboy Solanes]
-   -  Fix on the visiblity initialized counter logic.  [Nicolas Geoffray]
-   -  Remove debugging code.  [Nicolas Geoffray]
-   -  Fix some clang-tidy warnings.  [Krzysztof Kosiński]
-   -  Fix imgdiag page counting  [Dmitrii Ishcheikin]
-   -  Fix one edge case at method linking to throw at runtime.  [Nicolas Geoffray]
-
-   * android_frameworks_base
-   -  StatusBarIconController: Avoid crash due to incorrect casting  [Adithya R]
-   -  Remove network traffic mode implementation  [Pranav Vashi]
-   -  Improvements for dynamic VoLTE & VoWiFi icons  [Pranav Vashi]
-   -  Fix VPN icon failed reloading after disabling  [Pranav Vashi]
-   -  Switch back to multiple listeners in RecentTasksController  [octocorvus]
-   -  SystemUI: Update logo for rd  [minaripenguin]
-   -  SystemUI: Set maximum blur radius to 225px  [minaripenguin]
-   -  SystemUI: Refactor brightness slider paddings  [minaripenguin]
-   -  Avoid NetworkPolicyLogger NullPointException  [keparal.li]
-   -  SystemUI: Fix expanded QS clock color  [minaripenguin]
-   -  QS Styles: two tone: QS improvements  [elluzion]
-   -  SettingsLib: Redesign and animate Battery and storage progress bars  [Trishiraj]
-   -  Redesign seekbar  [SagarMakhar]
-   -  SystemUI: Display 2 rows when using 3 columns  [minaripenguin]
-   -  SystemUI: Fix reticker's notification background color  [minaripenguin]
-   -  SystemUI/Statusbar: Add back big dotted and big circle battery indicator  [DennySPB]
-   -  Battery Styles: Added 9 more battery styles [1/2]  [R15Hi]
-   -  SystemUI: Fix keyguard user avatar margins  [minaripenguin]
-   -  ImageUtils: Fix estimated bytes factor for P010  [Kwangkyu Park]
-   -  [SQUASH] SystemUI: Implement burn-in protection for status/navbar  [Park Ju Hyung]
-   -  core: Prevent logspam when background is translucent  [minaripenguin]
-   -  Camera: Allow skipping input configuration check  [minaripenguin]
-   -  sounds: Import rice system sound effects pack  [str143]
-   -  sounds: Implement new screenshot sound effect  [minaripenguin]
-   -  BrightnessSlider: move brightness slider icon to the left  [minaripenguin]
-   -  BrightnessController: update icon state for auto bg icon - Change button color depending on state - Update off state icon from Amartya (@ yukiscape)  [yukiscape]
-   -  Privacy Indicators: Follow light/dark theme settings  [minarypenguin]
-   -  Fix: BT volume in MediaOutputDialog becomes incorrect after SHO  [Mingbo Zhang]
-   -  base: Introduce Scarlet assistant idle manager [1/2]  [Dil3mm4]
-   -  Squashed QSPanel style and design changes  [StarkDroid]
-   -  New Crowdin updates (#922)  [Lup Gabriel]
-   -  SystemUI: Enable session-based media actions for all apps  [Adithya R]
-   -  SystemUI: Fetch bluetooth battery level from any device  [jhonboy121]
-   -  BluetoothControllerImpl: Synchronize mConnectedDevices access  [jhonboy121]
-   -  BatteryStatsImpl: Guard against OOB  [Ido Ben-Hur]
-   -  TwilightService: Save and use last fetched location  [Ido Ben-Hur]
-   -  TwilightService: Use temporary TwilightState when location is not available  [rituj]
-   -   SystemUI: Redesign Volume Panel  [minaripenguin]
-   -  SystemUI: Add charging icon to the charging animation  [minaripenguin]
-   -  SystemUI: Improve charging animation's color palette  [minaripenguin]
-   -  SystemUI: Refactor notification reticker  [Trishiraj]
-   -  SystemUI: Blurs: allow blur even when GFX acceleration is disabled  [Pulkit077]
-   -  SystemUI: Add missing userhandle import  [minaripenguin]
-   -  [1/2] base: Remove restrictions for system audio record  [jhenrique09]
-   -  fonts: Update italic font axis for Inter  [Danny Lin]
-   -  fonts: Use fallback variant of Roboto  [Danny Lin]
-   -  fonts: Don't build real DroidSansMono  [Danny Lin]
-   -  DozeSensors: Dont set proximity sensor listening if not registered  [Pranav Vashi]
-   -  Package installer: show current and new version on apk installation  [ezio84]
-   -  base: Rework lock gesture feature  [cjh1249131356]
-   -  SystemUI: Apply QPR2 beta QS panel UI changes  [minaripenguin]
-   -  SystemUI: Open Weather settings on long click  [minaripenguin]
-   -  SystemUI: Update QuickStatusBarHeader click actions  [Ido Ben-Hur]
-   -  QuickStatusBarHeader: Add date & clock click actions  [Ido Ben-Hur]
-   -  base: Bring in Weather service API  [minaripenguin]
-   -  SoundSearchTile: Update intent flags for the apps  [ezio84]
-   -  SoundSearchTile: Extend the use  [El Dainosor]
-   -  Add Google Sound Search tile  [ezio84]
-   -  Reset fenceFd without calling close on it  [Brian Kim]
-   -  ViewConfiguration: Reduce initial scroll friction  [minaripenguin37]
-   -  ViewConfiguration: Optimize ripple animation  [minaripenguin37]
-   -  ViewConfiguration: Update fling velocity for modern devices  [minaripenguin37]
-   -  core: Enable limited alpha composting by default  [strwbrry143]
-   -  core: Disable `config_sf_slowBlur`  [minaripenguin37]
-   -  core: Avoid using accelerated graphics by default  [minaripenguin37]
-   -  Initialize ContentObserver in startObserving().  [Philip Junker]
-   -  Fix an issue that the FoldStateListener induces a memory leak  [Kwangkyu Park]
-   -  Fix multithreading causing null value in ArrayList<ManagedServiceInfo>  [fhan0401]
-   -  Add setBackdropRenderEffect for View and RenderNode.  [Dongya Jiang]
-
-   * android_packages_apps_Launcher3
-   -  Launcher3: Remove text from QSB  [minaripenguin]
-   -  SushiLauncher: Rework at a glance view for QPR1  [minaripenguin]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Import strings for optional IME space  [minaripenguin]
-
-   * android_system_core
-   -  init: Add gentle_kill service property  [Daniel Rosenberg]
-
-   * android_vendor_rice
-   -  Initial generated changelog for Open Beta  [minaripenguin]
-   -  config: Bump to v10.0 - Open Beta  [minaripenguin]
-   -  fonts: Remove proton aosp font overlays  [minaripenguin]
-   -  Cleanup prebuilt packages  [minaripenguin]
-   -  add a temporary changelog  [hydrangea07]
-   -  vendor: Import nothingOS audio pack and remove old audios  [minaripenguin]
-   -  Revert "config/common: Use a generic profile based boot image by default"  [hydrangea07]
-   -  config: qcom: Allow a device to manually override which HALs it want…  [Akhil Narang]
-
-====================
-     12-31-2022
-====================
-
-   * android
-   -  Initial QPR1 manifest for ricedroidOSS  [minaripenguin]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Configurable media notification and lockscreen blur radius  [minaripenguin]
 
