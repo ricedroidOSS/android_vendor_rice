@@ -39,8 +39,6 @@ endif
 ifeq ($(WITH_GMS), true)
     ifeq ($(TARGET_CORE_GMS), true)
        RICE_PACKAGE_TYPE ?= CORE
-    else ifeq ($(TARGET_USE_GOOGLE_TELEPHONY), true)
-       RICE_PACKAGE_TYPE ?= GMS
     else
        RICE_PACKAGE_TYPE ?= PIXEL
     endif
