@@ -76,10 +76,17 @@ endif
 PRODUCT_PRODUCT_PROPERTIES += \
     arm64.memtag.process.system_server=off
 
-TARGET_BUILD_APERTURE_CAMERA ?= true
 ifeq ($(strip $(TARGET_BUILD_APERTURE_CAMERA)),true)
 PRODUCT_PACKAGES += \
     Aperture
+    
+PRODUCT_PACKAGE_OVERLAYS += \
+    vendor/lineage/overlay/aperture
+endif
+
+ifeq ($(strip $(TARGET_BUILD_GRAPHENE_CAMERA)),true)
+PRODUCT_PACKAGES += \
+    GrapheneCamera
 endif
 
 # Bootanimation

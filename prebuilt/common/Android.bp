@@ -4,3 +4,14 @@ prebuilt_etc_xml {
     src: "etc/sensitive_pn.xml",
     schema: ":spn-schema",
 }
+
+android_app_import {
+	name: "GrapheneCamera",
+	apk: "apps/GrapheneCamera.apk",
+	presigned: true,
+	privileged: true,
+	dex_preopt: {
+		enabled: false,
+	},
+	product_specific: true,
+}
