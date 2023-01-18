@@ -33,6 +33,11 @@ ifeq ($(filter $(CURRENT_DEVICE), $(DEVICE_LIST)), $(CURRENT_DEVICE))
      endif
   endif
 else
+   ifeq ($(RICE_BUILDTYPE), OFFICIAL)
+     $(error **********************************************************)
+     $(error *     A violation has been detected, aborting build      *)
+     $(error **********************************************************)
+   endif
   RICE_BUILDTYPE := COMMUNITY
 endif
 
