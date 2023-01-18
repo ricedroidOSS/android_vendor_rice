@@ -197,16 +197,6 @@ PRODUCT_PACKAGES += \
 endif
 endif
 
-# Dex/ART optimization
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Settings \
-    Dialer \
-    Contacts \
-    DeskClock \
-    messaging \
-    Eleven \
-    SystemUI
-
 # Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
 
