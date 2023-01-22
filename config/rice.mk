@@ -87,6 +87,9 @@ endif
 ifeq ($(strip $(TARGET_BUILD_GRAPHENE_CAMERA)),true)
 PRODUCT_PACKAGES += \
     GrapheneCamera
+    
+PRODUCT_PACKAGE_OVERLAYS += \
+    vendor/lineage/overlay/graphene
 endif
 
 # Bootanimation
