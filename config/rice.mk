@@ -53,6 +53,15 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.rice.platform_release_codename=$(RICE_FLAVOR) \
     ro.ricelegal.url=https://www.manginasal.com/
 
+TARGET_ENABLE_PRIVAPP_ENFORCEMENT ?= true
+ifeq ($(TARGET_ENABLE_PRIVAPP_ENFORCEMENT), true)
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.control_privapp_permissions=enforce
+else 
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.control_privapp_permissions=log
+endif
+
 # Disable touch video heatmap to reduce latency, motion jitter, and CPU usage
 # on supported devices with Deep Press input classifier HALs and models
 PRODUCT_PRODUCT_PROPERTIES += \
