@@ -115,6 +115,12 @@ else
 PRODUCT_COPY_FILES += vendor/lineage/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 endif
 
+# DesktopMode
+PRODUCT_PACKAGES += \
+    DesktopMode
+
+$(call inherit-product, packages/services/VncFlinger/product.mk)
+
 # Extra packages
 PRODUCT_PACKAGES += \
     Backgrounds \
