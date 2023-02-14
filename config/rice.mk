@@ -86,6 +86,12 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.launcher.blur.appLaunch=0
 endif
 
+# Default boosting durations 
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.powerhal.interaction.max=64 \
+    persist.sys.powerhal.interaction.max_default=64 \
+    persist.sys.powerhal.interaction.max_boost=500
+
 # Disable async MTE on system_server
 PRODUCT_PRODUCT_PROPERTIES += \
     arm64.memtag.process.system_server=off
