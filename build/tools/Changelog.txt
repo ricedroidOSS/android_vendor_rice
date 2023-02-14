@@ -1,25 +1,8 @@
 ====================
-     02-13-2023
+     02-14-2023
 ====================
 
    * android_art
-   -  ART: Add two extra DCE passes  [Chris Jones]
-   -  ART: Rename 'final' DCE pass to 'after_bce'  [Hari Limaye]
-   -  Reland "Propagating values from if clauses to its successors"  [Santiago Aboy Solanes]
-   -  Update the successor's Phis in RemoveDeadBlocks  [Santiago Aboy Solanes]
-   -  ART: Remove duplicated access modifier in OptimizingCompiler  [Hari Limaye]
-   -  Improve DCE's SimplifyAlwaysThrows regarding Invoke location  [Santiago Aboy Solanes]
-   -  Skip NullChecks in LSE when replacing loads  [Santiago Aboy Solanes]
-   -  Allow LSE to remove acquire/release operations  [Santiago Aboy Solanes]
-   -  Refine where stores are visible in LSE  [Santiago Aboy Solanes]
-   -  Remove TryRemovingNullCheck from LSE  [Santiago Aboy Solanes]
-   -  Bump max classes visibly initialized  [minaripenguin]
-   -  Add SsaDeadPhiElimination to DeadCodeElimination  [Santiago Aboy Solanes]
-   -  Add phis in SimplifyIfs to enable branch redirection  [Santiago Aboy Solanes]
-   -  Allow LSA to run with acquire/release operations  [Santiago Aboy Solanes]
-   -  Swap optimizations when inlining  [Santiago Aboy Solanes]
-   -  Optimize the System.arraycopy(char) arm64 intrinsic  [Richard Neill]
-   -  Do not fail when loading an APK without dex files.  [Jiakai Zhang]
    -  Use stp/ldp while calling native functions in arm64  [Jing Ji]
    -  Reorganise stack frame layout to avoid unaligned loads.  [Daniel Boulby]
    -  Force enable loop vectorization (Predicated SIMD) for ALL loops  [minaripenguin]
@@ -30,26 +13,36 @@
    -  Refactor vectorization general pipeline.  [Artem Serov]
    -  Refactor vectorization data flow methods.  [Artem Serov]
    -  Extend 656-checker-simd-opt test.  [Artem Serov]
-   -  Always use llvm-addr2line for DumpNativeStack  [David Srbecky]
-   -  Remove is low memory mode for threshold adjustment and TransitionGC  [Edgar Arriaga]
-   -  Update concurrent start bytes when app switches from background to foreground.  [qiubowen]
-   -  ART: dex2oat and instruction_set_features: utilize modified runtime capabilities set  [XeonDead]
-   -  art: add check for __ARM_FEATURE_ATOMICS that indicates LSE atomics availability on target  [XeonDead]
-   -  art: add kryo785 architecture variant.  [Sungwook Jung]
-   -  VIXL Dissassembler Integration Upgrade May. 2022  [Greg Cawthorne]
-   -  art: Add Kryo585 support  [Raphiel Rollerscaperers]
-   -  art: Kryo785 supports dotprod  [minaripenguin37]
-   -  For cortex-a75/a55 validate features with hwcaps.  [Nicolas Geoffray]
-   -  Optimize GC judgment process from foreground to background  [qiubowen]
-   -  Only madvise for jank-perceptible processes  [Jared Duke]
-   -  Only madvise primary oat/vdex artifacts  [Jared Duke]
-   -  Explicitly madvise boot image oat files  [Jared Duke]
+   -  Recalculate garbage collector transition check  [minaripenguin]
+   -  ART: Add two extra DCE passes  [Chris Jones]
+   -  ART: Rename 'final' DCE pass to 'after_bce'  [Hari Limaye]
+   -  Reland "Propagating values from if clauses to its successors"  [Santiago Aboy Solanes]
+   -  Update the successor's Phis in RemoveDeadBlocks  [Santiago Aboy Solanes]
+   -  ART: Remove duplicated access modifier in OptimizingCompiler  [Hari Limaye]
+   -  Improve DCE's SimplifyAlwaysThrows regarding Invoke location  [Santiago Aboy Solanes]
+   -  Refine where stores are visible in LSE  [Santiago Aboy Solanes]
+   -  Remove TryRemovingNullCheck from LSE  [Santiago Aboy Solanes]
+   -  Bump max classes visibly initialized  [minaripenguin]
+   -  Add SsaDeadPhiElimination to DeadCodeElimination  [Santiago Aboy Solanes]
+   -  Add phis in SimplifyIfs to enable branch redirection  [Santiago Aboy Solanes]
+   -  Allow LSA to run with acquire/release operations  [Santiago Aboy Solanes]
+   -  Swap optimizations when inlining  [Santiago Aboy Solanes]
+   -  Do not fail when loading an APK without dex files.  [Jiakai Zhang]
 
-   * android_bootable_recovery
-   -  recovery: rewrite slot switch logic using bootcontrol APIs  [Anay Wadhera]
-   -  recovery: add support for changing slots  [Ethan Yonker]
-   -  recovery: display current filesystem when going to format  [Anay Wadhera]
-   -  recovery: add the option to choose the filesystem for /data  [Anay Wadhera]
+   * android_bionic
+   -  arm64: remove unnecessary duplication of constants in vfork.S.  [Elliott Hughes]
+   -  libc: Move U globals to T  [minaripenguin]
+   -  Add C23's memset_explicit().  [Elliott Hughes]
+   -  Add %b and %B support to the printf/wprintf family.  [Elliott Hughes]
+   -  Add copy_file_range(2) syscall stub to bionic.  [zijunzhao]
+   -  add new Linux close_range() system call to bionic  [Maciej Żenczykowski]
+   -  setjmp.h: add the missing __returns_twice to sigsetjmp().  [Elliott Hughes]
+   -  Mangle the pointers stored in PointerData.  [Christopher Ferris]
+   -  linker_namespace: move sonames instead of copying  [Jooyung Han]
+   -  Forward malloc_iterate/disable/enable to dispatch.  [Mitch Phillips]
+   -  if_nameindex: Fix the failure for subinterfaces  [Theres Kuttappan]
+   -  arm64: memset: Use p2align instead of nop  [Andrzej Perczak]
+   -  libc: Add TARGET_ALTERNATIVE_FUTEX_WAITERS  [ShevT]
 
    * android_external_zlib-ng
    -  Update Soong blueprint for Android 13  [minaripenguin]
@@ -86,315 +79,75 @@
    -  C2SoftVpxEnc: Correct minimum level setting code  [Harish Mahendrakar]
    -  C2SoftVpxEnc: add support for levels upto 4.1  [Manisha Jajoo]
    -  Correct crop size for software encoders  [Patryk Busse]
-   -  AudioFlinger: propagate createEffect return status safely to caller  [Ram Mohan M]
-   -  [BUG] Keep track of music effect thread when primary output is unavailable  [Francois Gaffie]
-   -  Routing to Speaker-safe for notification after voice-call  [Dana Nguyen]
-   -  Map COLOR_FormatYUV420Flexible to YCBCR_420_888 in pre-S devices  [Harish Mahendrakar]
-   -  CCodec: Update watchdog to handle timeouts accurately  [Shrikara B]
-   -  CCodec: fix update pixelFormatInfo for pre-S  [guochuang]
-   -  CCodec: fix not to use YV12 format on COLOR_FormatYUV420Flexible for pre-S  [Taehwan Kim]
 
    * android_frameworks_base
+   -  hwui: Prevent a null pointer on renderthread  [minaripenguin]
+   -  hwui: renderthread/CanvasContext: Reduce the timeout for dequeueing buffers  [electimon]
+   -  Fix a new recent task added with an empty one not removed  [Jia Zekun]
+   -  ActivityThread: Fix a race condition in content provider  [minaripenguin]
+   -  Fixed wake up if device not interactive before showing GlobalActions dialog  [Yan Minzhi]
+   -  Fix task info null crash  [ot903107]
+   -  Fix:Freeform task set ‘alwaysOnTop’, resulting in input misalignment of FullScreen task  [xuzhijian]
+   -  InputMethodManager: fix NullPointerException in startInputInner  [Jia Zekun]
+   -  Prevent NPE and try to recover  [Edward Savage-Jones]
+   -  [BugFix]Fix NPE when pip onAnimationEnd  [wangdongdong6]
+   -  Add try-catch for ensure client get right last new insets  [ot903107]
+   -  Fix NPE prevent system server FC  [Wen Zhang]
+   -  fix NPE when an Activity is launched twice by multithread  [yunyi zhu]
+   -  Fix NullPointerException when the display has been disabled  [niuwenchao]
+   -  [BugFix] Fix NPE in AdbDebuggingManager when disabling adbwifi cause null bssid  [yangjing24]
+   -  Avoid resursion for sleep check in embedding window  [tanxiaoyan]
+   -  Add missing nullness annotations to Notification.Action and its Builder.  [Mateus Azis]
+   -  Fix crash when comparing messages  [Shen Lin]
+   -  prevent crash with pin protected user and taskview  [Carsten Rohn]
+   -  Revert "Controls in QS"  [nift4]
+   -  Revert "Remove "Device Controls" from Settings"  [nift4]
+   -  Add check on NativeObject to avoid using released surface  [ot904265]
+   -  Reduce the number of binders  [Liangliang Sui]
+   -  Reset buffer after stop protolog to file  [haoyu.wang]
+   -  Fix NPE when store brightness and displayDevice is null  [Shen Lin]
+   -  Fix bugs a task skipped setForceHidden and remained RESUMED state when setHidden of TaskDisplayArea  [yunseon.park]
+   -  [BugFix]replace isVisibleByPolicy by isVisible when check wake up draw  [yangye Chen]
+   -  [Bugfix][ContentProvider] Fix the anr procedure of a ContentProvider no longer responding  [yuxi]
+   -  Sort running task by focus and visibility  [Bowen Li]
+   -  AppOpsService: Don't log stack traces for isolated processes  [Svet Ganov]
+   -  Don't warn for displays with no input device matching.  [Svet Ganov]
+   -  [Bugfix]fix NullPointException when PackageInfo's verifiers is null  [Wen Zhang]
+   -  Modify incorrect output format in log  [yaoliang1]
+   -  Do not brighten when dim state or low power mode.  [linkai]
+   -  Fix potential NPE when callback remote animator  [Shen Lin]
+   -  OMS: dump: silently ignore -a  [Mårten Kongstad]
+   -  Correct mapping for "boot-after-ota" compilation reason  [Stefano Cianciulli]
+   -  Track interfaces and roaming changed event history  [Aaron Huang]
+   -  [Bugfix][RemoteAnimation] Fix IndexOutOfBoundsException in onAnimationFinished of RemoteAnimationController  [xi yu]
+   -  Remove wtf if no display nits mapping exists  [Alistair Delva]
+   -  Toast: Fix JE caused by service not bind  [hupeng3]
+   -  Fix race condition when TelephonyRegistry handles multi-SIM config change  [Rambo Wang]
+   -  Recheck the condition before really killing  [desuo wang]
+   -  Don't check wakefulness before setting sandman summoned to false.  [Philip Junker]
+   -  Reset PowerGroup.mIsSandmanSummoned while waking up.  [jiayongqiang]
+   -  Fix potential race condition problem  [tysonwei]
+   -  Fix potential crash when exit splash screen  [Shen Lin]
+   -  Update HWUI to use GrGLMakeNativeInterface instead of deprecated GrGLCreateNativeInterface.  [Brian Salomon]
+   -  Fix erroneous self deletion on SkImage creation failure  [Nolan Scobie]
+   -  Only create clip bound object when RenderNode is not quick rejected  [Zhao Qin]
+   -  Move SkiaCanvas::Clip above SkiaCanvas::SkiaCanvas  [Ryan Prichard]
+   -  Add null pointer check to avoid system crash.  [Jessie Hao]
+   -  Fix unqualified-std-cast-call compiler warning  [donghongweng]
+   -  Fix include in YuvToJpegEncoder  [Kevin Lubick]
+   -  Do not drop app permissions on hibernate  [Sergey Vasiliev]
+   -  SystemUI: Fix expanded QS clock/date paddings  [minaripenguin]
    -  AudioService: Update the volume after voip call ends  [Jakub Tyszkowski]
    -  [WMS][Bugfix] Fix hang when dumping local window.  [qinyige1]
-   -  SystemUI: Fix expanded QS clock/date paddings  [minaripenguin]
    -  SystemUI: Rework media artwork blur implementation [1/2]  [minaripenguin]
    -  SettingsProvider: Bypass google device_write_config and secure settings denials  [minaripenguin]
    -  NotificationChannel SecurityException handling  [WoongKi Min]
    -  Attempt to fix google restore issue  [minaripenguin]
-
-   * android
-   -  manifest: Bump prebuilts/kernel-build-tools to android-13.0.0_r0.60  [Michael Bestas]
-   -  manifest: Untrack dlmalloc  [minaripenguin]
-
-   * android_packages_apps_Launcher3
-   -  [SQUASH]: Remove colorkt- based LocalColorExtractor  [minaripenguin]
-   -  Launcher3: Match hotseat background with app drawer scrim  [Pranav Vashi]
-   -  Launcher3: Add customization to set hotseat background opacity  [Pranav Vashi]
-   -  Launcher3: fix second screen launcher crash  [nift4]
-   -  Launcher3: Make music search icon colorful  [Rizky Benggolo]
-   -  SushiLauncher: Add kill App button to recents overview  [Trishiraj]
-   -  SushiLauncher: Recents: Add preference to enable scroll vibration  [StarkDroid]
-   -  New translations cr_strings.xml (French) (#320)  [Lup Gabriel]
-   -  Launcher3: fix app icon font  [jhenrique09]
-   -  Allow widgets to have 1 row as minimum size  [Saul Henriquez]
-   -  Enable local colors for popup menu items  [Danny Lin]
-   -  IconPalette: Don't crash when the app gives us an invalid color  [Ido Ben-Hur]
-   -  Launcher3: disable white gradient on home screen  [Pratyush]
-   -  SushiLauncher: Update recent apps UI  [minaripenguin]
-   -  Launcher3: Allow locking tasks to recents [2/2]  [SagarMakhar]
-   -  Launcher3: Open running services activity when clicking meminfo view  [minaripenguin]
-   -  Launcher3: Cleanup QsbLayout `onFinishInflate`  [minaripenguin]
-   -  Launcher3: Optional music search toggle for QSB  [=?UTF-8?q?Ph=E1=BA=A1m=20Ti=C3=AAn=20Sinh?=]
-   -  fixup!: Launcher3: Add toggle for translucent hotseat background  [StarkDroid]
-   -  Launcher3: Do not add more space on hotseat with taskbar  [Pranav Vashi]
-   -  Launcher3: Adjust icons on dock search bar  [Pranav Vashi]
-   -  Launcher3: Clean up AssistantIconView  [Pranav Vashi]
-   -  ui: Fix premature short-circuit on end spring anim  [Dan Choi]
-   -  Fix NPE in SurfaceTransactionApplier when ViewRootImpl is null  [Shen Lin]
-   -  Fix NPE in FallbackSwipeHandler when getRunningTask() returns null  [Shen Lin]
-   -  Revert "Launcher: Do not attach cleanupScreenshot() to frame update event"  [Edwin Moquete]
-   -  Launcher: Add a preference to manually restart the launcher  [elpaablo]
-   -  Launcher: CustomSeekBarPreference: Improve seekbar drawables  [pri0818]
-   -  Launcher: Move restart check to home page  [elpaablo]
-   -  Launcher3: meminfo: Replace deprecated BigDecimal methods  [minaripenguin]
-   -  Launcher3: Hotseat: Use hotseat width for QSB only on tablets  [Pranav Vashi]
-   -  SushiLauncher: Ship for riceDroid  [minaripenguin]
-   -  SushiLauncher: Increase maximum blur radius to 125px  [minaripenguin]
-   -  SushiLauncher: Remove light/dark support for recents overview  [minaripenguin]
-   -  Launcher3: InfoBottomSheet: Fix NPE with AppTransitionManager  [DennySPb]
-   -  Launcher3: Ship as SushiLauncher  [minaripenguin]
-   -  SushiLauncher: Update extended style format  [minaripenguin]
-   -  SushiLauncher: Revamp settings activity  [minaripenguin]
-   -  SushiLauncher: Add an about section  [El Dainosor]
-   -  Launcher3: Keep hotseat bottom spacing for taskbar devices  [Tobias Merkel]
-   -  Launcher3: Adjust suggestions row vertical padding  [Adithya R]
-   -  Launcher3: Do not skip search animation for app icons  [Adithya R]
-   -  Launcher3: Do not limit the number of search results  [Adithya R]
-   -  Launcher3: Update Dutch translation  [B4579]
-   -  Launcher3: Add Russian translation  [rxuglr]
-   -  Launcher3: Sync blur radius with frameworks  [minaripenguin]
-   -  Launcher3: Add toggle to show/hide app drawer search bar  [StarkDroid]
-   -  Launcher3: Fix rtl layout error  [Leonardo Hvang]
-   -  Revert "Launcher3: Do not limit the number of search results"  [minaripenguin]
-   -  SushiLauncher: Use headline font for important UI elements  [minaripenguin]
-   -  Launcher3: Remove text from QSB  [minaripenguin]
-   -  SushiLauncher: Rework at a glance view for QPR1  [minaripenguin]
-   -  Launcher3: Fix taskbar crash without QSB  [Pranav Vashi]
-   -  Launcher3: Update activity for Aperture camera shortcut  [Pranav Vashi]
-   -  Launcher3: Taskbar: Follow light/dark theme  [minaripenguin]
-   -  Launcher3: Fix taskbar all apps background  [minaripenguin]
-   -  Launcher: Bottomsheet: Don't make package source pref clickable  [minaripenguin]
-   -  Launcher3: Improve all apps no search result string  [minaripenguin]
-   -  Launcher3: Hotseat: Fix normal QSB width  [Adithya R]
-   -  Launcher3: Rebrand to sushi launcher  [minaripenguin]
-   -  Launcher3: Fix preferences paddings  [minaripenguin]
-   -  Launcher3: Do not add more space on hotseat with taskbar  [Pranav Vashi]
-   -  SushiLauncher: Refine dock and all apps UI  [strwbrry143]
-   -  Introduce extra top & bottom margin for overview task cards  [LibXZR]
-   -  SushiLauncher: Rework MeminfoView available ram calculation  [minaripenguin]
-   -  SushiLauncher: Redesign recents app view style  [minaripenguin37]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Rework media artwork and blur implementation  [2/2]  [minaripenguin]
-   -  settings: Fix settings header image value range  [minaripenguin]
-
-   * android_packages_apps_Settings
-   -  settings: Fix banner image value range  [minaripenguin]
-
-   * android_vendor_rice
-   -  config: Inherit several Android Go configurations  [Albert I]
-   -  config: Speed profile services and wifi-service to reduce RAM and st… …orage  [Mathieu Chartier]
-   -  config: optimize everything on preopt  [Park Ju Hyung]
-
-   * vendor_google_pixel
-   -  gms: Update GoogleRestorePrebuilt  [minaripenguin]
-   -  gms: Update priv-app permissions  [minaripenguin]
-
-====================
-     02-12-2023
-====================
-
-   * android_build_soong
-   -  Add conscrypt updatable certificates.  [Miguel]
-
-   * android_external_conscrypt
-   -  Make epoch a valid creationDate.  [Miguel]
-   -  Add conscrypt updatable certificates.  [Miguel]
-
-   * android_frameworks_av
-   -  Stagefright: add NULL check before accessing param  [Uma Mehta]
-   -  libstagefright: Support YVU420SemiPlanar camera format  [Ethan Chen]
-   -  Camera: Filter readoutTimestamp for older vndk  [Shuzhen Wang]
-   -  Efficiency improvements in OggExtractor  [Ray Essick]
-   -  Camera: Fix offline session close locking  [Emilian Peev]
-   -  Use another Vector as a swap to reduce computing complexity  [zhenxingwang]
-
-   * android_frameworks_base
    -  Settings: Bypass OEM cameras from app ops permission checks  [minaripenguin]
    -  core: Seperate fling velocity configuration for gesture recognition and Views  [minaripenguin]
    -  Add conscrypt updatable certificates.  [Miguel]
    -  ActivityManager: Add stub implementation of enableBinderTracing  [Jens Reidel]
-
-   * android_frameworks_proto_logging
-   -  Add Virtual A/B feature bits to SnapshotMergeReported.  [David Anderson]
-
-   * android
-   -  manifest: Track system/extras  [minaripenguin]
-   -  manifest: Track external/conscrypt repository  [minaripenguin]
-   -  manifest: Remove unused repositories  [minaripenguin]
-   -  manifest: Track desktopmode repos  [Erfan Abdi]
-
-   * android_hardware_qcom_display
-   -  Avoid Readback buffer support if window_rect feature used  [Vinoth Jayaram]
-   -  drm: add lock to exclusively modify property map  [Vikas batchu]
-   -  display: Do not change active config on first commit  [Zube Molokwu]
-   -  gralloc: describe layout for P010 & VENUS P010  [Praveen Chavan]
-   -  gralloc: Fix P010 format layout  [Vinoth Jayaram]
-   -  Gralloc:: Add error handing for meta decoding.  [Ramakant Singh]
-   -  composer: Cancel sequence scope lock when display is destroyed  [Baldev Sahu]
-   -  composer: Fix out of bound array access due to display id  [Vinoth Jayaram]
-   -  sdm: Setup histogram IRQ only when property is enabled  [Renchao Liu]
-   -  hwc: Disable SF composition prediction model.  [Pullakavi Srinivas]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Prompt restart when toggling contextual messages  [minaripenguin]
-
-   * android_system_core
-   -  init: Wait for daemon to fully spin up all threads  [Akilesh Kailash]
-   -  vts_libsnapshot_test: Fix test flakiness.  [David Anderson]
-   -  libsnapshot: Remove flaky image creation test.  [David Anderson]
-   -  libsnapshot: Use SnapshotManager to delete devices.  [David Anderson]
-   -  libsnapshot: Improve vts_libsnapshot_test alternate configuration testing.  [David Anderson]
-   -  libsnapshot: Switch to IPropertyFetcher.  [David Anderson]
-   -  libsnapshot: Clarify the meaning of "compression.enabled".  [David Anderson]
-   -  libsnapshot: Refactor WriteSnapshotAndHash.  [David Anderson]
-   -  Print OTA merge progress state in logs  [Sandeep Dhavale]
-   -  init: Detach daemon only after sepolicy is loaded  [Akilesh Kailash]
-   -  libsnapshot: Add more feature flags to SnapshotMergeReport.  [David Anderson]
-   -  snapuserd: Update verification  [Akilesh Kailash]
-   -  Support sysfs changes in the Linux 5.15 kernel.  [David Anderson]
-   -  libdm: Add a helper function for creating placeholder devices.  [David Anderson]
-   -  OTA: make lp_metadata write more atomic  [Zhou Xuezan]
-   -  Grant wmtrace access to platform_app:systemui  [Hongwei Wang]
-   -  UDC: Dm-Bow failed to load when size is not Multiple of 4096  [Swapneel Mashalkar]
-   -  libprocessgroup: Introduce a local variable in CgroupMap::ActivateControllers()  [Bart Van Assche]
-   -  liblp: Fix a crash when adding an image to a partition with no extents.  [David Anderson]
-   -  libprocessgroup: Translate "blkio" into "io" if necessary  [Bart Van Assche]
-   -  libprocessgroup: Proceed if activation of an optional controller fails  [Bart Van Assche]
-   -  libprocessgroup: Rework SetupCgroup()  [Bart Van Assche]
-   -  Set memlock rlimit to 64KB  [Carlos Galo]
-   -  snapuserd: Set taskprofile OtaProfiles  [Akilesh Kailash]
-   -  Auto enable usb adb if booting with debug ramdisk  [Yi-Yo Chiang]
-   -  debuggerd: Remove scudo headers from debuggerd tests  [minaripenguin]
-   -  init: Take wakelock on zygote restart  [Kalesh Singh]
-   -  liblp: Allow to flash on bigger block device  [me-cafebabe]
-   -  task profiles: Pin surfaceflinger to top-app  [minaripenguin]
-   -  debuggerd: Disable scudo usage  [Adithya R]
-   -  Fix the cgroup v2 thread path  [Bart Van Assche]
-   -  rootdir: init: Setup runtime blkio  [minaripenguin]
-   -  rootdir: init: Tune VM settings  [minaripenguin]
-   -  libutils: Improve performance of utf8_to_utf16/utf16_to_utf8  [Eric Miao]
-   -  init: Change extra_free_kbytes.sh to add margin relative to the default watermark level  [Suren Baghdasaryan]
-   -  libprocessgroup: Provide SetProcessProfiles() and SetTaskProfiles() alternatives  [Bart Van Assche]
-   -  libprocessgroup: Switch from gnu++-17 to gnu++-20  [Bart Van Assche]
-   -  libprocessgroup: Fix a log message  [Bart Van Assche]
-   -  set iostat_period_ms to 1 sec  [Daeho Jeong]
-   -  libprocessgroup: Make GetProfile() and GetAttribute() more efficient  [Bart Van Assche]
-   -  init/sched: Import code linaro optimizations  [minaripenguin]
-   -  libutils: Fix missing definition of shared_ptr and unique_ptr  [Biswapriyo Nath]
-   -  init_first_stage defaults: disable LTO  [John Galt]
-   -  Fix module-file name collisions  [Cole Faust]
-   -  sh_binary_host for 'adb-remount-test.sh'.  [jiajia tang]
-   -  Added libinit_headers to Android.bp  [Devendra Singhi]
-   -  init: Fix the implementation of the task_profiles keyword  [Bart Van Assche]
-   -  init: skip cgroup/task_profiles configuration if cgroups are disabled  [Nikita Ioffe]
-   -  init: Apply the NormalIoProfile when creating a service  [Bart Van Assche]
-   -  init: Reduce the number of system calls  [Bart Van Assche]
-   -  Fix scudo fault address processing.  [liyong]
-   -  Fix incorrect use of TEMP_FAILURE_RETRY  [Yi Kong]
-   -  sparse_fuzzer: Bug fix  [Devendra Singhi]
-   -  init/epoll: Fix a potential use-after-free  [Bart Van Assche]
-   -  Fix bug in WriteStringToFileAtomic  [Kelvin Zhang]
-   -  Harden CrasherTest::Trap under sanitizers.  [Evgenii Stepanov]
-   -  libsnapshot: fix -Wdefaulted-function-delete warnings.  [Krzysztof Kosiński]
-   -  Fix build breakage on -user build  [Yi-Yo Chiang]
-   -  Fix for Cannot load etc/recovery.fstab when doing OTA upgrade  [daren.liao]
-   -  Fix clang error about incompatible assignment in simg2simg.cpp  [rapperskull]
-   -  init: Fix HandleSignalFd()  [Bart Van Assche]
-   -  rootdir: Add sysfs permissions for pocket bridge  [Chris Lahaye]
-   -  Rectify Boottime property  [Padmanabha V]
-   -  libmodprobe: check blockedlist if load failed  [chungkai]
-   -  libmodprobe: allow module with soft dependencies to load in parallel  [chungkai]
-   -  Move boringssl self tests from early-init to init.  [Pete Bentley]
-   -  init.rc: Move boringssl_self_tests to 'init' stage.  [Karthik Gopalan]
-   -  Don't kill subcontext if it's null  [Inseob Kim]
-   -  Do not call tune2fs for verity on non /data partitions  [Jaegeuk Kim]
-   -  healthd: Fix charger_res_images_vendor install location  [Tim Zimmermann]
-   -  Fix data lost in zram_swap if system rebooted  [Hu Xiaoyu]
-   -  healthd: cover devices that have voltage_max file with value of 0  [maxwen]
-   -  hosts: Block OTA downloading from GMS  [jhenrique09]
-   -  LockscreenCharging: squashed (2/3)  [xyyx]
-   -  camera: Add L-compatible camera feature enums  [Steve Kondik]
-   -  Camera: Add feature extensions  [Sauhard Pande]
-   -  init: Set persist.sys.usb.config properly  [jhenrique09]
-   -  rootdir: Look for ODM & vendor ueventd entries in ETC too.  [Alexander Koskovich]
-   -  fastboot: stop trying to determine bootloader unlock status from /proc/cmdline  [Matt Filetto]
-   -  libfs_avb: Disable dm-verity when AVB is permissive  [Danny Lin]
-   -  Revert "libfs_avb: verifying vbmeta digest early"  [Md Abu Talha]
-   -  init: Update properties for snet spoof  [Pranav Vashi]
-   -  init.rc: don't start console unless asked to  [Alex Naidis]
-   -  init.rc: Disable native stats collection service  [Danny Lin]
-   -  init: Do not set safety net props for ENG builds  [Pranav Vashi]
-   -  init: Add more properties to spoof.  [spezi77]
-   -  init: Weaken property override security for the init extension  [Alex Naidis]
-   -  fastboot: Revert to Android 11 method of checking lock status  [Danny Lin]
-   -  init: Don't spoof SafetyNet properties in recovery mode  [Jarl-Penguin]
-   -  init: Set properties to make SafetyNet pass  [Danny Lin]
-   -  init: reboot to recovery on panic by default to allow reading pstore  [Alexander Martinz]
-   -  fs_mgr: Allow remounts with Magisk installed  [Bruno Martins]
-   -  Add wrapped key support  [dianlujitao]
-   -  fastboot: Prefer ro.boot.hardware.revision for hw-revision  [Michael Bestas]
-   -  fastboot: Print OemCmdHandler return message on success  [Michael Bestas]
-   -  libsysutils: Hide NetlinkListener error in recovery  [Michael Bestas]
-   -  libsparse: Add simg2img_static target for host  [Chirayu Desai]
-   -  fs_mgr: Don't run clean_scratch_files on non-dynamic devices  [Nolen Johnson]
-   -  llkd: Include llkd-debuggable.rc in eng builds only  [dianlujitao]
-   -  debuggerd: add Lineage version to tombstones  [Scott Mertz]
-   -  healthd: Reinitialize mChargerNames for every battery update  [Abhijeet Dharmapurikar]
-   -  healthd: Add support for HVDCP_3P5 chargers  [Dyneteve]
-   -  healthd: Add support for HVDCP_3 chargers  [Abhijeet Dharmapurikar]
-   -  healthd: Add DASH charger type  [Steve Kondik]
-   -  reboot: allow opting-in to fastbootd  [Alessandro Astone]
-   -  core: mark libsysutils and libdiskconfig recovery_available  [Alessandro]
-   -  Revert "Format formattable partitions if mount fails"  [Tom Marshall]
-   -  fs_mgr: mount: don't set the block device as ro for recovery  [Alessandro Astone]
-   -  init: don't skip starting a service with no domain if permissive  [William Bellavance]
-   -  init: Add vendor-specific initialization hooks.  [David Ng]
-
-   * android_system_extras
-   -  simpleperf: Check map range in MemAccess.  [Yabin Cui]
-   -  simpleperf: Check if ETMDecoder is created.  [Yabin Cui]
-   -  simpleperf: fix ReadAuxDataFromKernelBuffer.  [Yabin Cui]
-   -  ext4_utils: disable ext4dev 64bit block support  [katao]
-   -  Make the extra profile lib available for all apex.  [Yu Liu]
-   -  Allow libfec to correct bad blocks  [Kelvin Zhang]
-   -  lpmake: Fix some issues in size calculation.  [David Anderson]
-
-   * android_system_sepolicy
-   -  Add SEPolicy tags for concrypt cacerts.  [Miguel]
-   -  Allow files to be created /metadata/ota  [Akilesh Kailash]
-   -  Fix io_uring permission denial for snapuserd  [Kelvin Zhang]
-   -  Allow vold to check apex files  [Randall Huang]
-   -  Define the permissions for Nfc sysprops  [Henri Chataing]
-   -  Allow GMSCore to read RKP properties.  [Max Bires]
-   -  Ignore fusefs_type access for su  [Thiébaud Weksteen]
-   -  Allow servicemanager to make binder call to hal_fingerprint  [Jeff Pu]
-   -  Update SE policy for all media provider processes  [Krishang Garodia]
-   -  Allow camera HAL to read EGL vendor properties  [Cody Northrop]
-   -  Allow platform_app:systemui to write protolog file  [Hongwei Wang]
-
-   * android_system_update_engine
-   -  Add more data to SnapshotMergeReported.  [David Anderson]
-
-   * android_vendor_rice
-   -  changelogs: Sync with the latest source changes  [minaripenguin]
-
-====================
-     02-11-2023
-====================
-
-   * android_external_jemalloc-new
-   -  fixup! Update to jemalloc 5.2.1  [Pranav Vashi]
-   -  jemalloc: always assume overcommitting memory  [Park Ju Hyung]
-   -  jemalloc: remove THP support  [Park Ju Hyung]
-   -  jemalloc: disable config parsing altogether  [Park Ju Hyung]
-   -  jemalloc: remove deprecated size_classes.h  [Park Ju Hyung]
-
-   * android_frameworks_base
    -  Handle graceful exit with constants  [Ashok Mutyala]
-   -  Prohibit the influence of Adj across applications  [qiubowen]
-   -  Avoid resursion for sleep check in embedding window  [tanxiaoyan]
    -  AudioService: Fix setting LeAudio volume after VoIP call  [Jakub Tyszkowski]
    -  [AMS][Bugfix] Fix background activity start.  [qinyige1]
    -  More infos uploaded to Memochō  [Dil3mm4]
@@ -403,7 +156,6 @@
    -  UI: Adjust default navbar layouts  [Andy CrossGate Yan]
    -  SystemUI: Enable doze proximity checks by default  [minaripenguin]
    -  core: Implement Oplus inspired vibration haptics  [minaripenguin]
-   -  renderthread: Increase hwui priority  [Sergey Vasiliev]
    -  CachedAppOptimizer : Pageout File pages during system compaction  [Divyanand Rangu]
    -  Reconfigure seekbar progress thumb colors  [minaripenguin]
    -  PowerStatsService: Prevent NPE in BatteryTrigger.  [Shumao]
@@ -424,7 +176,6 @@
    -  Do not mark dun APN types as read only  [flawedworld]
    -  NotificationShade: Make blur crossfading more gradual  [Danny Lin]
    -  [ProtonAOSP] SystemUI: Disable blur wakeup animation  [Danny Lin]
-   -  GLSurfaceView: report draw finished after first onDrawFrame in GLThread  [shoudil]
    -  SystemUI: properly align Notification Icons  [SuperDroidBond]
    -  SystemUI: Open mobile data usage from qsfooter  [Genkzsz11]
    -  Bump timeout for display rotation  [Tommy Webb]
@@ -459,7 +210,6 @@
    -  PixelPropsUtils: Use spoofBuildGms for FP and model alteration  [Danny Lin]
    -  SystemUI: Refactor and fix OOS clear all button styles  [minaripenguin]
    -  SystemUI: Allow limiting AOD & ambient display refresh rate via overlay.  [Ido Ben-Hur]
-   -  swipe to screenshot: Remove device boot completed and provisioned check  [minaripenguin]
    -  New Crowdin updates (#945)  [Lup Gabriel]
    -  UI can Enable/Disable VCP and CSIP  [SongFerngWang]
    -  Allow APK signature scheme v1 for API 30+ apps  [Danny Lin]
@@ -555,7 +305,6 @@
    -  Fixed the incorrect downlinkOffset and uplinkOffset values  [Jack Yu]
    -  CameraManager: Add an option to override physical camera ID  [minaripenguin]
    -  CameraManager: HAX for depth sensor on ginkgo [1/2]  [Adithya R]
-   -  [Bugfix] Add reading timeout when waiting for the reply of an application zygote.  [xi yu]
    -  Fix for GSM-8bit encoding error  [Thomas Nguyen]
    -  SystemUI: Update IMS states and update icon when necessary  [Pranav Vashi]
    -  MobileSignalController: Try register IMS callback when listening  [Pranav Vashi]
@@ -566,7 +315,6 @@
    -  ServiceRecord: Don't post running notification for oplus camera  [cjh1249131356]
    -  DisplayModeDirector: Allow to enforce user selected resolution  [cjh1249131356]
    -  SystemUI: Introduce dynamic lockscreen clock spacing  [minaripenguin]
-   -  Reduce Integer allocations in ThreadLocalWorkSource  [Orion Hodson]
    -  Fix potential NPE when ActivityClientRecord is null  [lihaizhou]
    -  Emulator: handle OOM and Protocol error cases  [Robin Lee]
    -  [AMS] Check low mem by reading /proc/meminfo.  [qinyige1]
@@ -621,7 +369,6 @@
    -  styles: Use user fonts for Material UI themes  [Danny Lin]
    -  Fix black screen issue due to wallpaper decoding exceptions  [Weijie Wang]
    -  Shrink by 0.5 for YUV TextViews  [John Reck]
-   -  hwui: renderthread/CanvasContext: Reduce the timeout for dequeueing buffers  [electimon]
    -  KeyguardIndication: Set wakelock on doze only when required  [Pranav Vashi]
    -  base: Refactor Wi-Fi standard icons  [Adithya R]
    -  base: Import Wi-Fi standard icon [1/2]  [ReallySnow]
@@ -633,7 +380,6 @@
    -  Fix potential crash in ImageTransformState  [Shen Lin]
    -  Add @Nullable to SensorManager.getDefaultSensor's return value  [Matthew Sedam]
    -  Sync anim durations with Nothing Phone 1  [spkal01]
-   -  SurfaceTexture: add setConsumerCanWait()  [Tomislav Novak]
    -  camera: Add backwards-compatible CaptureResultExtras constructor  [Adithya R]
    -  Intent: Fix launch of permision revoke activity from playstore  [jhenrique09]
    -  fixup! Battery Styles: Clean up for more customizations  [Pranav Vashi]
@@ -673,9 +419,7 @@
    -  Crash occured due to null pointer exception.  [Niraj kumar Mishra]
    -  MountService: ensure VolumeRecord with UUID exists before modifying  [Scott Mertz]
    -  frameworks: Fix null pointer Issue  [mqi]
-   -  os: Process: Fix wrong code in isThreadInProcess  [leo zhang]
    -  view: add null check for dispatch touch view  [jianzhou]
-   -  ActivityThread: Prevent surface hang up when screen on and screen off  [Guo Li]
    -  add fsync when copy native libs  [liulvping]
    -  NativeMessageQueue: ensure nativeDestroy success  [Jintao Zhu]
    -  libandroid_defaults: use whole program vtables lto optimization  [John Galt]
@@ -708,7 +452,6 @@
    -  SystemUI: Integrate Google Lens into Screenshot UI  [AshutoshSundresh]
    -  SystemUI: Display a toast when a screenshot is deleted  [Alex Cruz]
    -  core: Configure SQLite to operate in MEMORY mode  [Jesse Chan]
-   -  libs: Offload WM shell to another thread  [Danny Lin]
    -  SystemUI: Refactor QS Data Usage  [minaripenguin]
    -  SystemUI: Avoid ClassCastException for auto brightness icon  [minaripenguin]
    -  PixelPropsUtils: spoof nothing smartcenter to pixel  [aswin7469]
@@ -825,8 +568,6 @@
    -  core: Disable `config_sf_slowBlur`  [minaripenguin37]
    -  core: Avoid using accelerated graphics by default  [minaripenguin37]
    -  Initialize ContentObserver in startObserving().  [Philip Junker]
-   -  Fix multithreading causing null value in ArrayList<ManagedServiceInfo>  [fhan0401]
-   -  Add setBackdropRenderEffect for View and RenderNode.  [Dongya Jiang]
    -  Avoid repeated loading of mutable runtime overlays in the form of sharedLib  [zhangshuai10]
    -  Fix NullPointerException to get sim accounts  [Zemeng Li]
    -  [Bugfix]Add mNotificationLock when updateUriPermissions  [Zhiliang Shan]
@@ -836,16 +577,9 @@
    -  fix ProcessCpuTracker.java file sLoadComparator issue.  [Chunlei Zhuang]
    -  wallpaper: fix resource leak for fd  [Xu Qian]
    -  [Bugfix] NPE on RuntimeInit uncaughtException  [Guanyou Chen]
-   -  Fix com.android.server.wm.TaskFpsCallbackController#unregisterListener method NEVER works  [Rikka]
    -  base: Do not reset keyguard going away state  [minaripenguin]
-   -  Singleton use DCL(double check lock).  [song walfud]
-   -  Fixed ConcurrentModificationException in LockoutResetDispatcher  [huyuxin]
-   -  Add HandlerThread constructor with ThreadGroup  [Jorge Antonio Diaz-Benito Soriano]
-   -  AuthRippleController: Always finish the LightRevealScrim  [Chenyang Zhong]
-   -  AuthRippleController: Only update sensor location when necessary  [Chenyang Zhong]
    -  Unify binder txn trace name  [Zim]
    -  display: Don't reset brightness adjustment on clearUserDataPoints()  [LibXZR]
-   -  Reduce the number of binders  [Liangliang Sui]
    -  KernelCpuUidTimeReader: Always check if `remove_uid_range` file exists  [minaripenguin]
    -  Camera: allow camera to use power key as shutter  [Danesh M]
    -  core: Remove old app target SDK dialog  [Danny Lin]
@@ -862,7 +596,6 @@
    -  Enable shrinking for EasterEgg  [Jared Duke]
    -  [DO NOT MERGE] Fix bugs with changing service gesture detection state.  [Ameer Armaly]
    -  Stops updating A11yUserState on ACTION_USER_PRESENT.  [Daniel Norman]
-   -  fix lost old callback when continuous call requestRenderAndNotify  [Bowen Li]
    -  [DO NOT MERGE] AccessibilityInputFilter: retain service gesture detection state when rebuilding.  [Ameer Armaly]
    -  incfs: tolerate either ptrdiff_t or size_t for std::span  [Ryan Prichard]
    -  ViewGroup: Remove child parent when a new view is added  [mydongistiny]
@@ -887,7 +620,6 @@
    -  Provide a method to verify a PKCS#7 signature  [Victor Hsieh]
    -  Fix imprecise name of a fs-verity helper function  [Victor Hsieh]
    -  Logspam: Properly handle optional app widgets service  [Svet Ganov]
-   -  ActivityThread: Do not initialize java.io.tmpdir if context storage is credentials protected  [Josh Gao]
    -  SystemUI: Animate cutout padding for QS clock  [Andy CrossGate Yan]
    -  core: Make all list dividers transparent  [minaripenguin]
    -  SettingsProvider: Disable "Mobile data always Active" by default  [minaripenguin37]
@@ -914,7 +646,6 @@
    -  SystemUI: fixup! Hide OOS clear all if panel visible because Headsup  [ariffjenong]
    -  SystemUI: Custom style notification clear all button [1/2]  [00day0]
    -  Battery: make fill path rounded  [Evillium]
-   -  SystemUI: Switch notification background to monet on heads up  [DillerOFire]
    -  Make center clock follow paddingTop  [cjh1249131356]
    -  SystemUI: Fix up status bar end side content layout  [Pranav Vashi]
    -  SystemUI: Fix up statusbar clock bg chip layout  [Pranav Vashi]
@@ -925,7 +656,6 @@
    -  base: Update few drawables  [Jesus R]
    -  ServiceRegistry: Don't throw an exception if OEM_LOCK is missing  [Scott Warner]
    -  Fix incorrect context classloader initialization in system_server  [yuanhuihui]
-   -  Fix MtpDatabase multithreading NullPointerException  [katao]
    -  BackupAgent: Add backup shared mode  [Arthur Shuai]
    -  base: Added screenshot tile  [ShevT]
    -  fwb: Smart Pixels on UDFPS - drop disable_smart_pixels_on_udfps flag  [ShevT]
@@ -1061,7 +791,6 @@
    -  toString() of StringBuilder need to create a array copy with count, if no more memory could be made available by the garbage collector, "free list large object space" maybe oom.  [duguowei]
    -  Fix binderDied of an app can not be triggered in some cases.  [xi yu]
    -  Services: Boost gesture flings  [minaripenguin37]
-   -  Fix erroneous self deletion on SkImage creation failure  [Nolan Scobie]
    -  ImeFocusController: Prevent a rare NPE  [Ido Ben-Hur]
    -  Fixed Attribution Source’s calling Uid check for multiuser.  [Cintia Martins]
    -  Fix the problem that the turn_screen_on Activity does not draw.  [Cheng Shi]
@@ -1078,13 +807,10 @@
    -  telephony: SmsMessage: Bring newFromCDS method back  [SamarV-121]
    -  StorageManager: Add dummy inCryptKeeperBounce method  [SamarV-121]
    -  SystemUI: Respect Statusbar left padding in keyguard carrier  [timjosten]
-   -  Don't report after view detached from window.  [derek.li]
    -  Skip tracing missing binder txn names  [Zim]
    -  Enable binder txn tracing more broadly  [Zim]
    -  Clean up binder txn tracking special case  [Zim]
    -  Populate binder trace txn names lazily  [Zim]
-   -  Only create clip bound object when RenderNode is not quick rejected  [Zhao Qin]
-   -  Send <Request ARC Termination> when Standby  [daren.liao]
    -  EnhancedEstimates: Get estimates from Device Health Services  [Jason Edson]
    -  Fix DozeLogger NPE crash when DozeMachine.State is null  [Shen Lin]
    -  Cleanup and consistency around system server profiling.  [Nicolas Geoffray]
@@ -1093,7 +819,6 @@
    -  Fix bug for user removed case  [yong8.huang]
    -  PackageInfo: Optimize ApplicationInfo creation  [Danny Lin]
    -  Follow Dark/Light theme for Safe Mode dialog  [Pulkit077]
-   -  Update HWUI to use GrGLMakeNativeInterface instead of deprecated GrGLCreateNativeInterface.  [Brian Salomon]
    -  Remove unnecessary HashMap instantiation  [Josep del Rio]
    -  Hide contaminant dialog "Enable USB" button if not supported  [Kazutaka Murai]
    -  Fix freeform window resize not working on multiple displays  [nift4]
@@ -1106,7 +831,6 @@
    -  Not run hideDotView as an animation  [Bin Huang]
    -  Fix bluetooth tile show blank  [Wanhong Jiang]
    -  Change sendVolumeKeyEvent condition  [daren.liao]
-   -  fwb: GLSurfaceView: Be less picky about EGLConfig alpha sizes  [Andy Ross]
    -  display: Don't spam log when display state changes  [Adithya R]
    -  Fix bug Device that can't support adoptable storage cannot read the sdcard.  [sangho.yoon]
    -  Fix permission issues for network update service  [Neil Fuller]
@@ -1157,11 +881,9 @@
    -  Fix exception caused by system app setting wallpaper  [Ge Tianxiong]
    -  Fix sticky firstEventAfterDiscontinuity setting  [Brian Duddie]
    -  Prevent FGS notification from exceeding allowed  [WoongKi Min]
-   -  Move SkiaCanvas::Clip above SkiaCanvas::SkiaCanvas  [Ryan Prichard]
    -  Do not crash when duplication found in merged imsi list  [Junyu Lai]
    -  app_process: Fix className check  [Mikhail Naganov]
    -  Telephony: Fix the record output  [Zoey Chen]
-   -  make sure mSurfaceLock.unlock can be executed in unlockCanvasAndPost  [xiaoxin]
    -  Prefer valueOf() to boxed primitive constructors  [Orion Hodson]
    -  Switch to source build of JavaPoet.  [Krzysztof Kosiński]
    -  Allow passing in a category override to aapt2  [Jeremy Meyer]
@@ -1178,7 +900,421 @@
    -  Replace usages of Context.getUserId() by Context.getUser()  [Alisher Alikhodjaev]
    -  Explicitly discard released proto strings.  [Krzysztof Kosiński]
    -  Add a missing test dependency for StagedRollbackTest  [Yike]
-   -  Add null pointer check to avoid system crash.  [Jessie Hao]
+
+   * android_frameworks_native
+   -  SF: Scheduler: opportunistically enter idle after touch  [Juhyung Park]
+   -  SF: Scheduler: maintain current refresh rate if no layers are detected  [Juhyung Park]
+   -  SF: Scheduler: relax measurements for heuristic mode  [Juhyung Park]
+   -  SF: Scheduler: remove presentTime check in calculateAverageFrameTime()  [Juhyung Park]
+   -  SF: rename debug.sf.frame_rate_multiple_threshold  [Juhyung Park]
+   -  SF: set debug.sf.frame_rate_multiple_threshold to 60 by default  [Juhyung Park]
+   -  SF: Scheduler: vote max for NOTIFICATION_SHADE  [Juhyung Park]
+   -  SF: Scheduler: add more window types to consider NoVote  [Juhyung Park]
+   -  inputflinger: add absolute mouse input support  [nift4]
+   -  Trampoline atrace definitions through libbinder to libcutils  [Zim]
+   -  libbinder: BBinder descriptor  [Steven Moreland]
+   -  Add lookupOrCreateWeak to ObjectManager  [Devin Moore]
+   -  Add a delegate helper for AIDL Delegators  [Devin Moore]
+   -  Remove unused variables.  [Krzysztof Kosiński]
+   -  DO NOT MERGE: SF: Fix a race between layer creation and apply transaction  [Vishnu Nair]
+   -  Always provide metadata blob for hdr frames  [Alec Mouri]
+   -  IPCThreadState::hasExplicitIdentity()  [mattgilbride]
+   -  installd: explicitly specify capabilities  [Nikita Ioffe]
+   -  DO NOT MERGE Extend mPreviousPresentFences for high refresh rate  [Jen-Chih Chang]
+   -  Replace duplicate shaderOutputLayer with subgroupBroadcastDynamicId  [Trevor David Black]
+   -  renderengine: skia: switch to glass blur effect  [minaripenguin]
+   -  EGL: Conditionally revert commit a9550f3  [Danny Trunk]
+   -  Vulkan loader changes to address previous comments in image_compression_control  [Trevor David Black]
+   -  Vulkan loader changes to support VK_EXT_image_compression_control  [Trevor David Black]
+   -  [MASTER]: Only use legacy_usage for legacy query  [John Reck]
+   -  sf: Allow SystemServer to set the display brightness  [Rheygine Medel]
+   -  Set the maxImageExtent for vk wsi based on currentExtent  [Trevor David Black]
+   -  Use hardcoded value for HapticScale  [Jeongik Cha]
+   -  Only report PASS_THROUGH when VK_EXT_swapchain_colorspace enabled  [Jason Macnak]
+   -  vulkan: respect consumer default dataspace upon PASS_THROUGH  [Yiwei Zhang]
+   -  Allow PASS_THROUGH colorspace with R5G6B5, R16G16B16A16, A2B10G10R10  [Jason Macnak]
+   -  Allow use of PASS_THROUGH colorspace with RGBA8  [Lingfeng Yang]
+   -  Use dalvik.vm.background-dex2oat-* system properties for background jobs.  [Martin Stjernholm]
+   -  Allow Gralloc2 devices to disable support for P010 buffers  [Jason Macnak]
+   -  sf: Update mSendUpdateImminent on reset callback  [Rheygine Medel]
+   -  [MASTER]: Update VK_GOOGLE_surfaceless_query extension fixed values  [Ian Elliott]
+   -  [MASTER]: Reduce timeouts for occasionally-stalling sections  [Kevin Jeon]
+   -  [MASTER]: Stop OtaDexopt when receive any exception signal  [yangfuteng]
+   -  Forward port 'Swap volume buttons' (2/3)  [nadlabak]
+   -  InputDispatcher: On keypress, deliver keycode to pokeUserActivity  [Corinna Vinschen]
+   -  [MASTER] Avoid UI freezing when reading battery capacity/status  [Andy Chen]
+   -  [MASTER]: fix validateBufferDescriptorInfo error when usage bits were 32-bits  [Jessie Hao]
+   -  build: Optimize dalvik heap configs  [minarypenguin]
+   -  Add dalvik-heap device configs for 8/12/16 GiB devices  [Simao Gomes Viana]
+   -  It's no need to start the dispatch cycle going if the outbound queue was not previously empty.  [hongzuo liu]
+   -  libbinder: O_CLOFORK  [Steven Moreland]
+   -  nativedisplay: fix the flicker issue in streaming video  [Ray Zhang]
+   -  sf: Avoid present hidl call when DP is disconnected.  [Vikas batchu]
+   -  Fix the shadow problem caused by layer parent switching  [xinying1]
+   -  Add AC4Tbl params for dolby AC4 decoder [2/2]  [HELLBOY017]
+   -  libbinder: Suppress log spam when unlinking death recipients  [Danny Lin]
+   -  sf: Exclude VDS use of HWC on non-UM platforms  [dianlujitao]
+   -  sf: Allow WFD to use hwc in vendor frozen targets  [Rheygine Medel]
+   -  sf: Clean up properties for virtual display  [Rheygine Medel]
+   -  sf: Align virtual display changes with CAF  [Michael Bestas]
+   -  SF: Fix HWC based virtual display creation  [Rajat Yadav]
+   -  Remove use of VrFlinger from value-adds.  [Chris Gross]
+   -  sf:add getPriority() from CAF  [Rajat Yadav]
+   -  surfaceflinger: Modify dumpAll to dump on the main thread  [Rajat Yadav]
+   -  sf: Fix virtual display related issues.  [Ramakant Singh]
+   -  Do not return glGetString error on desktop GL context  [Aaron Kling]
+   -  EGL: nvidia: For desktop gl contexts, use gles v2 hooks list  [Aaron Kling]
+   -  EGL: nvidia: Don't use extension map  [Aaron Kling]
+   -  EGL: Loader: Enable desktop openGL on Nvidia platforms  [Billy Laws]
+   -  CompositionEngine: Request device composition for the Udfps touched layer  [daniml3]
+   -  surfaceflinger: Add support for Udfps extension lib  [Pierre-Hugues Husson]
+   -  libui: Allow extension of valid gralloc 1.0 buffer usage bits  [Kevin F. Haggerty]
+   -  Add vendor version for libgui  [Vinay Verma]
+
+   * android
+   -  manifest: Bump prebuilts/kernel-build-tools to android-13.0.0_r0.60  [Michael Bestas]
+
+   * android_lineage-sdk
+   -  sdk: Kill app: Actually kill app  [Michael W]
+
+   * android_packages_apps_Launcher3
+   -  [SQUASH]: Remove colorkt- based LocalColorExtractor  [minaripenguin]
+   -  Launcher3: Match hotseat background with app drawer scrim  [Pranav Vashi]
+   -  Launcher3: Add customization to set hotseat background opacity  [Pranav Vashi]
+   -  Launcher3: fix second screen launcher crash  [nift4]
+   -  Launcher3: Make music search icon colorful  [Rizky Benggolo]
+   -  SushiLauncher: Add kill App button to recents overview  [Trishiraj]
+   -  SushiLauncher: Recents: Add preference to enable scroll vibration  [StarkDroid]
+   -  New translations cr_strings.xml (French) (#320)  [Lup Gabriel]
+   -  Launcher3: fix app icon font  [jhenrique09]
+   -  Allow widgets to have 1 row as minimum size  [Saul Henriquez]
+   -  Enable local colors for popup menu items  [Danny Lin]
+   -  IconPalette: Don't crash when the app gives us an invalid color  [Ido Ben-Hur]
+   -  Launcher3: disable white gradient on home screen  [Pratyush]
+   -  SushiLauncher: Update recent apps UI  [minaripenguin]
+   -  Launcher3: Allow locking tasks to recents [2/2]  [SagarMakhar]
+   -  Launcher3: Open running services activity when clicking meminfo view  [minaripenguin]
+   -  Launcher3: Cleanup QsbLayout `onFinishInflate`  [minaripenguin]
+   -  Launcher3: Optional music search toggle for QSB  [=?UTF-8?q?Ph=E1=BA=A1m=20Ti=C3=AAn=20Sinh?=]
+   -  fixup!: Launcher3: Add toggle for translucent hotseat background  [StarkDroid]
+   -  Launcher3: Do not add more space on hotseat with taskbar  [Pranav Vashi]
+   -  Launcher3: Adjust icons on dock search bar  [Pranav Vashi]
+   -  Launcher3: Clean up AssistantIconView  [Pranav Vashi]
+   -  ui: Fix premature short-circuit on end spring anim  [Dan Choi]
+   -  Fix NPE in SurfaceTransactionApplier when ViewRootImpl is null  [Shen Lin]
+   -  Fix NPE in FallbackSwipeHandler when getRunningTask() returns null  [Shen Lin]
+   -  Revert "Launcher: Do not attach cleanupScreenshot() to frame update event"  [Edwin Moquete]
+   -  Launcher: Add a preference to manually restart the launcher  [elpaablo]
+   -  Launcher: CustomSeekBarPreference: Improve seekbar drawables  [pri0818]
+   -  Launcher: Move restart check to home page  [elpaablo]
+   -  Launcher3: meminfo: Replace deprecated BigDecimal methods  [minaripenguin]
+   -  Launcher3: Hotseat: Use hotseat width for QSB only on tablets  [Pranav Vashi]
+   -  SushiLauncher: Ship for riceDroid  [minaripenguin]
+   -  SushiLauncher: Increase maximum blur radius to 125px  [minaripenguin]
+   -  SushiLauncher: Remove light/dark support for recents overview  [minaripenguin]
+   -  Launcher3: InfoBottomSheet: Fix NPE with AppTransitionManager  [DennySPb]
+   -  Launcher3: Ship as SushiLauncher  [minaripenguin]
+   -  SushiLauncher: Update extended style format  [minaripenguin]
+   -  SushiLauncher: Revamp settings activity  [minaripenguin]
+   -  SushiLauncher: Add an about section  [El Dainosor]
+   -  Launcher3: Keep hotseat bottom spacing for taskbar devices  [Tobias Merkel]
+   -  Launcher3: Adjust suggestions row vertical padding  [Adithya R]
+   -  Launcher3: Do not skip search animation for app icons  [Adithya R]
+   -  Launcher3: Do not limit the number of search results  [Adithya R]
+   -  Launcher3: Update Dutch translation  [B4579]
+   -  Launcher3: Add Russian translation  [rxuglr]
+   -  Launcher3: Sync blur radius with frameworks  [minaripenguin]
+   -  Launcher3: Add toggle to show/hide app drawer search bar  [StarkDroid]
+   -  Launcher3: Fix rtl layout error  [Leonardo Hvang]
+   -  Revert "Launcher3: Do not limit the number of search results"  [minaripenguin]
+   -  SushiLauncher: Use headline font for important UI elements  [minaripenguin]
+   -  Launcher3: Remove text from QSB  [minaripenguin]
+   -  SushiLauncher: Rework at a glance view for QPR1  [minaripenguin]
+   -  Launcher3: Fix taskbar crash without QSB  [Pranav Vashi]
+   -  Launcher3: Update activity for Aperture camera shortcut  [Pranav Vashi]
+   -  Launcher3: Taskbar: Follow light/dark theme  [minaripenguin]
+   -  Launcher3: Fix taskbar all apps background  [minaripenguin]
+   -  Launcher: Bottomsheet: Don't make package source pref clickable  [minaripenguin]
+   -  Launcher3: Improve all apps no search result string  [minaripenguin]
+   -  Launcher3: Hotseat: Fix normal QSB width  [Adithya R]
+   -  Launcher3: Rebrand to sushi launcher  [minaripenguin]
+   -  Launcher3: Fix preferences paddings  [minaripenguin]
+   -  Launcher3: Do not add more space on hotseat with taskbar  [Pranav Vashi]
+   -  SushiLauncher: Refine dock and all apps UI  [strwbrry143]
+   -  Introduce extra top & bottom margin for overview task cards  [LibXZR]
+   -  SushiLauncher: Rework MeminfoView available ram calculation  [minaripenguin]
+   -  SushiLauncher: Redesign recents app view style  [minaripenguin37]
+
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Enable full power menu style  [minaripenguin]
+   -  settings: Rework media artwork and blur implementation  [2/2]  [minaripenguin]
+
+   * android_packages_apps_Settings
+   -  Merge tag 'android-13.0.0_r30' into rebase  [minaripenguin]
+
+   * android_packages_modules_Permission
+   -  Merge tag 'android-13.0.0_r30' into thirteen  [minaripenguin]
+
+   * android_packages_services_Telecomm
+   -  Merge tag 'android-13.0.0_r30' into thirteen  [minaripenguin]
+
+   * android_system_core
+   -  task_profiles: Use foreground cpuset for SurfaceFlinger  [Jake Weinstein]
+   -  init.rc: tune dirty data writebacks  [Juhyung Park]
+   -  init: Wait for daemon to fully spin up all threads  [Akilesh Kailash]
+   -  vts_libsnapshot_test: Fix test flakiness.  [David Anderson]
+   -  libsnapshot: Remove flaky image creation test.  [David Anderson]
+   -  libsnapshot: Use SnapshotManager to delete devices.  [David Anderson]
+   -  libsnapshot: Improve vts_libsnapshot_test alternate configuration testing.  [David Anderson]
+   -  libsnapshot: Switch to IPropertyFetcher.  [David Anderson]
+   -  libsnapshot: Clarify the meaning of "compression.enabled".  [David Anderson]
+   -  libsnapshot: Refactor WriteSnapshotAndHash.  [David Anderson]
+   -  Print OTA merge progress state in logs  [Sandeep Dhavale]
+   -  init: Detach daemon only after sepolicy is loaded  [Akilesh Kailash]
+   -  libsnapshot: Add more feature flags to SnapshotMergeReport.  [David Anderson]
+   -  snapuserd: Update verification  [Akilesh Kailash]
+   -  Support sysfs changes in the Linux 5.15 kernel.  [David Anderson]
+   -  libdm: Add a helper function for creating placeholder devices.  [David Anderson]
+   -  OTA: make lp_metadata write more atomic  [Zhou Xuezan]
+   -  Grant wmtrace access to platform_app:systemui  [Hongwei Wang]
+   -  UDC: Dm-Bow failed to load when size is not Multiple of 4096  [Swapneel Mashalkar]
+   -  libprocessgroup: Introduce a local variable in CgroupMap::ActivateControllers()  [Bart Van Assche]
+   -  liblp: Fix a crash when adding an image to a partition with no extents.  [David Anderson]
+   -  libprocessgroup: Translate "blkio" into "io" if necessary  [Bart Van Assche]
+   -  libprocessgroup: Proceed if activation of an optional controller fails  [Bart Van Assche]
+   -  libprocessgroup: Rework SetupCgroup()  [Bart Van Assche]
+   -  Set memlock rlimit to 64KB  [Carlos Galo]
+   -  snapuserd: Set taskprofile OtaProfiles  [Akilesh Kailash]
+   -  Auto enable usb adb if booting with debug ramdisk  [Yi-Yo Chiang]
+   -  debuggerd: Remove scudo headers from debuggerd tests  [minaripenguin]
+   -  init: Take wakelock on zygote restart  [Kalesh Singh]
+   -  liblp: Allow to flash on bigger block device  [me-cafebabe]
+   -  debuggerd: Disable scudo usage  [Adithya R]
+   -  Fix the cgroup v2 thread path  [Bart Van Assche]
+
+   * android_system_memory_lmkd
+   -  lmkd: Dedupe update props methods  [minaripenguin]
+
+   * android_vendor_rice
+   -  config: props: Relax boosting durations  [minaripenguin]
+   -  changelogs: Sync with source changes  [minaripenguin]
+
+====================
+     02-13-2023
+====================
+
+   * android_art
+   -  Always use llvm-addr2line for DumpNativeStack  [David Srbecky]
+   -  Remove is low memory mode for threshold adjustment and TransitionGC  [Edgar Arriaga]
+   -  Update concurrent start bytes when app switches from background to foreground.  [qiubowen]
+   -  ART: dex2oat and instruction_set_features: utilize modified runtime capabilities set  [XeonDead]
+   -  art: add check for __ARM_FEATURE_ATOMICS that indicates LSE atomics availability on target  [XeonDead]
+   -  art: add kryo785 architecture variant.  [Sungwook Jung]
+   -  VIXL Dissassembler Integration Upgrade May. 2022  [Greg Cawthorne]
+   -  art: Add Kryo585 support  [Raphiel Rollerscaperers]
+   -  art: Kryo785 supports dotprod  [minaripenguin37]
+   -  For cortex-a75/a55 validate features with hwcaps.  [Nicolas Geoffray]
+   -  Optimize GC judgment process from foreground to background  [qiubowen]
+   -  Only madvise for jank-perceptible processes  [Jared Duke]
+   -  Only madvise primary oat/vdex artifacts  [Jared Duke]
+   -  Explicitly madvise boot image oat files  [Jared Duke]
+
+   * android_bootable_recovery
+   -  recovery: rewrite slot switch logic using bootcontrol APIs  [Anay Wadhera]
+   -  recovery: add support for changing slots  [Ethan Yonker]
+   -  recovery: display current filesystem when going to format  [Anay Wadhera]
+   -  recovery: add the option to choose the filesystem for /data  [Anay Wadhera]
+
+   * android_frameworks_av
+   -  Routing to Speaker-safe for notification after voice-call  [Dana Nguyen]
+   -  Map COLOR_FormatYUV420Flexible to YCBCR_420_888 in pre-S devices  [Harish Mahendrakar]
+   -  CCodec: Update watchdog to handle timeouts accurately  [Shrikara B]
+   -  CCodec: fix update pixelFormatInfo for pre-S  [guochuang]
+   -  CCodec: fix not to use YV12 format on COLOR_FormatYUV420Flexible for pre-S  [Taehwan Kim]
+   -  Stagefright: add NULL check before accessing param  [Uma Mehta]
+   -  libstagefright: Support YVU420SemiPlanar camera format  [Ethan Chen]
+   -  Camera: Filter readoutTimestamp for older vndk  [Shuzhen Wang]
+   -  Efficiency improvements in OggExtractor  [Ray Essick]
+   -  Camera: Fix offline session close locking  [Emilian Peev]
+   -  Use another Vector as a swap to reduce computing complexity  [zhenxingwang]
+
+   * android
+   -  manifest: Untrack dlmalloc  [minaripenguin]
+
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Fix settings header image value range  [minaripenguin]
+
+   * android_packages_apps_Settings
+   -  settings: Fix banner image value range  [minaripenguin]
+
+   * android_vendor_rice
+   -  config: Inherit several Android Go configurations  [Albert I]
+   -  config: Speed profile services and wifi-service to reduce RAM and st… …orage  [Mathieu Chartier]
+   -  config: optimize everything on preopt  [Park Ju Hyung]
+
+   * vendor_google_pixel
+   -  gms: Update GoogleRestorePrebuilt  [minaripenguin]
+   -  gms: Update priv-app permissions  [minaripenguin]
+
+====================
+     02-12-2023
+====================
+
+   * android_build_soong
+   -  Add conscrypt updatable certificates.  [Miguel]
+
+   * android_external_conscrypt
+   -  Make epoch a valid creationDate.  [Miguel]
+   -  Add conscrypt updatable certificates.  [Miguel]
+
+   * android_frameworks_proto_logging
+   -  Add Virtual A/B feature bits to SnapshotMergeReported.  [David Anderson]
+
+   * android
+   -  manifest: Track system/extras  [minaripenguin]
+   -  manifest: Track external/conscrypt repository  [minaripenguin]
+   -  manifest: Remove unused repositories  [minaripenguin]
+   -  manifest: Track desktopmode repos  [Erfan Abdi]
+
+   * android_hardware_qcom_display
+   -  Avoid Readback buffer support if window_rect feature used  [Vinoth Jayaram]
+   -  drm: add lock to exclusively modify property map  [Vikas batchu]
+   -  display: Do not change active config on first commit  [Zube Molokwu]
+   -  gralloc: describe layout for P010 & VENUS P010  [Praveen Chavan]
+   -  gralloc: Fix P010 format layout  [Vinoth Jayaram]
+   -  Gralloc:: Add error handing for meta decoding.  [Ramakant Singh]
+   -  composer: Cancel sequence scope lock when display is destroyed  [Baldev Sahu]
+   -  composer: Fix out of bound array access due to display id  [Vinoth Jayaram]
+   -  sdm: Setup histogram IRQ only when property is enabled  [Renchao Liu]
+   -  hwc: Disable SF composition prediction model.  [Pullakavi Srinivas]
+
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Prompt restart when toggling contextual messages  [minaripenguin]
+   -  settings: Remove volume vibration haptic toggle  [minaripenguin]
+
+   * android_system_apex
+   -  Add build target for existing cts shim v2_rebootless_prebuilt  [Victor Hsieh]
+   -  Add dist entry for v2_unsigned_apk_container  [Colin Cross]
+
+   * android_system_core
+   -  libutils: Improve performance of utf8_to_utf16/utf16_to_utf8  [Eric Miao]
+   -  init: Change extra_free_kbytes.sh to add margin relative to the default watermark level  [Suren Baghdasaryan]
+   -  libprocessgroup: Provide SetProcessProfiles() and SetTaskProfiles() alternatives  [Bart Van Assche]
+   -  libprocessgroup: Switch from gnu++-17 to gnu++-20  [Bart Van Assche]
+   -  libprocessgroup: Fix a log message  [Bart Van Assche]
+   -  set iostat_period_ms to 1 sec  [Daeho Jeong]
+   -  libprocessgroup: Make GetProfile() and GetAttribute() more efficient  [Bart Van Assche]
+   -  init/sched: Import code linaro optimizations  [minaripenguin]
+   -  libutils: Fix missing definition of shared_ptr and unique_ptr  [Biswapriyo Nath]
+   -  init_first_stage defaults: disable LTO  [John Galt]
+   -  Fix module-file name collisions  [Cole Faust]
+   -  sh_binary_host for 'adb-remount-test.sh'.  [jiajia tang]
+   -  Added libinit_headers to Android.bp  [Devendra Singhi]
+   -  init: Fix the implementation of the task_profiles keyword  [Bart Van Assche]
+   -  init: skip cgroup/task_profiles configuration if cgroups are disabled  [Nikita Ioffe]
+   -  init: Apply the NormalIoProfile when creating a service  [Bart Van Assche]
+   -  init: Reduce the number of system calls  [Bart Van Assche]
+   -  Fix scudo fault address processing.  [liyong]
+   -  Fix incorrect use of TEMP_FAILURE_RETRY  [Yi Kong]
+   -  sparse_fuzzer: Bug fix  [Devendra Singhi]
+   -  init/epoll: Fix a potential use-after-free  [Bart Van Assche]
+   -  Fix bug in WriteStringToFileAtomic  [Kelvin Zhang]
+   -  Harden CrasherTest::Trap under sanitizers.  [Evgenii Stepanov]
+   -  libsnapshot: fix -Wdefaulted-function-delete warnings.  [Krzysztof Kosiński]
+   -  Fix build breakage on -user build  [Yi-Yo Chiang]
+   -  Fix for Cannot load etc/recovery.fstab when doing OTA upgrade  [daren.liao]
+   -  Fix clang error about incompatible assignment in simg2simg.cpp  [rapperskull]
+   -  init: Fix HandleSignalFd()  [Bart Van Assche]
+   -  rootdir: Add sysfs permissions for pocket bridge  [Chris Lahaye]
+   -  Rectify Boottime property  [Padmanabha V]
+   -  libmodprobe: check blockedlist if load failed  [chungkai]
+   -  libmodprobe: allow module with soft dependencies to load in parallel  [chungkai]
+   -  Move boringssl self tests from early-init to init.  [Pete Bentley]
+   -  init.rc: Move boringssl_self_tests to 'init' stage.  [Karthik Gopalan]
+   -  Don't kill subcontext if it's null  [Inseob Kim]
+   -  Do not call tune2fs for verity on non /data partitions  [Jaegeuk Kim]
+   -  healthd: Fix charger_res_images_vendor install location  [Tim Zimmermann]
+   -  Fix data lost in zram_swap if system rebooted  [Hu Xiaoyu]
+   -  healthd: cover devices that have voltage_max file with value of 0  [maxwen]
+   -  hosts: Block OTA downloading from GMS  [jhenrique09]
+   -  LockscreenCharging: squashed (2/3)  [xyyx]
+   -  camera: Add L-compatible camera feature enums  [Steve Kondik]
+   -  Camera: Add feature extensions  [Sauhard Pande]
+   -  init: Set persist.sys.usb.config properly  [jhenrique09]
+   -  rootdir: Look for ODM & vendor ueventd entries in ETC too.  [Alexander Koskovich]
+   -  fastboot: stop trying to determine bootloader unlock status from /proc/cmdline  [Matt Filetto]
+   -  libfs_avb: Disable dm-verity when AVB is permissive  [Danny Lin]
+   -  Revert "libfs_avb: verifying vbmeta digest early"  [Md Abu Talha]
+   -  init: Update properties for snet spoof  [Pranav Vashi]
+   -  init.rc: don't start console unless asked to  [Alex Naidis]
+   -  init.rc: Disable native stats collection service  [Danny Lin]
+   -  init: Do not set safety net props for ENG builds  [Pranav Vashi]
+   -  init: Add more properties to spoof.  [spezi77]
+   -  init: Weaken property override security for the init extension  [Alex Naidis]
+   -  fastboot: Revert to Android 11 method of checking lock status  [Danny Lin]
+   -  init: Don't spoof SafetyNet properties in recovery mode  [Jarl-Penguin]
+   -  init: Set properties to make SafetyNet pass  [Danny Lin]
+   -  init: reboot to recovery on panic by default to allow reading pstore  [Alexander Martinz]
+   -  fs_mgr: Allow remounts with Magisk installed  [Bruno Martins]
+   -  Add wrapped key support  [dianlujitao]
+   -  fastboot: Prefer ro.boot.hardware.revision for hw-revision  [Michael Bestas]
+   -  fastboot: Print OemCmdHandler return message on success  [Michael Bestas]
+   -  libsysutils: Hide NetlinkListener error in recovery  [Michael Bestas]
+   -  libsparse: Add simg2img_static target for host  [Chirayu Desai]
+   -  fs_mgr: Don't run clean_scratch_files on non-dynamic devices  [Nolen Johnson]
+   -  llkd: Include llkd-debuggable.rc in eng builds only  [dianlujitao]
+   -  debuggerd: add Lineage version to tombstones  [Scott Mertz]
+   -  healthd: Reinitialize mChargerNames for every battery update  [Abhijeet Dharmapurikar]
+   -  healthd: Add support for HVDCP_3P5 chargers  [Dyneteve]
+   -  healthd: Add support for HVDCP_3 chargers  [Abhijeet Dharmapurikar]
+   -  healthd: Add DASH charger type  [Steve Kondik]
+   -  reboot: allow opting-in to fastbootd  [Alessandro Astone]
+   -  core: mark libsysutils and libdiskconfig recovery_available  [Alessandro]
+   -  Revert "Format formattable partitions if mount fails"  [Tom Marshall]
+   -  fs_mgr: mount: don't set the block device as ro for recovery  [Alessandro Astone]
+   -  init: don't skip starting a service with no domain if permissive  [William Bellavance]
+   -  init: Add vendor-specific initialization hooks.  [David Ng]
+
+   * android_system_extras
+   -  simpleperf: Check map range in MemAccess.  [Yabin Cui]
+   -  simpleperf: Check if ETMDecoder is created.  [Yabin Cui]
+   -  simpleperf: fix ReadAuxDataFromKernelBuffer.  [Yabin Cui]
+   -  ext4_utils: disable ext4dev 64bit block support  [katao]
+   -  Make the extra profile lib available for all apex.  [Yu Liu]
+   -  Allow libfec to correct bad blocks  [Kelvin Zhang]
+   -  lpmake: Fix some issues in size calculation.  [David Anderson]
+
+   * android_system_sepolicy
+   -  Add SEPolicy tags for concrypt cacerts.  [Miguel]
+   -  Allow files to be created /metadata/ota  [Akilesh Kailash]
+   -  Fix io_uring permission denial for snapuserd  [Kelvin Zhang]
+   -  Allow vold to check apex files  [Randall Huang]
+   -  Define the permissions for Nfc sysprops  [Henri Chataing]
+   -  Allow GMSCore to read RKP properties.  [Max Bires]
+   -  Ignore fusefs_type access for su  [Thiébaud Weksteen]
+   -  Allow servicemanager to make binder call to hal_fingerprint  [Jeff Pu]
+   -  Update SE policy for all media provider processes  [Krishang Garodia]
+   -  Allow camera HAL to read EGL vendor properties  [Cody Northrop]
+   -  Allow platform_app:systemui to write protolog file  [Hongwei Wang]
+
+   * android_system_update_engine
+   -  Add more data to SnapshotMergeReported.  [David Anderson]
+
+   * android_vendor_rice
+   -  changelogs: Sync with the latest source changes  [minaripenguin]
+
+====================
+     02-11-2023
+====================
+
+   * android_external_jemalloc-new
+   -  fixup! Update to jemalloc 5.2.1  [Pranav Vashi]
+   -  jemalloc: always assume overcommitting memory  [Park Ju Hyung]
+   -  jemalloc: remove THP support  [Park Ju Hyung]
+   -  jemalloc: disable config parsing altogether  [Park Ju Hyung]
+   -  jemalloc: remove deprecated size_classes.h  [Park Ju Hyung]
+
+   * android_frameworks_base
    -  Unpin staledataclass-annotation-processor from Java 8  [Sorin Basca]
    -  Toast: Fix ActivityRecord does not attached to process  [hupeng3]
    -  InternetDialog: Launch mobile network settings on long press  [Adithya R]
@@ -1408,25 +1544,14 @@
    -  NfcA: Fix an NPE in constructor  [Guche Mantuano]
    -  SystemUI: Follow light/dark theme in SplitShade Header  [ReallySnow]
 
-   * android_frameworks_native
-   -  sf: Fallback to skiaglthreaded if no renderengine backend is defined  [minaripenguin]
-   -  sf: Set sched policy to top-app  [minaripenguin]
-
    * android_packages_apps_RiceDroidSettings
-   -  settings: Remove volume vibration haptic toggle  [minaripenguin]
    -  settings: Random settings header image [2/2]  [minaripenguin]
 
    * android_packages_apps_Settings
    -  settings: Random settings header image [1/2]  [minaripenguin]
    -  settings: Fix release type filter  [minaripenguin]
 
-   * android_system_apex
-   -  Add build target for existing cts shim v2_rebootless_prebuilt  [Victor Hsieh]
-   -  Add dist entry for v2_unsigned_apk_container  [Colin Cross]
-
    * android_system_memory_lmkd
-   -  lmkd: Dedupe update props methods  [minaripenguin]
-   -  lmkd: Pin reaper & watchdog threads to top-app  [minaripenguin]
    -  lmkd: disable loggings to kernel trace  [Juhyung Park]
    -  lmkd: featurize loggings to kernel trace  [Juhyung Park]
    -  lmkd: remove verbose loggings  [Juhyung Park]
@@ -1436,30 +1561,17 @@
    -  lmkd: port code linaro's lmkd optimizations  [minaripenguin]
    -  Merge tag 'LA.QSSI.13.0.r1-09000-qssi.0' into thirteen  [minaripenguin]
 
+   * android_system_vold
+   -  vold: tunning the min_rario of fuse  [Chi Wu]
+   -  Increase netlink receive socket buffer to 128KB  [Devang]
+   -  Switch to C23's memset_explicit().  [Elliott Hughes]
+   -  Do not reboot with commit failure when ext4 userdata is wiped  [faqiang.zhu]
+   -  MetadataCrypt: extend timeout for low performance device  [Masaya Takahashi]
+   -  vold: Bring in more wrapped key changes  [Pig]
+
 ====================
      02-10-2023
 ====================
-
-   * android_bionic
-   -  Tidy up the x86 atom/silvermont stuff similar to x86-64.  [Elliott Hughes]
-   -  libc: arm: Optimise memchr for NEON-enabled processors  [Prakhar Bahuguna]
-   -  Simplify the implementation of get_nproc().  [Elliott Hughes]
-   -  arm64: remove unnecessary duplication of constants in vfork.S.  [Elliott Hughes]
-   -  libc: Move U globals to T  [minaripenguin]
-   -  Add C23's memset_explicit().  [Elliott Hughes]
-   -  Add %b and %B support to the printf/wprintf family.  [Elliott Hughes]
-   -  Add copy_file_range(2) syscall stub to bionic.  [zijunzhao]
-   -  add new Linux close_range() system call to bionic  [Maciej Żenczykowski]
-   -  setjmp.h: add the missing __returns_twice to sigsetjmp().  [Elliott Hughes]
-   -  Mangle the pointers stored in PointerData.  [Christopher Ferris]
-   -  Purge memory.  [Christopher Ferris]
-   -  linker_namespace: move sonames instead of copying  [Jooyung Han]
-   -  Forward malloc_iterate/disable/enable to dispatch.  [Mitch Phillips]
-   -  if_nameindex: Fix the failure for subinterfaces  [Theres Kuttappan]
-   -  Dynamic handling of memcpy based on BTI support  [Vinay Verma]
-   -  arm64: memset: Use p2align instead of nop  [Andrzej Perczak]
-   -  libc: Add TARGET_ALTERNATIVE_FUTEX_WAITERS  [ShevT]
-   -  bionic: Squash of pre-P mutex behavior restoration  [Ethan Chen]
 
    * android_frameworks_av
    -  fix access null pointer exception  [Yanqiang Fan]
@@ -1476,6 +1588,9 @@
    -  Disable fast capture for record thread attached to MSD  [Sampath]
    -  NuPlayer does not send MEDIA_PLAYBACK_COMPLETE message in some cases.  [Jonathan Kim]
 
+   * android_packages_apps_Backgrounds
+   -  backgrounds: Import Midjourney x notayan99 collab wallpapers  [notayan99]
+
    * android_packages_apps_Settings
    -  SpringNestScrollView: Remove `onAbsorb` haptic effect  [minaripenguin]
 
@@ -1486,13 +1601,10 @@
    -  leaudio: Fix invalid reconfiguration state  [Łukasz Rymanowski]
    -  leaudio: Fix disconnection on timeout  [Łukasz Rymanowski]
 
-   * android_system_vold
-   -  vold: tunning the min_rario of fuse  [Chi Wu]
-   -  Increase netlink receive socket buffer to 128KB  [Devang]
-   -  Switch to C23's memset_explicit().  [Elliott Hughes]
-   -  Do not reboot with commit failure when ext4 userdata is wiped  [faqiang.zhu]
-   -  MetadataCrypt: extend timeout for low performance device  [Masaya Takahashi]
-   -  vold: Bring in more wrapped key changes  [Pig]
+   * android_system_security
+   -  Add prng_seeder.rc to start PRNG seeder daemon from early init.  [Pete Bentley]
+   -  If setup fails, hang forever  [Paul Crowley]
+   -  Add prng_seeder utility  [Paul Crowley]
 
    * android_vendor_rice
    -  config: Enable freeform by default  [Erfan Abdi]
@@ -1504,16 +1616,11 @@
      02-09-2023
 ====================
 
-   * android_frameworks_native
-   -  inputflinger: add absolute mouse input support  [nift4]
+   * android_frameworks_av
+   -  Fix mic address augmenting in APM  [Mikhail Naganov]
 
-   * android_packages_apps_Backgrounds
-   -  backgrounds: Import Midjourney x notayan99 collab wallpapers  [notayan99]
-
-   * android_system_security
-   -  Add prng_seeder.rc to start PRNG seeder daemon from early init.  [Pete Bentley]
-   -  If setup fails, hang forever  [Paul Crowley]
-   -  Add prng_seeder utility  [Paul Crowley]
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Update misc strings  [minaripenguin]
 
    * android_vendor_addons
    -  themes: Remove tranparency from notification background  [minaripenguin]
@@ -1524,140 +1631,7 @@
 ====================
 
    * android_frameworks_av
-   -  Fix mic address augmenting in APM  [Mikhail Naganov]
    -  libstagefright: omx: Add support for loading prebuilt ddp and ac4 decoder lib  [Paul Keith]
-
-   * android
-   -  manifest: Track updated qcom hal/vendor forks  [minaripenguin]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Update misc strings  [minaripenguin]
-   -  settings: Add 6 new QS Styles  [rdx420]
-   -  settings: smart charging: decrease minimum charging limit (#1021)  [Funami580]
-   -  settings: Custom style notification clear all button [2/2]  [ShevT]
-
-   * android_packages_modules_Bluetooth
-   -  AptX: use "legacy" apex name  [Alexander Martinz]
-   -  Fix more tidy error  [William Escande]
-   -  Enable tidy for aptx and aptxHD  [William Escande]
-   -  Apply and fix clang-tidy on aptx and aptxhd  [William Escande]
-   -  Add regression test for aptx  [William Escande]
-   -  Link AptX and AptXHD encoder into Bt  [William Escande]
-   -  Apply format on aptx and aptxhd  [William Escande]
-   -  Add AptX and AptXHD Headers  [William Escande]
-   -  Add encoder for aptX and encoder for aptX HD source code.  [Chris Waddell]
-   -  Fix folder name  [William Escande]
-   -  Add aptx and aptxhd folder  [William Escande]
-
-   * android_vendor_addons
-   -  qs themes: Add 6 new QS styles  [rdx420]
-
-   * android_vendor_qcom_opensource_display-commonsys
-   -  display: Add CRC calculation related code.  [Qi Jin]
-   -  display: Make reserved_size in gralloc handle optional  [Jake Weinstein]
-
-   * android_vendor_qcom_opensource_display-commonsys-intf
-   -  display: Add CRC calculation related code.  [Qi Jin]
-   -  gralloc: Enable reserved_size by default  [Jake Weinstein]
-
-   * android_vendor_qcom_opensource_display
-   -  display: Add CRC calculation related code.  [Qi Jin]
-
-   * android_vendor_qcom_opensource_interfaces
-   -  IQtiMapper: Add HAL for CRC buffer calculation.  [Qi Jin]
-
-   * android_vendor_rice
-   -  config: Bump cheetah/Pixel 7 pro build description and fingerprint  [minaripenguin]
-   -  ricedroid: Bump to version 10.2  [minaripenguin]
-
-   * hardware_qcom-caf_sm8350_display
-   -  gralloc: Enable reserved_size by default  [Jake Weinstein]
-   -  display: Make reserved_size in gralloc handle optional  [Adithya R]
-   -  Merge tag 'LA.UM.9.14.r1-21000-LAHAINA.QSSI13.0' into thirteen  [minaripenguin]
-   -  display: Use generated kernel headers  [Bruno Martins]
-
-====================
-     02-07-2023
-====================
-
-   * android_bionic
-   -  libc: arm64: Use SIMD-accelerated memcpy  [Andrzej Perczak]
-   -  libc: arm64: optimize memcpy  [Wilco Dijkstra]
-   -  libc: arm64: add integer memcpy/memmove from arm-optimized-routines  [Jake Weinstein]
-   -  aarch64: Increase small and medium cases for memcpy  [Krzysztof Koch]
-
-   * android_build
-   -  Merge tag 'android-13.0.0_r30' into thirteen  [minaripenguin]
-
-   * android_frameworks_av
-   -  Changing max SampleRate limits for raw audio decoder  [Arun Johnson]
-   -  libstagefright: Check trackMeta for NULL  [Karthikeyan Periasamy]
-   -  converter: Support 24bit converter  [gmanam]
-   -  media: Add changes to pick target specific media xml's  [Uma Mehta]
-   -  audio: add encoding support for linear PCM format  [Mingming Yin]
-   -  av: Initial support for 24bit encoding and 6 channels  [Pranav Vashi]
-   -  New return type for setMediaDrmSession in Icrypto  [Sohail Nagaraj]
-   -  New IDrm API return type  [Sohail Nagaraj]
-   -  Resume HW after forced pause during flush  [Gareth Fenn]
-   -  Prevent TunerHAL passthrough from going into standby  [Gareth Fenn]
-   -  media: Add timelapse 8k UHD Camcorder profile to quality map  [Malathi Gottam]
-   -  MediaCodec:configuring block model for encoders  [Uma Mehta]
-   -  libstagefright: Adding NULL check for codec instance  [Sachu George]
-   -  libstagefright: limit configuring block model for hw encoders  [Malathi Gottam]
-   -  libstagefright: Configure camcorder encoder session with "CONFIGURE_FLAG_USE_BLOCK_MODEL" flag  [Gaviraju Doddabettahalli Bettegowda]
-   -  CameraService: Fix deadlock in binder death cleanup  [Mounika Reddy Tangirala]
-   -  CAMX: CHI: Added support for handling jpeg debug data.  [Abhinav sohane]
-   -  Camera: Add support for preview frame fd  [Susmitha Gummalla]
-   -  libstagefright: Limit software avc decoder capability  [Sanjay Singh]
-   -  libstagefright: Allow HFR-60 in HAL-3 recording  [Manikanta Kanamarlapudi]
-   -  stagefright: FrameDecoder: fix stall during thumbnail decoding  [Praveen Chavan]
-   -  libstagefright: omx: Add quirks for VP8 codec  [Priyanka Gujjula]
-   -  media: omx: Add quirk for vc1 decoder session  [Shrikara B]
-   -  video: Add quirk for tme encoder session.  [Surajit Podder]
-   -  libstagefright: Fix thumbnail color format issues  [Manikanta Kanamarlapudi]
-   -  camera: Expose aux cameras in third party apps  [Pierre-Hugues Husson]
-   -  fixup! Camera: Skip stream size check for whitelisted apps  [Arian]
-   -  services: Mark oem cameras as privileged clients  [minaripenguin]
-   -  #undef ATRACE_TAG to fix compile error  [Zim]
-   -  APM: Restore S, R and Q behavior respectively for telephony audio  [Peter Cai]
-   -  APM: Remove A2DP audio ports from the primary HAL  [Peter Cai]
-   -  APM: Optionally force-load audio policy for system-side bt audio HAL  [Peter Cai]
-   -  libcameraservice: Guard miui camera workarounds  [minaripenguin]
-   -  libcameraservice: Add support for miui camera mode  [Adithya R]
-   -  libcameraservice: HAX for depth sensor on ginkgo [2/2]  [Adithya R]
-   -  StagefrightRecorder: Add "set-title" parameter  [cjh1249131356]
-   -  libcameraservice: Add support to set vendor tag with client package name  [cjh1249131356]
-   -  libcameraservice: add TARGET_CAMERA_NEEDS_CLIENT_INFO_LIB  [Hikari-no-Tenshi]
-   -  audioserver: Ensure minimum binder priority set  [Andy Hung]
-   -  Spatializer: Raise Spatializer-looper priority to RT  [Andy Hung]
-   -  av: Remove restrictions for system audio record [2/2]  [jhenrique09]
-   -  Use index mask when there is no valid input mask from output mask.  [jiabin]
-   -  Initialize volume level of volume control effect as lowest level.  [jiabin]
-   -  Import libvibratorutils instead of libvibrator  [Jeongik Cha]
-   -  Add AUDIO_FORMAT_APTX_ADAPTIVE_{QLEA|R4}  [Mikhail Naganov]
-   -  av: Add support per-app volume [1/3]  [cjybyjk]
-   -  Remove libavservices_minijail_vendor  [Justin Yun]
-   -  camera: Don't segfault if we get a NULL parameter  [Steve Kondik]
-   -  camera: Allow to use boottime as timestamp reference  [maxwen]
-   -  stagefright: add changes related to high-framerates in CameraSource  [Paras Nagda]
-   -  Add AC4Tbl params for dolby AC4 decoder [1/2]  [HELLBOY017]
-   -  [HACK] Camera: Make system cameras available to all camera apps  [Adithya R]
-   -  Camera: Avoid roundBufferDimensionsNearest also for blob streams  [SGCMarkus]
-   -  Camera: Skip stream size check for whitelisted apps  [Arian]
-   -  WifiDisplaySource: raise supported resolution to 1920x1080p60  [Chenyang Zhong]
-   -  audiopolicy: Disable sonification on WFD sink  [Mingming Yin]
-   -  Revert "Remove libavservices_minijail_vendor"  [Michael Bestas]
-   -  codec2: add smoothfactor when checking n-th work  [Jiajia Cong]
-   -  Add group audio to vendor.media.omx service  [Luca Weiss]
-   -  Partial revert "Move unused classes out of stagefright foundataion"  [Nico]
-   -  audioflinger: Fix audio for WifiDisplay  [myfluxi]
-   -  libstagefright_wfd: video encoder does not actually release MediaBufferBase when done  [Vladimir Oltean]
-   -  stagefright: Fix buffer handle retrieval in signalBufferReturned  [Angelo G. Del Regno]
-   -  stagefright: Fix SurfaceMediaSource getting handle from wrong position issue  [zhangbo_a]
-   -  libstagefright_wfd: compilation fixes  [Vladimir Oltean]
-   -  libstagefright: Remove libmediaextractor dependency  [Adithya R]
-   -  Revert "Removed unused class and its test"  [Vladimir Oltean]
-   -  Revert "stagefright: remove Miracast sender code"  [Vladimir Oltean]
 
    * android_frameworks_base
    -  SystemUI: Add statusbar call strength icon to tuner prefs  [xyyx]
@@ -1801,6 +1775,171 @@
    -  Camera: Add feature extensions  [Sauhard Pande]
    -  Camera: Extend face detection  [Shuzhen Wang]
    -  Camera: Ignore torch status update for aux or composite camera  [Gaoxiang Chen]
+
+   * android
+   -  manifest: Track updated qcom hal/vendor forks  [minaripenguin]
+   -  README: Update properties based on revision 10.2 changes  [minaripenguin]
+   -  manifest: android-13.0.0_r24 -> r30  [minaripenguin]
+
+   * android_packages_apps_Backgrounds
+   -  backgrounds: riceDroid v10.2 update  [minaripenguin]
+
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Add 6 new QS Styles  [rdx420]
+   -  settings: smart charging: decrease minimum charging limit (#1021)  [Funami580]
+   -  settings: Custom style notification clear all button [2/2]  [ShevT]
+
+   * android_packages_modules_Bluetooth
+   -  AptX: use "legacy" apex name  [Alexander Martinz]
+   -  Fix more tidy error  [William Escande]
+   -  Enable tidy for aptx and aptxHD  [William Escande]
+   -  Apply and fix clang-tidy on aptx and aptxhd  [William Escande]
+   -  Add regression test for aptx  [William Escande]
+   -  Link AptX and AptXHD encoder into Bt  [William Escande]
+   -  Apply format on aptx and aptxhd  [William Escande]
+   -  Add AptX and AptXHD Headers  [William Escande]
+   -  Add encoder for aptX and encoder for aptX HD source code.  [Chris Waddell]
+   -  Fix folder name  [William Escande]
+   -  Add aptx and aptxhd folder  [William Escande]
+
+   * android_vendor_addons
+   -  qs themes: Add 6 new QS styles  [rdx420]
+
+   * android_vendor_qcom_opensource_display-commonsys
+   -  display: Add CRC calculation related code.  [Qi Jin]
+   -  display: Make reserved_size in gralloc handle optional  [Jake Weinstein]
+
+   * android_vendor_qcom_opensource_display-commonsys-intf
+   -  display: Add CRC calculation related code.  [Qi Jin]
+   -  gralloc: Enable reserved_size by default  [Jake Weinstein]
+
+   * android_vendor_qcom_opensource_display
+   -  display: Add CRC calculation related code.  [Qi Jin]
+
+   * android_vendor_qcom_opensource_interfaces
+   -  IQtiMapper: Add HAL for CRC buffer calculation.  [Qi Jin]
+
+   * android_vendor_rice
+   -  config: Bump cheetah/Pixel 7 pro build description and fingerprint  [minaripenguin]
+   -  ricedroid: Bump to version 10.2  [minaripenguin]
+
+   * hardware_qcom-caf_sm8350_display
+   -  gralloc: Enable reserved_size by default  [Jake Weinstein]
+   -  display: Make reserved_size in gralloc handle optional  [Adithya R]
+   -  Merge tag 'LA.UM.9.14.r1-21000-LAHAINA.QSSI13.0' into thirteen  [minaripenguin]
+   -  display: Use generated kernel headers  [Bruno Martins]
+
+====================
+     02-07-2023
+====================
+
+   * android_bionic
+   -  libc: arm64: Use SIMD-accelerated memcpy  [Andrzej Perczak]
+   -  libc: arm64: optimize memcpy  [Wilco Dijkstra]
+   -  libc: arm64: add integer memcpy/memmove from arm-optimized-routines  [Jake Weinstein]
+   -  aarch64: Increase small and medium cases for memcpy  [Krzysztof Koch]
+   -  bionic: use jemalloc by default and allow opt-in to scudo (3/3)  [Juhyung Park]
+   -  Verify that allocated memory is always zeroed.  [Christopher Ferris]
+   -  Switch to jemalloc memory allocator  [Danny Lin]
+   -  libc: Do not nullify `__dtoa_locks`  [minaripenguin]
+   -  Rewrite function definitions with identifier lists  [Yi Kong]
+   -  Sync with upstream NetBSD.  [Elliott Hughes]
+   -  Sync libm with upstream freebsd.  [Elliott Hughes]
+   -  Sync with upstream openbsd.  [Elliott Hughes]
+   -  arm64: fix fesetround().  [Elliott Hughes]
+   -  arm64: simplify the fenv implementation a bit.  [Elliott Hughes]
+   -  Fix it to call the lambda function  [Suchang Woo]
+   -  libc: Set __bionic_asm_align to 64 for arm and arm64  [Jake Weinstein]
+   -  fdsan: fix overflow in FdTableImpl::at  [Benjamin Lerman]
+   -  avx2 implementation for memset.  [ahs]
+   -  fread: cope with >2GiB totals.  [Elliott Hughes]
+   -  Always free after getline().  [Elliott Hughes]
+   -  linker: Fix memory leak for reserved memory  [huangchaochao]
+   -  Add inaddr.h header file  [Roopesh Rajashekharaiah Nataraja]
+   -  linker: Add support for dynamic SHIM libraries  [Christopher R. Palmer]
+   -  libc: Mark libstdc++ as vendor available  [Rashed Abdel-Tawab]
+
+   * android_build
+   -  Merge tag 'android-13.0.0_r30' into thirteen  [minaripenguin]
+   -  build: make: use jemalloc by default and allow opt-in to scudo (1/3)  [Juhyung Park]
+
+   * android_build_soong
+   -  build: soong: use jemalloc by default and allow opt-in to scudo (2/3)  [Juhyung Park]
+
+   * android_external_harfbuzz_ng
+   -  Merge commit 'Update HarfBuzz to 6.0.0' into thirteen  [minaripenguin]
+
+   * android_frameworks_av
+   -  Changing max SampleRate limits for raw audio decoder  [Arun Johnson]
+   -  libstagefright: Check trackMeta for NULL  [Karthikeyan Periasamy]
+   -  converter: Support 24bit converter  [gmanam]
+   -  media: Add changes to pick target specific media xml's  [Uma Mehta]
+   -  audio: add encoding support for linear PCM format  [Mingming Yin]
+   -  av: Initial support for 24bit encoding and 6 channels  [Pranav Vashi]
+   -  New return type for setMediaDrmSession in Icrypto  [Sohail Nagaraj]
+   -  New IDrm API return type  [Sohail Nagaraj]
+   -  Resume HW after forced pause during flush  [Gareth Fenn]
+   -  Prevent TunerHAL passthrough from going into standby  [Gareth Fenn]
+   -  media: Add timelapse 8k UHD Camcorder profile to quality map  [Malathi Gottam]
+   -  MediaCodec:configuring block model for encoders  [Uma Mehta]
+   -  libstagefright: Adding NULL check for codec instance  [Sachu George]
+   -  libstagefright: limit configuring block model for hw encoders  [Malathi Gottam]
+   -  libstagefright: Configure camcorder encoder session with "CONFIGURE_FLAG_USE_BLOCK_MODEL" flag  [Gaviraju Doddabettahalli Bettegowda]
+   -  CameraService: Fix deadlock in binder death cleanup  [Mounika Reddy Tangirala]
+   -  CAMX: CHI: Added support for handling jpeg debug data.  [Abhinav sohane]
+   -  Camera: Add support for preview frame fd  [Susmitha Gummalla]
+   -  libstagefright: Limit software avc decoder capability  [Sanjay Singh]
+   -  libstagefright: Allow HFR-60 in HAL-3 recording  [Manikanta Kanamarlapudi]
+   -  stagefright: FrameDecoder: fix stall during thumbnail decoding  [Praveen Chavan]
+   -  libstagefright: omx: Add quirks for VP8 codec  [Priyanka Gujjula]
+   -  media: omx: Add quirk for vc1 decoder session  [Shrikara B]
+   -  video: Add quirk for tme encoder session.  [Surajit Podder]
+   -  libstagefright: Fix thumbnail color format issues  [Manikanta Kanamarlapudi]
+   -  camera: Expose aux cameras in third party apps  [Pierre-Hugues Husson]
+   -  fixup! Camera: Skip stream size check for whitelisted apps  [Arian]
+   -  services: Mark oem cameras as privileged clients  [minaripenguin]
+   -  #undef ATRACE_TAG to fix compile error  [Zim]
+   -  APM: Restore S, R and Q behavior respectively for telephony audio  [Peter Cai]
+   -  APM: Remove A2DP audio ports from the primary HAL  [Peter Cai]
+   -  APM: Optionally force-load audio policy for system-side bt audio HAL  [Peter Cai]
+   -  libcameraservice: Guard miui camera workarounds  [minaripenguin]
+   -  libcameraservice: Add support for miui camera mode  [Adithya R]
+   -  libcameraservice: HAX for depth sensor on ginkgo [2/2]  [Adithya R]
+   -  StagefrightRecorder: Add "set-title" parameter  [cjh1249131356]
+   -  libcameraservice: Add support to set vendor tag with client package name  [cjh1249131356]
+   -  libcameraservice: add TARGET_CAMERA_NEEDS_CLIENT_INFO_LIB  [Hikari-no-Tenshi]
+   -  audioserver: Ensure minimum binder priority set  [Andy Hung]
+   -  Spatializer: Raise Spatializer-looper priority to RT  [Andy Hung]
+   -  av: Remove restrictions for system audio record [2/2]  [jhenrique09]
+   -  Use index mask when there is no valid input mask from output mask.  [jiabin]
+   -  Initialize volume level of volume control effect as lowest level.  [jiabin]
+   -  Import libvibratorutils instead of libvibrator  [Jeongik Cha]
+   -  Add AUDIO_FORMAT_APTX_ADAPTIVE_{QLEA|R4}  [Mikhail Naganov]
+   -  av: Add support per-app volume [1/3]  [cjybyjk]
+   -  Remove libavservices_minijail_vendor  [Justin Yun]
+   -  camera: Don't segfault if we get a NULL parameter  [Steve Kondik]
+   -  camera: Allow to use boottime as timestamp reference  [maxwen]
+   -  stagefright: add changes related to high-framerates in CameraSource  [Paras Nagda]
+   -  Add AC4Tbl params for dolby AC4 decoder [1/2]  [HELLBOY017]
+   -  [HACK] Camera: Make system cameras available to all camera apps  [Adithya R]
+   -  Camera: Avoid roundBufferDimensionsNearest also for blob streams  [SGCMarkus]
+   -  Camera: Skip stream size check for whitelisted apps  [Arian]
+   -  WifiDisplaySource: raise supported resolution to 1920x1080p60  [Chenyang Zhong]
+   -  audiopolicy: Disable sonification on WFD sink  [Mingming Yin]
+   -  Revert "Remove libavservices_minijail_vendor"  [Michael Bestas]
+   -  codec2: add smoothfactor when checking n-th work  [Jiajia Cong]
+   -  Add group audio to vendor.media.omx service  [Luca Weiss]
+   -  Partial revert "Move unused classes out of stagefright foundataion"  [Nico]
+   -  audioflinger: Fix audio for WifiDisplay  [myfluxi]
+   -  libstagefright_wfd: video encoder does not actually release MediaBufferBase when done  [Vladimir Oltean]
+   -  stagefright: Fix buffer handle retrieval in signalBufferReturned  [Angelo G. Del Regno]
+   -  stagefright: Fix SurfaceMediaSource getting handle from wrong position issue  [zhangbo_a]
+   -  libstagefright_wfd: compilation fixes  [Vladimir Oltean]
+   -  libstagefright: Remove libmediaextractor dependency  [Adithya R]
+   -  Revert "Removed unused class and its test"  [Vladimir Oltean]
+   -  Revert "stagefright: remove Miracast sender code"  [Vladimir Oltean]
+
+   * android_frameworks_base
    -  CameraManager: Fixup exposing aux camera to apps  [Ido Ben-Hur]
    -  Fix Photosphere/Camera FCs  [Jostein Kjønigsen]
    -  Allow sending vendor- or device-specific commands to the camera HAL.  [Danny Baumann]
@@ -1812,15 +1951,8 @@
    * android_frameworks_opt_net_wifi
    -  Merge tag 'android-13.0.0_r31' into thirteen  [minaripenguin]
 
-   * android
-   -  README: Update properties based on revision 10.2 changes  [minaripenguin]
-   -  manifest: android-13.0.0_r24 -> r30  [minaripenguin]
-
    * android_hardware_interfaces
    -  Merge tag 'LA.QSSI.13.0.r1-09000-qssi.0' into thirteen  [minaripenguin]
-
-   * android_packages_apps_Backgrounds
-   -  backgrounds: riceDroid v10.2 update  [minaripenguin]
 
    * android_packages_modules_Bluetooth
    -  legacy: Split header for hci legacy definitions  [Christian Hoffmann]
@@ -1929,49 +2061,6 @@
 
    * android_system_vold
    -  Merge tag 'android-13.0.0_r31' into thirteen  [minaripenguin]
-
-   * incremental_delivery
-   -  Merge tag 'android-13.0.0_r31' into thirteen  [minaripenguin]
-
-====================
-     02-06-2023
-====================
-
-   * android_bionic
-   -  bionic: use jemalloc by default and allow opt-in to scudo (3/3)  [Juhyung Park]
-   -  Verify that allocated memory is always zeroed.  [Christopher Ferris]
-   -  Switch to jemalloc memory allocator  [Danny Lin]
-   -  libc: Do not nullify `__dtoa_locks`  [minaripenguin]
-   -  Rewrite function definitions with identifier lists  [Yi Kong]
-   -  Sync with upstream NetBSD.  [Elliott Hughes]
-   -  Sync libm with upstream freebsd.  [Elliott Hughes]
-   -  Sync with upstream openbsd.  [Elliott Hughes]
-   -  arm64: fix fesetround().  [Elliott Hughes]
-   -  arm64: simplify the fenv implementation a bit.  [Elliott Hughes]
-   -  Fix it to call the lambda function  [Suchang Woo]
-   -  libc: Set __bionic_asm_align to 64 for arm and arm64  [Jake Weinstein]
-   -  fdsan: fix overflow in FdTableImpl::at  [Benjamin Lerman]
-   -  avx2 implementation for memset.  [ahs]
-   -  fread: cope with >2GiB totals.  [Elliott Hughes]
-   -  Always free after getline().  [Elliott Hughes]
-   -  linker: Fix memory leak for reserved memory  [huangchaochao]
-   -  Add inaddr.h header file  [Roopesh Rajashekharaiah Nataraja]
-   -  linker: Add support for dynamic SHIM libraries  [Christopher R. Palmer]
-   -  libc: Mark libstdc++ as vendor available  [Rashed Abdel-Tawab]
-
-   * android_build
-   -  build: make: use jemalloc by default and allow opt-in to scudo (1/3)  [Juhyung Park]
-
-   * android_build_soong
-   -  build: soong: use jemalloc by default and allow opt-in to scudo (2/3)  [Juhyung Park]
-
-   * android_external_harfbuzz_ng
-   -  Merge commit 'Update HarfBuzz to 6.0.0' into thirteen  [minaripenguin]
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Update Russian translation  [rxuglr]
-
-   * android_system_vold
    -  Ignore DE retrieveKey failure for non-user-0  [liulvping]
    -  Correct sleep usage for fsck timeout  [Daniel Rosenberg]
    -  Fix unhandled exception when FUSE disabled  [Oleg Lyovin]
@@ -1994,84 +2083,26 @@
    -  clock fonts: Import more clock styles  [rdx420]
    -  fonts: Import Google sans font changes from TQ1A.230105.002  [minaripenguin]
 
+   * incremental_delivery
+   -  Merge tag 'android-13.0.0_r31' into thirteen  [minaripenguin]
+
+====================
+     02-06-2023
+====================
+
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Update Russian translation  [rxuglr]
+
 ====================
      02-05-2023
 ====================
 
+   * android_packages_services_Telephony
+   -  Format conference participant phone numbers to national for Japan  [YanJun Kang]
+
 ====================
      02-04-2023
 ====================
-
-   * android_frameworks_native
-   -  Trampoline atrace definitions through libbinder to libcutils  [Zim]
-   -  libbinder: BBinder descriptor  [Steven Moreland]
-   -  Add lookupOrCreateWeak to ObjectManager  [Devin Moore]
-   -  Add a delegate helper for AIDL Delegators  [Devin Moore]
-   -  Remove unused variables.  [Krzysztof Kosiński]
-   -  gui: fix an error which caused the buffers can never be released  [chengdaozhong]
-   -  DO NOT MERGE: SF: Fix a race between layer creation and apply transaction  [Vishnu Nair]
-   -  surfaceflinger: fix missing pure virtual declarations.  [Josh Gao]
-   -  Always provide metadata blob for hdr frames  [Alec Mouri]
-   -  Remove set_cpuset_policy due to new taskprofiles for SF threads  [lihaizhou]
-   -  IPCThreadState::hasExplicitIdentity()  [mattgilbride]
-   -  Fix Surface HDR meta reset  [yihsing.shen]
-   -  installd: explicitly specify capabilities  [Nikita Ioffe]
-   -  SurfaceFlinger: skip composition when presenting a single auto-refresh layer  [Tomislav Novak]
-   -  SurfaceFlinger: keep auto-refresh in sync between producer and consumer  [Tomislav Novak]
-   -  BufferQueueConsumer: acquire a buffer only if fence is signaled  [Tomislav Novak]
-   -  DO NOT MERGE Extend mPreviousPresentFences for high refresh rate  [Jen-Chih Chang]
-   -  Replace duplicate shaderOutputLayer with subgroupBroadcastDynamicId  [Trevor David Black]
-   -  renderengine: skia: switch to glass blur effect  [minaripenguin]
-   -  EGL: Conditionally revert commit a9550f3  [Danny Trunk]
-   -  Vulkan loader changes to address previous comments in image_compression_control  [Trevor David Black]
-   -  Vulkan loader changes to support VK_EXT_image_compression_control  [Trevor David Black]
-   -  [MASTER]: Only use legacy_usage for legacy query  [John Reck]
-   -  sf: Allow SystemServer to set the display brightness  [Rheygine Medel]
-   -  Set the maxImageExtent for vk wsi based on currentExtent  [Trevor David Black]
-   -  Fix unintended buffer canceling  [Kwangkyu Park]
-   -  Use hardcoded value for HapticScale  [Jeongik Cha]
-   -  Only report PASS_THROUGH when VK_EXT_swapchain_colorspace enabled  [Jason Macnak]
-   -  vulkan: respect consumer default dataspace upon PASS_THROUGH  [Yiwei Zhang]
-   -  Allow PASS_THROUGH colorspace with R5G6B5, R16G16B16A16, A2B10G10R10  [Jason Macnak]
-   -  Allow use of PASS_THROUGH colorspace with RGBA8  [Lingfeng Yang]
-   -  Use dalvik.vm.background-dex2oat-* system properties for background jobs.  [Martin Stjernholm]
-   -  Allow Gralloc2 devices to disable support for P010 buffers  [Jason Macnak]
-   -  sf: Update mSendUpdateImminent on reset callback  [Rheygine Medel]
-   -  [MASTER]: Update VK_GOOGLE_surfaceless_query extension fixed values  [Ian Elliott]
-   -  [MASTER]: Reduce timeouts for occasionally-stalling sections  [Kevin Jeon]
-   -  [MASTER]: Stop OtaDexopt when receive any exception signal  [yangfuteng]
-   -  Forward port 'Swap volume buttons' (2/3)  [nadlabak]
-   -  InputDispatcher: On keypress, deliver keycode to pokeUserActivity  [Corinna Vinschen]
-   -  [MASTER] Avoid UI freezing when reading battery capacity/status  [Andy Chen]
-   -  [MASTER]: fix validateBufferDescriptorInfo error when usage bits were 32-bits  [Jessie Hao]
-   -  build: Optimize dalvik heap configs  [minarypenguin]
-   -  Add dalvik-heap device configs for 8/12/16 GiB devices  [Simao Gomes Viana]
-   -  It's no need to start the dispatch cycle going if the outbound queue was not previously empty.  [hongzuo liu]
-   -  libbinder: O_CLOFORK  [Steven Moreland]
-   -  nativedisplay: fix the flicker issue in streaming video  [Ray Zhang]
-   -  libgui: reset buffer count to max slots instead of returning BAD_VALUE.  [Rui Wang]
-   -  sf: Avoid present hidl call when DP is disconnected.  [Vikas batchu]
-   -  SF: Scheduler: vote max for NOTIFICATION_SHADE  [Juhyung Park]
-   -  Fix the shadow problem caused by layer parent switching  [xinying1]
-   -  Add AC4Tbl params for dolby AC4 decoder [2/2]  [HELLBOY017]
-   -  libbinder: Suppress log spam when unlinking death recipients  [Danny Lin]
-   -  sf: Exclude VDS use of HWC on non-UM platforms  [dianlujitao]
-   -  sf: Allow WFD to use hwc in vendor frozen targets  [Rheygine Medel]
-   -  sf: Clean up properties for virtual display  [Rheygine Medel]
-   -  sf: Align virtual display changes with CAF  [Michael Bestas]
-   -  SF: Fix HWC based virtual display creation  [Rajat Yadav]
-   -  Remove use of VrFlinger from value-adds.  [Chris Gross]
-   -  sf:add getPriority() from CAF  [Rajat Yadav]
-   -  surfaceflinger: Modify dumpAll to dump on the main thread  [Rajat Yadav]
-   -  sf: Fix virtual display related issues.  [Ramakant Singh]
-   -  Do not return glGetString error on desktop GL context  [Aaron Kling]
-   -  EGL: nvidia: For desktop gl contexts, use gles v2 hooks list  [Aaron Kling]
-   -  EGL: nvidia: Don't use extension map  [Aaron Kling]
-   -  EGL: Loader: Enable desktop openGL on Nvidia platforms  [Billy Laws]
-   -  CompositionEngine: Request device composition for the Udfps touched layer  [daniml3]
-   -  surfaceflinger: Add support for Udfps extension lib  [Pierre-Hugues Husson]
-   -  libui: Allow extension of valid gralloc 1.0 buffer usage bits  [Kevin F. Haggerty]
-   -  Add vendor version for libgui  [Vinay Verma]
 
    * android_hardware_qcom_display
    -  config: Avoid conflict with device tree properties  [minaripenguin]
@@ -2079,31 +2110,12 @@
    * android_packages_apps_RiceDroidSettings
    -  settings: Introduce Date/smartspace font picker  [minaripenguin]
    -  settings: Organize personalizations  [minaripenguin]
-
-   * android_packages_apps_Settings
-   -  settings: Custom settings header text [1/2]  [minaripenguin]
-
-   * android_packages_apps_ThemePicker
-   -  Dedupe theme stub package queries entry  [minaripenguin]
-   -  Import themestub from cheetah TQ1A.230105.002  [minaripenguin]
-
-   * android_packages_services_Telephony
-   -  Format conference participant phone numbers to national for Japan  [YanJun Kang]
-
-====================
-     02-03-2023
-====================
-
-   * android_packages_apps_RiceDroidSettings
    -  settings: Custom settings header text [2/2]  [minaripenguin]
    -  [SQUASH]: settings: Import monet settings from YAAP  [Ido Ben-Hur]
    -  settings: Remove colorkt-based theme engine settings  [minaripenguin]
-   -  Settings: Introduce contextual dashboard messages [2/2]  [minaripenguin]
-   -  settings: Import settings rice resources  [minaripenguin]
-   -  settings: Introduce Settings Omni Headers/Banners [2/2]  [minaripenguin]
-   -  settings: Import Bootleggers header/banner resources  [El Dainosor]
 
    * android_packages_apps_Settings
+   -  settings: Custom settings header text [1/2]  [minaripenguin]
    -  settings: Add overscroll vibration haptic effect to Bouncy scrollview  [minaripenguin]
    -  Settings: Remove overscroll glow on homepage  [Elluzion]
    -  Settings: Improve SpringNestScrollView code  [ender1324]
@@ -2112,8 +2124,26 @@
    -  settings: dashboard styles: Code cleanup  [minaripenguin]
    -  settings: Revamp Ayan's card UI style  [notayan99]
 
+   * android_packages_apps_ThemePicker
+   -  Dedupe theme stub package queries entry  [minaripenguin]
+   -  Import themestub from cheetah TQ1A.230105.002  [minaripenguin]
+
    * android_vendor_rice
    -  Revert "rice: Bring back the monet bootanimations"  [minaripenguin]
+
+====================
+     02-03-2023
+====================
+
+   * android_packages_apps_RiceDroidSettings
+   -  Settings: Introduce contextual dashboard messages [2/2]  [minaripenguin]
+   -  settings: Import settings rice resources  [minaripenguin]
+   -  settings: Introduce Settings Omni Headers/Banners [2/2]  [minaripenguin]
+   -  settings: Import Bootleggers header/banner resources  [El Dainosor]
+
+   * android_system_libziparchive
+   -  Merge branch 'aosp/master' into thirteen  [minaripenguin]
+   -  [zip] Don't mmap all zip files on 32 bits  [Yurii Zubrytskyi]
 
 ====================
      02-02-2023
@@ -2137,13 +2167,18 @@
    -  Pass "-Xgc:CMC" to dex2oat when userfaultfd GC is enabled.  [Jiakai Zhang]
    -  Only dexpreopt system server jars for the primary arch.  [Jiakai Zhang]
 
+   * android_packages_apps_RiceDroidSettings
+   -  settings: Add an option to display QS weather condition  [minaripenguin]
+   -  settings: Remove combined qs headers toggle  [minaripenguin]
+   -  settings: Introduce Dynamic System Bars (DSB) [2/2]  [ariffjenong]
+   -  settings: Add QS Page Custom Transition Animations [2/2]  [ariffjenong]
+
    * android_packages_apps_Settings
    -  Settings: Add Bouncy scrollview from OOS  [mezz]
    -  settings: Redesign settings and improve theming support  [minaripenguin]
 
-   * android_system_libziparchive
-   -  Merge branch 'aosp/master' into thirteen  [minaripenguin]
-   -  [zip] Don't mmap all zip files on 32 bits  [Yurii Zubrytskyi]
+   * android_packages_apps_ThemePicker
+   -  Revert "Themepicker: Disable monet styles"  [minaripenguin]
 
    * android_system_unwinding
    -  Check for overflows in symbol data.  [Christopher Ferris]
@@ -2158,25 +2193,12 @@
    -  Allow libutils to use libunwindstack_no_dex.  [Christopher Ferris]
    -  libunwindstack: fix -Wdefaulted-function-deleted warning.  [Krzysztof Kosiński]
 
-====================
-     02-01-2023
-====================
-
-   * android_packages_apps_RiceDroidSettings
-   -  settings: Add an option to display QS weather condition  [minaripenguin]
-   -  settings: Remove combined qs headers toggle  [minaripenguin]
-   -  settings: Introduce Dynamic System Bars (DSB) [2/2]  [ariffjenong]
-   -  settings: Add QS Page Custom Transition Animations [2/2]  [ariffjenong]
-
-   * android_packages_apps_ThemePicker
-   -  Revert "Themepicker: Disable monet styles"  [minaripenguin]
-
    * android_vendor_addons
    -  themes: clockfonts: Cleanup and rename overlay category  [minaripenguin]
    -  themes: Add more styles for lockscreen clock  [El Dainosor]
 
 ====================
-     01-31-2023
+     02-01-2023
 ====================
 
    * android_external_harfbuzz_ng
@@ -2187,7 +2209,14 @@
 
    * android_packages_apps_RiceDroidSettings
    -  settings: theme engine: Improve theming support  [minaripenguin]
+
+====================
+     01-31-2023
+====================
+
+   * android_packages_apps_RiceDroidSettings
    -  settings: Initiliaze/Disable system boost upon user toggle  [minaripenguin]
+   -  settings: Exclusive preference/fragment for scarlet settings  [minaripenguin]
 
    * android_packages_apps_Settings
    -  settings: Add activity entry for scarlet settings  [minaripenguin]
