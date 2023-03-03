@@ -265,10 +265,6 @@ ifneq ($(TARGET_KERNEL_CLANG_COMPILE),false)
     endif
 endif
 
-ifneq ($(TARGET_KERNEL_MODULES),)
-    $(error TARGET_KERNEL_MODULES is no longer supported!)
-endif
-
 ifneq ($(KERNEL_NO_GCC), true)
 		PATH_OVERRIDE += PATH=$(KERNEL_TOOLCHAIN_PATH_gcc):$$PATH
 endif
