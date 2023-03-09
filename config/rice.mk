@@ -29,12 +29,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.config.notification_sound=oneplus.ogg \
     ro.config.alarm_alert=into_the_night.ogg
 
-# HWUI
-PRODUCT_PRODUCT_PROPERTIES += \
-    debug.renderengine.backend?=skiaglthreaded \
-    debug.hwui.renderer?=skiagl \
-    debug.renderthread.skia.reduceopstasksplitting?=true
-
 # Media
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
