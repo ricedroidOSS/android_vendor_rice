@@ -121,7 +121,7 @@ if [ -f $existingOTAjson ]; then
 else
 	#if not already supported, create dummy file with info in it on how to
 	echo 'There is no official support for this device yet' >> $output;
-	echo 'Consider adding official support by reading the documentation at https://github.com/RiceDroid/android_vendor_RiceDroidOTA/blob/thirteen/README.md' >> $output;
+	echo 'Consider adding official support by reading the documentation at https://github.com/riceDroidOSS-devices/android_vendor_RiceDroidOTA/blob/thirteen/README.md' >> $output;
 fi
 
 cat $output
